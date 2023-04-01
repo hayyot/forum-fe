@@ -1,3 +1,9 @@
+<!--
+ * @Author: hayyot
+ * @Date: 2023-04-01 16:22:48
+ * @Description: 铁沸物
+ * @FilePath: \软件杯\forum-fe\src\components\HelloWorld.vue
+-->
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
@@ -27,6 +33,14 @@
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
+    <el-row>
+      <el-button>默认按钮</el-button>
+      <el-button type="primary">主要按钮</el-button>
+      <el-button type="success">成功按钮</el-button>
+      <el-button type="info">信息按钮</el-button>
+      <el-button type="warning">警告按钮</el-button>
+      <el-button type="danger">危险按钮</el-button>
+    </el-row>
   </div>
 </template>
 
