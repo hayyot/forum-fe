@@ -300,7 +300,7 @@ li {
 }
 
 .bell:hover i {
-    color: #007fff;
+    color: #66CC99;
 }
 
 .writeArticle {
@@ -319,7 +319,7 @@ li {
     display: block;
     height: 30px;
     line-height: 30px;
-    color: #3b76c5;
+    color: #66CC99;
     font-size: 13px;
     text-align: center;
 }
@@ -360,7 +360,7 @@ li {
 }
 
 .more>a:first-child:hover {
-    background-color: #0a72da;
+    background-color: #66CC99;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
 }
@@ -372,7 +372,7 @@ li {
 }
 
 .more>a:last-child:hover {
-    background-color: #0a72da;
+    background-color: #66CCCC;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
 }
@@ -396,7 +396,7 @@ li {
     align-items: center;
     flex-direction: row-reverse;
     padding:0 6px;
-    border: 1px solid #0a72da;
+    border: 1px solid #66CCCC;
     background-color: rgba(255, 255, 255);
     border-radius: 2px;
 }

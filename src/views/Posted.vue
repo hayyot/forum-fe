@@ -1,8 +1,14 @@
+<!--
+ * @Author: hayyot
+ * @Date: 2023-04-04 11:05:34
+ * @Description: 铁沸物
+ * @FilePath: \forum-fe\src\views\Posted.vue
+-->
 <template>
     <div id="posted">
         <div>
             <el-input class="input_topic" size="100px" width="600px" v-model="topic" placeholder="请输入文章标题.."></el-input>
-            <el-button  type="success">发布</el-button>
+            <el-button type="success">发布</el-button>
             <div class="input_topic-img">
                 <el-avatar icon="el-icon-user-solid" :src="imgurl"></el-avatar>
             </div>

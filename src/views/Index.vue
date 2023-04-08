@@ -1,11 +1,13 @@
 <template>
     <div class="index-bg">
         <TabBar></TabBar>
+        <IndexContent></IndexContent>
     </div>
 </template>
 
 <script>
 import TabBar from '@/components/Tab-bar.vue';
+import IndexContent from '@/components/Index-content.vue';
 export default {
     name: 'ForumFeIndex',
 
@@ -23,7 +25,8 @@ export default {
         
     },
     components:{
-        TabBar
+        TabBar,
+        IndexContent
     }
 };
 </script>
