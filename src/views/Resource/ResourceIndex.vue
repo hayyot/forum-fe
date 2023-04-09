@@ -1,41 +1,135 @@
 <template>
     <div class="ResourceIndex-bg">
-        
+        <el-row>
+            <el-button class="el-btn"  v-for="item,index in topic_list" :key="index" @click="changeTopic(index)">{{ item }}</el-button>
+        </el-row>
+        <div style="width: 100%;display: flex;justify-content: center;">
+            <div class="ResourceIndex-content">
+                <div class="ResourceIndex-content_data" v-for="item,index in data_list" :key="index">
+                    <a :href="item.link">
+                        <div class="ResourceIndex-content_data-head">
+                            <img :src="item.logo" alt="">
+                            <p>{{ item.resourceName }}</p>
+                        </div>
+                        <div class="ResourceIndex-content_data-body">
+                            {{ item.desc }}
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-import { ceshi } from '@/api/api';
+// import { ceshi } from '@/api/api';
+import data from './resource.json'
 export default {
     name: 'ForumFeResourceIndex',
 
     data() {
         return {
-            content:{
-                currentPage: '1',
-                pageSize: '32'
-            }
+            data_list: data.data.list,
+            topic_list: ['全部资源','图片','视频','音频','插画','线框图','图标','纹理','背景图片','工具','设计灵感','Mockup','色彩工具'],
+            topic_listIndex: '全部资源',
+            topic_listFocus: true
         };
     },
 
     mounted() {
-        this.axios.get('../../assets/resource.json')
-        ceshi().then(res => {
-            console.log(res);
-        })
+        console.log(this.data_list);
     },
 
     methods: {
-        
+        changeTopic(index){
+            console.log(index);
+        }
     },
 };
 </script>
 
 <style lang="scss" scoped>
 .ResourceIndex-bg {
-    position: absolute;
+    // z-index: -1;
+    margin-top: 0rem;
+    position: relative;
     width: 100%;
-    height: 100%;
+    min-height: 900px;
     background: #f1f1f1;
+}
+.el-btn {
+    margin-top: 100px;
+    font-size: 1em;
+    color: #66CCCC;
+    background: #ecf5ff;
+    border-color: #66CCCC;
+}
+.el-btn:hover {
+    background-color: #66CCCC;
+    color: #fff;
+    border-color: #66CCCC;
+}
+
+.el-btn:focus {
+    color: #ecf5ff;
+    background: #66CC99;
+    border-color: #66CC99;
+}
+
+.ResourceIndex-content {
+    width: 80%;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.ResourceIndex-content_data {
+    height: 100px;
+    width: 23.6%;
+    border-radius: 10px;
+    background-color: #ffffff;
+    margin: 10px;
+    a:link {
+        color: #000000;
+    }
+    a:visited {
+        color: #000000;
+    }
+    .ResourceIndex-content_data-head{
+        width: 100%;
+        padding: 2%;
+        height: 50px;
+        line-height: 40px;
+        vertical-align: middle;
+        img {
+            // display: flex;
+            // justify-content: flex-start;
+            // margin-left: 25px;
+            // margin-top: 10px;
+            float: left;
+            margin-top: 5px;
+            margin-left: 30px;
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            display: inline;
+        }
+        p {
+            // display: inline;
+            position: relative;
+            top: 7.5px;
+            // right: 40px;
+            left: 20px;
+            text-align: left;
+            // margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: 800;
+        }
+    }
+    .ResourceIndex-content_data-body {
+        font-size: 14px;
+        color: #858585;
+        font-weight: 600;
+    }
 }
 </style>
