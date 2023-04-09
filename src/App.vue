@@ -6,15 +6,17 @@
 -->
 <template>
   <div id="app">
-    <router-view></router-view>
+    <TabBar class="tabbar"></TabBar>
+    <router-view class="view"></router-view>
   </div>
 </template>
 
 <script>
+import TabBar from '@/components/Tab-bar.vue';
 export default {
   name: 'App',
   components: {
-    
+    TabBar,
   }
 }
 </script>

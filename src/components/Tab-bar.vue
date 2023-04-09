@@ -90,7 +90,7 @@ export default {
                 },
                 {
                     title: '论坛',
-                    url: '#'
+                    url: '/forum'
                 },
                 {
                     title: '学习',
@@ -112,7 +112,11 @@ export default {
         };
     },
 
-    mounted() {
+    created() {
+        console.log(this.$route.path);
+        if(this.$route.path == '/forum'){
+            this.currentClick = '论坛'
+        }
         
     },
 
@@ -262,7 +266,9 @@ li {
     margin-top: 13px;
     border-radius: 3px;
     right: 0px;
-    /* position: absolute; */
+    /* left: 50px;   */
+    z-index: 9999;
+    position: relative;
 }
 
 .navRight-menu-item {

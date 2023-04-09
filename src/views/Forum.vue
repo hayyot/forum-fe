@@ -1,14 +1,18 @@
+<!--
+ * @Author: hayyot
+ * @Date: 2023-04-09 10:12:25
+ * @Description: 铁沸物
+ * @FilePath: \forum-fe\src\views\Forum.vue
+-->
 <template>
-    <div class="index-bg">
-        <IndexContent></IndexContent>
+    <div class="Forum-bg">
+        
     </div>
 </template>
 
 <script>
-
-import IndexContent from '@/components/Index-content.vue';
 export default {
-    name: 'ForumFeIndex',
+    name: 'ForumFeForum',
 
     data() {
         return {
@@ -23,15 +27,11 @@ export default {
     methods: {
         
     },
-    
-    components:{
-        IndexContent
-    }
 };
 </script>
 
 <style lang="scss" scoped>
-.index-bg {
+.Forum-bg{
     position: absolute;
     width: 100%;
     height: 100%;
