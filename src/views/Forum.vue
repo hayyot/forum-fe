@@ -6,7 +6,9 @@
 -->
 <template>
     <div class="Forum-bg">
-        
+        <el-row>
+            <el-button size="small" v-for="item,index in type_list" :key="index">{{item.name}}</el-button>
+        </el-row>
     </div>
 </template>
 
@@ -16,7 +18,23 @@ export default {
 
     data() {
         return {
-            
+            type_list:[
+                {
+                    name:'内容1',
+                },
+                {
+                    name:'内容2',
+                },
+                {
+                    name:'内容3',
+                },
+                {
+                    name:'内容4',
+                },
+                {
+                    name:'内容5',
+                },
+            ]
         };
     },
 

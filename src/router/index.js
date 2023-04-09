@@ -9,6 +9,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Index.vue'
 import ForumVue from '@/views/Forum.vue'
 import Posted from '../views/Posted.vue'
+import ResourceIndexVue from '@/views/Resource/ResourceIndex.vue'
+import StudyIndexVue from '@/views/Study/StudyIndex.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -26,6 +28,14 @@ const routes = [
     path: '/forum',
     name: 'forum',
     component: ForumVue
+  },{
+    path: '/resource',
+    name: 'ResourceIndexVue',
+    component: ResourceIndexVue
+  },{
+    path: '/study',
+    name: 'StudyIndexVue',
+    component: StudyIndexVue
   }
 ]
 
