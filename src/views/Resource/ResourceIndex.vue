@@ -86,11 +86,12 @@ export default {
     overflow:auto;
     position: absolute;
     width: 100%;
-    height: 100%;
+    min-height: 100.1%;
+    // margin-bottom: 100px;
     background: #f1f1f1;
 }
 .el-btn {
-    margin-top: 100px;
+    margin-top: 40px;
     font-size: 1em;
     color: #66CCCC;
     background: #ecf5ff;
@@ -114,6 +115,7 @@ export default {
 }
 .ResourceIndex-content {
     width: 80%;
+    height: 120%;
     margin-top: 30px;
     display: grid;
     // grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -172,24 +174,24 @@ export default {
         margin-left: 40px;
     }
 }
-.ResourceIndex-content_data:hover {
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-::-webkit-scrollbar {
-  background: transparent;
-  width: 0px;
-  height: 10px
-}
+// .ResourceIndex-content_data:hover {
+//     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+// }
+// ::-webkit-scrollbar {
+//   background: transparent;
+//   width: 0px;
+//   height: 10px
+// }
 
-::-webkit-scrollbar-thumb {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  background-color: #e1e1e1;
-  width: 0px;
-  height: 6px;
-  border: 2px solid transparent;
-  background-clip: content-box
-}
+// ::-webkit-scrollbar-thumb {
+//   -webkit-border-radius: 5px;
+//   -moz-border-radius: 5px;
+//   border-radius: 5px;
+//   background-color: #e1e1e1;
+//   width: 0px;
+//   height: 6px;
+//   border: 2px solid transparent;
+//   background-clip: content-box
+// }
 
 </style>

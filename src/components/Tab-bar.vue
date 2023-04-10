@@ -95,7 +95,7 @@ export default {
                 },
                 {
                     title: '关于我们',
-                    url: '#'
+                    url: '/aboutus'
                 },
                 {
                     title: 'github',

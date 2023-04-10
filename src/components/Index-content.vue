@@ -1,3 +1,9 @@
+<!--
+ * @Author: hayyot
+ * @Date: 2023-04-08 20:50:19
+ * @Description: 铁沸物
+ * @FilePath: \forum-fe\src\components\Index-content.vue
+-->
 <template>
     <div class="index">
         <div>
@@ -51,12 +57,14 @@ export default {
     padding-top: 20px;
     height: 80%;
     display: grid;
+    // grid-template-columns: repeat(auto-fit, 380px);
     grid-template-columns: 2fr 4fr 2fr;
 }
 .index-left{
     width: 40%;
     // height: 60px;
     border-radius: 5px;
+    min-width: 200px;
     background: #ffffff;
     // margin-right: 5%;
     float: right;
@@ -103,11 +111,13 @@ export default {
     height: 15%;
     border-radius: 7.5px;
     // width: 100%;
+    min-width: 500px;
     margin:0px 20px 20px 20px;
     background: #ffffff;
 }
 .index-mid_content {
     height: 80%;
+    min-width: 500px;
     margin:0px 20px 20px 20px;
     border-radius: 7.5px;
     background: #ffffff;
@@ -116,6 +126,7 @@ export default {
     height: 60%;
     width: 40%;
     float: left;
+    min-width: 200px;
     border-radius: 7.5px;
     background-color: #ffffff;
 }
