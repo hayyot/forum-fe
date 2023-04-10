@@ -2,16 +2,16 @@
     <div>
         <el-dialog v-bind="$attrs" v-on="$listeners" @open="onOpen" @close="onClose" title="登录享受更多权限" :close-on-click-modal ="false" append-to-body width="30%">
             <el-form ref="elForm" :model="formData" :rules="rules" size="medium" >
-                <el-form-item label="" prop="field101">
-                    <el-input v-model="formData.field101" placeholder="用户名/邮箱" clearable :style="{width: '100%'}">
+                <el-form-item label="" prop="username">
+                    <el-input v-model="formData.username" placeholder="用户名/邮箱" clearable :style="{width: '100%'}">
                     </el-input>
                 </el-form-item>
-                <el-form-item label="" prop="field102">
-                    <el-input v-model="formData.field102" placeholder="请输入密码" clearable show-password
+                <el-form-item label="" prop="password">
+                    <el-input v-model="formData.password" placeholder="请输入密码" clearable show-password
                               :style="{width: '100%'}"></el-input>
                 </el-form-item>
-                <el-form-item label="" prop="field103">
-                    <el-input v-model="formData.field103" placeholder="请输入验证码" clearable :style="{width: '100%'}">
+                <el-form-item label="" prop="yzm">
+                    <el-input v-model="formData.yzm" placeholder="请输入验证码" clearable :style="{width: '100%'}">
                         <el-button slot="append" @click="getVerify" v-show="flag">获取验证码</el-button>
                     </el-input>
                 </el-form-item>
@@ -42,22 +42,22 @@ export default {
         return {
             showDialog: false,
             formData: {
-                field101: undefined,
-                field102: undefined,
-                field103: undefined,
+                username: undefined,
+                password: undefined,
+                yzm: undefined,
             },
             rules: {
-                field101: [{
+                username: [{
                     required: true,
                     message: '用户名/邮箱',
                     trigger: 'blur'
                 }],
-                field102: [{
+                password: [{
                     required: true,
                     message: '请输入密码',
                     trigger: 'blur'
                 }],
-                field103: [{
+                yzm: [{
                     required: true,
                     message: '请输入验证码',
                     trigger: 'blur'
@@ -80,7 +80,28 @@ export default {
         },
         handelConfirm() {
             this.$refs['elForm'].validate(() => {
-                axios.post('').then()
+                let userList = {
+                    username: this.formData.username,
+                    password:this.formData.password,
+                };
+                var config = {
+                    method: 'post',
+                    url: 'http://47.107.225.176:8080/login',
+                    headers: {
+                        'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
+                        'Content-Type': 'application/json'
+                    },
+                    data : JSON.parse(JSON.stringify(userList))
+                };
+                axios(config)
+                    .then(function (response) {
+                        console.log(JSON.stringify(response.data));
+                        this.$emit('hasLogin',this.flag)
+                        this.close()
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
             })
         },
         getVerify(){

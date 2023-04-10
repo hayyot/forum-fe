@@ -46,8 +46,6 @@ export default {
                 username: undefined,
                 password: undefined,
                 repassword: undefined,
-                passwordError: '',
-                confirmPasswordError: '',
                 email: undefined,
                 yzm: undefined,
             },
@@ -113,16 +111,49 @@ export default {
         },
         handelConfirm() {
             this.$refs['elForm'].validate(() => {
+                let userList = {
+                    username: this.formData.username,
+                    email: this.formData.email,
+                    password:this.formData.password,
+                    yzm:this.formData.yzm
+                };
+                var config = {
+                    method: 'post',
+                    url: 'http://47.107.225.176:8080/insertUser2',
+                    headers: {
+                        'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
+                        'Content-Type': 'application/json'
+                    },
+                    data : JSON.parse(JSON.stringify(userList))
+                };
+                axios(config).then(res=>{
+                    console.log(res.data)
+                })
             })
-            var userList = [];
-            userList.push({username: this.formData.username, email: this.formData.email,yzm:this.formData.yzm});
-            axios.post(`http://47.107.225.176:8080/insertUser1`, userList).then()
+            // var userList = [];
+            // userList.push({username: this.formData.username, email: this.formData.email,yzm:this.formData.yzm});
+            // axios.post(`http://47.107.225.176:8080/insertUser1`, userList).then()
         },
         getVerify() {
-            var userList = [];
-            userList.push({username: this.formData.username, email: this.formData.email});
-            axios.post(`http://47.107.225.176:8080/insertUser1`, userList).then((response) => {
-                console.log(response.data)
+            // console.log(this.formData.username)
+            let userList = {
+                username: this.formData.username,
+                email: this.formData.email
+            };
+            // axios.post(`http://47.107.225.176:8080/insertUser1`, userList).then((response) => {
+            //     console.log(response.data)
+            // })
+            var config = {
+                method: 'post',
+                url: 'http://47.107.225.176:8080/insertUser1',
+                headers: {
+                    'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
+                    'Content-Type': 'application/json'
+                },
+                data : JSON.parse(JSON.stringify(userList))
+            };
+            axios(config).then(res=>{
+                console.log(res.data)
             })
         },
         checkPassword() {
