@@ -7,7 +7,7 @@
 <template>
     <div class="ResourceIndex-bg">
         <el-row>
-            <el-button class="el-btn" v-for="item,index in topic_list" :key="index" @click="changeTopic(index)">{{ item }}</el-button>
+            <el-button class="el-btn" :class="elActive[index] ? 'el-btn_focus' : ''" v-for="item,index in topic_list" :key="index" @click="changeTopic(index)">{{ item }}</el-button>
         </el-row>
         <div style="width: 100%;display: flex;justify-content: center;">
             <div class="ResourceIndex-content">
@@ -38,18 +38,27 @@ export default {
             data_list: [],
             topic_list: ['全部资源','图片','视频','音频','插画','线框图','图标','纹理','背景图片','工具','设计灵感','Mockup','色彩工具'],
             topic_listIndex: '全部资源',
-            topic_listFocus: true
+            topic_listFocus: true,
+            elActive: []
         };
     },
 
     mounted() {
         console.log(this.data_list);
         this.data_list = data.data.list
+        this.elActive.push(true)
+        for(let i=1;i<13;i++){
+            this.elActive.push(false)
+        }
     },
 
     methods: {
         changeTopic(index){
             // console.log(index);
+            for(let i=0;i<13;i++){
+                this.elActive[i] = false;
+            }
+            this.elActive[index] = true
             this.data_list = []
             if(index == 0){
                 this.data_list = data.data.list
@@ -67,12 +76,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+*{
+    margin: 0px;
+    padding: 0px;
+}
 .ResourceIndex-bg {
     // z-index: -1;
     margin-top: 0rem;
-    position: relative;
+    overflow:auto;
+    position: absolute;
     width: 100%;
-    min-height: 900px;
+    height: 100%;
     background: #f1f1f1;
 }
 .el-btn {
@@ -83,7 +97,7 @@ export default {
     border-color: #66CCCC;
 }
 .el-btn:hover {
-    background-color: #66CCCC;
+    background-color: #66CC99;
     color: #fff;
     border-color: #66CCCC;
 }
@@ -93,18 +107,21 @@ export default {
     background: #66CC99;
     border-color: #66CC99;
 }
-
+.el-btn_focus {
+    color: #ecf5ff;
+    background: #66CC99;
+    border-color: #66CC99;
+}
 .ResourceIndex-content {
     width: 80%;
     margin-top: 30px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    
+    display: grid;
+    // grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, 380px);
 }
 .ResourceIndex-content_data {
     height: 100px;
-    width: 23.6%;
+    // width: 23.6%;
     border-radius: 10px;
     background-color: #ffffff;
     margin: 10px;
@@ -158,4 +175,21 @@ export default {
 .ResourceIndex-content_data:hover {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+::-webkit-scrollbar {
+  background: transparent;
+  width: 0px;
+  height: 10px
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #e1e1e1;
+  width: 0px;
+  height: 6px;
+  border: 2px solid transparent;
+  background-clip: content-box
+}
+
 </style>

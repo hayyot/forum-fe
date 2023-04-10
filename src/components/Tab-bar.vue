@@ -99,7 +99,7 @@ export default {
                 },
                 {
                     title: 'github',
-                    url: '#'
+                    url: 'https://github.com/ShenHengjie/forum-fe'
                 }
             ],
             currentClick: '首页',
