@@ -1,7 +1,13 @@
+<!--
+ * @Author: hayyot
+ * @Date: 2023-04-09 19:18:14
+ * @Description: 铁沸物
+ * @FilePath: \forum-fe\src\views\Resource\ResourceIndex.vue
+-->
 <template>
     <div class="ResourceIndex-bg">
         <el-row>
-            <el-button class="el-btn"  v-for="item,index in topic_list" :key="index" @click="changeTopic(index)">{{ item }}</el-button>
+            <el-button class="el-btn" v-for="item,index in topic_list" :key="index" @click="changeTopic(index)">{{ item }}</el-button>
         </el-row>
         <div style="width: 100%;display: flex;justify-content: center;">
             <div class="ResourceIndex-content">
@@ -29,7 +35,7 @@ export default {
 
     data() {
         return {
-            data_list: data.data.list,
+            data_list: [],
             topic_list: ['全部资源','图片','视频','音频','插画','线框图','图标','纹理','背景图片','工具','设计灵感','Mockup','色彩工具'],
             topic_listIndex: '全部资源',
             topic_listFocus: true
@@ -38,11 +44,23 @@ export default {
 
     mounted() {
         console.log(this.data_list);
+        this.data_list = data.data.list
     },
 
     methods: {
         changeTopic(index){
-            console.log(index);
+            // console.log(index);
+            this.data_list = []
+            if(index == 0){
+                this.data_list = data.data.list
+            }else{
+                data.data.list.forEach(item => {
+                    if(item.category == this.topic_list[index]){
+                        console.log(item.category)
+                        this.data_list.push(item)
+                    }
+                });
+            }
         }
     },
 };
@@ -82,6 +100,7 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    
 }
 .ResourceIndex-content_data {
     height: 100px;
@@ -95,6 +114,7 @@ export default {
     a:visited {
         color: #000000;
     }
+    
     .ResourceIndex-content_data-head{
         width: 100%;
         padding: 2%;
@@ -130,6 +150,12 @@ export default {
         font-size: 14px;
         color: #858585;
         font-weight: 600;
+        text-align: left;
+        margin-top: 5px;
+        margin-left: 40px;
     }
+}
+.ResourceIndex-content_data:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 </style>
