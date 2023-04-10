@@ -8,7 +8,8 @@
                 </li>
             </ul>
             <ul class="navRight">
-                <li @click.stop>
+
+                <li @click.stop v-if="hasLogin">
                     <a @click="handleMenuClick" href="#"><img class="userAvater" src="../assets/logo.png"></a>
                     <ul class="navRight-menu-group" v-if="isMenuShow">
                         <div class="navRight-menu-item" v-for="(items, index) in menuList" :key="index">
@@ -20,7 +21,22 @@
                         </div>
                     </ul>
                 </li>
-                
+
+                <li v-if="!hasLogin">
+                    <button @click="showDialog = !showDialog">
+                        <div class="svg-wrapper-1">
+                            <div class="svg-wrapper">
+                                <svg height="20" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z" fill="currentColor"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <span>登录</span>
+                    </button>
+                    <cardCustomRightsDialog :visible.sync="showDialog"></cardCustomRightsDialog>
+                </li>
+
                 <li class="subNav writeArticle">
                     <div class="more" @click.stop>
                         <a href="/posted"><span>写文章</span></a>
@@ -43,7 +59,9 @@
 <script>
 export default {
     name: 'ForumFeTabBar',
-
+    components: {
+        cardCustomRightsDialog: () => import('@/views/Login.vue')
+    },
     data() {
         return {
             activeIndex: '1',
@@ -105,7 +123,9 @@ export default {
             currentClick: '首页',
             isInputFocus: false,
             isShow: false,
-            isMenuShow: false
+            isMenuShow: false,
+            showDialog: false,
+            hasLogin: false,
         };
     },
 
@@ -449,5 +469,57 @@ input:-moz-placeholder {
     font-size: 16px;
     color: #ffffff;
 }
+/**********************************/
+button {
+    font-family: inherit;
+    font-size: 13px;
+    background: #66CC99;
+    color: white;
+    padding: 0.5em 0.7em;
+    padding-left: 0.9em;
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.2s;
+}
 
+button span {
+    display: block;
+    margin-left: 0.3em;
+    transition: all 0.3s ease-in-out;
+}
+
+button svg {
+    display: block;
+    transform-origin: center center;
+    transition: transform 0.3s ease-in-out;
+}
+
+button:hover .svg-wrapper {
+    animation: fly-1 0.6s ease-in-out infinite alternate;
+}
+
+button:hover svg {
+    transform: translateX(1.2em) rotate(45deg) scale(1.1);
+}
+
+button:hover span {
+    transform: translateX(5em);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+@keyframes fly-1 {
+    from {
+        transform: translateY(0.1em);
+    }
+
+    to {
+        transform: translateY(-0.1em);
+    }
+}
 </style>
