@@ -11,6 +11,7 @@ import ForumVue from '@/views/Forum.vue'
 import Posted from '../views/Posted.vue'
 import ResourceIndexVue from '@/views/Resource/ResourceIndex.vue'
 import StudyIndexVue from '@/views/Study/StudyIndex.vue'
+import AboutUsIndex from '@/views/AboutUs/AboutUsIndex.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -36,6 +37,10 @@ const routes = [
     path: '/study',
     name: 'StudyIndexVue',
     component: StudyIndexVue
+  },{
+    path: '/aboutus',
+    name: 'AboutUsIndex',
+    component: AboutUsIndex
   }
 ]
 

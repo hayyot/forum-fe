@@ -1,20 +1,14 @@
-<!--
- * @Author: hayyot
- * @Date: 2023-04-09 19:21:36
- * @Description: 铁沸物
- * @FilePath: \forum-fe\src\views\Study\StudyIndex.vue
--->
 <template>
-    <div class="StudyIndex-bg">
+    <div>
+        <div class="AboutUs-bg">
         
+        </div>
     </div>
 </template>
 
 <script>
-import { ceshi1 } from '@/api/api';
-
 export default {
-    name: 'ForumFeStudyIndex',
+    name: 'ForumFeAboutUsIndex',
 
     data() {
         return {
@@ -23,9 +17,7 @@ export default {
     },
 
     mounted() {
-        ceshi1(1).then(res => {
-            console.log(res);
-        })
+        
     },
 
     methods: {
@@ -35,7 +27,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.StudyIndex-bg {
+.AboutUs-bg {
     position: absolute;
     width: 100%;
     height: 100%;
