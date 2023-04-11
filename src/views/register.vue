@@ -1,3 +1,9 @@
+<!--
+ * @Author: hayyot
+ * @Date: 2023-04-11 16:38:39
+ * @Description: 铁沸物
+ * @FilePath: \forum-fe\src\views\register.vue
+-->
 <template>
     <div>
         <el-dialog v-bind="$attrs" v-on="$listeners" @open="onOpen" @close="onClose" title="注册"
@@ -12,7 +18,7 @@
                               :style="{width: '100%'}"></el-input>
                 </el-form-item>
                 <el-form-item label="重复密码" prop="repassword" >
-                    <el-input v-model="formData.repassword" placeholder="重复密码" clearable show-password
+                    <el-input v-model="formData.repassword" placeholder="重复密码" clearable show-password blur="checkPassword"
                               :style="{width: '100%'}" @input="checkPassword"></el-input>
                 </el-form-item>
                 <el-form-item label="邮箱" prop="email">
@@ -65,7 +71,7 @@ export default {
                     trigger: 'blur'
                 }, {
                     pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,16}$/,
-                    message: '格式错误，至少包括一个字母一个数字以及一个特殊字符',
+                    message: '格式错误，8-16位至少包括一个字母一个数字以及一个特殊字符',
                     trigger: 'blur'
                 }],
                 repassword: [{
@@ -94,7 +100,9 @@ export default {
             },
         }
     },
-    computed: {},
+    computed: {
+
+    },
     watch: {},
     created() {
     },
@@ -159,7 +167,7 @@ export default {
         checkPassword() {
             console.log("123333")
             if (this.formData.password !== this.formData.repassword) {
-                console.log("32111111")
+                // console.log("32111111")
                 return this.rules.repassword[1].message = "两次输入密码不同";
             }
         }
