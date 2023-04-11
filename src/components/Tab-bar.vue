@@ -137,6 +137,9 @@ export default {
         else if(this.$route.path == '/study'){
             this.currentClick = '学习'
         }
+        else if(this.$route.path == '/aboutus'){
+            this.currentClick = '关于我们'
+        }
     },
 
     methods: {
