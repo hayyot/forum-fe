@@ -8,4 +8,4 @@ import { get} from '../request'
 
 export const ceshi = params => get('https://nothingnull.xyz/loginAll',params)
 
-export const ceshi1 = params => get('http://47.107.225.176:8080/findChildData/'+ params)
+export const getStudyList = params => get('http://47.107.225.176:8080/findChildData/'+ params)
