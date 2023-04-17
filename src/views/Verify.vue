@@ -1,6 +1,6 @@
 <template>
     <div>
-        <canvas ref="canvas" width="120" height="50"></canvas>
+        <canvas ref="canvas" width="120" height="50" @click="draw"></canvas>
 <!--        <input type="text" v-model="userInput" placeholder="请输入验证码">-->
 <!--        <button @click="checkCode">验证</button>-->
     </div>
@@ -10,10 +10,11 @@
 
 export default {
     name: "mMq",
+    props:["yzm"],
     data() {
         return {
             code: "",
-            userInput: "",
+            userInput: this.yzm,
         };
     },
     mounted() {
@@ -55,9 +56,11 @@ export default {
         getRandomColor() {
             return `rgb(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
         },
-        checkCode() {
-            if (this.userInput.toLowerCase() === this.code.toLowerCase()) {
-                alert("验证码正确");
+        checkCode(res) {
+            console.log(res)
+            if (res.toLowerCase() == this.code.toLowerCase()) {
+                // alert("验证码正确");
+                this.$emit('changeOkLogin',1)
             } else {
                 alert("验证码错误");
                 this.draw();

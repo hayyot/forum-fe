@@ -11,11 +11,11 @@
                               :style="{width: '100%'}"></el-input>
                 </el-form-item>
                 <el-form-item label="" prop="yzm">
-                    <el-input v-model="formData.yzm" placeholder="请输入验证码" clearable :style="{width: '100%'}">
-                        <el-button slot="append" @click="getVerify" v-show="flag">获取验证码</el-button>
+                    <el-input v-model="formData.yzm" placeholder="请输入验证码" clearable :style="{width: '100%'}" >
+                        <el-button slot="append" @click="pdYzm" v-show="flag">验证</el-button>
                     </el-input>
                 </el-form-item>
-                <verify v-show="flag"></verify>
+                <verify v-show="flag" ref="verify" @changeOkLogin="callback"></verify>
             </el-form>
             <el-button class="cta" type="text" @click="outerVisible = true,showDialog = !showDialog">
                 <span class="hover-underline-animation">点击注册</span>
@@ -25,7 +25,7 @@
                 <cardCustomRightsDialog :visible.sync="showDialog"></cardCustomRightsDialog>
             </el-button>
             <div slot="footer">
-                <el-button type="primary" @click="handelConfirm">登录</el-button>
+                <el-button type="primary" @click="handelConfirm" :disabled="okLogin">登录</el-button>
             </div>
         </el-dialog>
     </div>
@@ -64,6 +64,7 @@ export default {
                 }],
             },
             flag:true,
+            okLogin:true,
         }
     },
     computed: {},
@@ -104,9 +105,11 @@ export default {
                     });
             })
         },
-        getVerify(){
-            this.flag = -this.flag;
-            console.log(this.flag)
+        pdYzm(){
+            this.$refs.verify.checkCode(this.formData.yzm)
+        },
+        callback(flag){
+            if(flag==1)this.okLogin = !this.okLogin
         }
     }
 }
@@ -134,7 +137,7 @@ export default {
 .cta:hover svg {
     transform: translateX(0);
 }
-
+、
 .cta:active svg {
     transform: scale(0.9);
 }

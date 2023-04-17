@@ -74,7 +74,7 @@ export default {
                 [{
                     title: '我的主页',
                     imageUrl: 'iconfont icon-message',
-                    url: '#'
+                    url: '/user/personal/:id'
                 }, {
                     title: '我赞过的',
                     imageUrl: 'iconfont icon-message',
