@@ -9,3 +9,5 @@ import { get} from '../request'
 export const ceshi = params => get('https://nothingnull.xyz/loginAll',params)
 
 export const getStudyList = params => get('http://47.107.225.176:8080/findChildData/'+ params)
+
+export const getSection = () => get("http://47.107.225.176:8808/getSectionAndWzCount")

@@ -8,10 +8,12 @@
     <div class="index">
         <div>
             <div class="index-left">
-                <ul v-for="item,index in indexLeft" :key="index">
-                    <li :class="[(currentClick === item) ? 'aActive' :'aNormal']" @click="ChangeLeftitem(item)"><a href="#">{{ item }}</a></li>
+                <ul v-for="item , index in SectionList" :key="index">
+                    <li :class="[(currentClick === item) ? 'aActive' :'aNormal']" @click="ChangeLeftitem(item)">
+                      <a href="#">{{ item.sname }}   {{item.scount}}篇</a>
+                    </li>
                 </ul>
-            </div>
+            </div>`
         </div>
         <div>
             <div class="index-mid_top">
@@ -30,24 +32,34 @@
 </template>
 
 <script>
+import {getSection} from "@/api/api";
+
 export default {
     name: 'ForumFeIndexContent',
 
     data() {
         return {
             indexLeft: ["1","2","3"],
-            currentClick: "1",
+            // indexLeft: [],
+            currentClick: "java",
+            SectionList: [],
         };
     },
 
     mounted() {
-        
+      this.getList();
     },
 
     methods: {
         ChangeLeftitem(index) {
             this.currentClick = index
-        }
+        },
+      getList(){
+          getSection().then((res) =>{
+            this.SectionList = res.data;
+            console.log(res.data)
+          })
+      }
     },
 };
 </script>
