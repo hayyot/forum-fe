@@ -1,6 +1,13 @@
 <template>
     <div>
         <el-dialog v-bind="$attrs" v-on="$listeners" @open="onOpen" @close="onClose" title="登录享受更多权限" :close-on-click-modal ="false" append-to-body width="30%">
+            <el-button class="cta" type="text" @click="outerVisible = true,showDialog = !showDialog">
+                <span class="hover-underline-animation">点击注册</span>
+                <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg" id="arrow-horizontal">
+                    <path transform="translate(30)" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" data-name="Path 10" id="Path_10"></path>
+                </svg>
+                <cardCustomRightsDialog :visible.sync="showDialog"></cardCustomRightsDialog>
+            </el-button>
             <el-form ref="elForm" :model="formData" :rules="rules" size="medium" >
                 <el-form-item label="" prop="username">
                     <el-input v-model="formData.username" placeholder="用户名/邮箱" clearable :style="{width: '100%'}">
@@ -17,13 +24,6 @@
                 </el-form-item>
                 <verify v-show="flag" ref="verify" @changeOkLogin="callback"></verify>
             </el-form>
-            <el-button class="cta" type="text" @click="outerVisible = true,showDialog = !showDialog">
-                <span class="hover-underline-animation">点击注册</span>
-                <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg" id="arrow-horizontal">
-                    <path transform="translate(30)" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" data-name="Path 10" id="Path_10"></path>
-                </svg>
-                <cardCustomRightsDialog :visible.sync="showDialog"></cardCustomRightsDialog>
-            </el-button>
             <div slot="footer">
                 <el-button type="primary" @click="handelConfirm" :disabled="okLogin">登录</el-button>
             </div>

@@ -57,8 +57,9 @@ export default {
             return `rgb(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
         },
         checkCode(res) {
-            console.log(res)
-            if (res.toLowerCase() == this.code.toLowerCase()) {
+            // console.log(res)
+            if(res==undefined)alert("输入不可为空哦");
+            else if (res.toLowerCase() == this.code.toLowerCase()) {
                 // alert("验证码正确");
                 this.$emit('changeOkLogin',1)
             } else {
