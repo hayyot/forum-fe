@@ -27,13 +27,13 @@
                     </el-input>
                 </el-form-item>
                 <el-form-item label="验证码" prop="yzm">
-                    <el-input v-model="formData.yzm" placeholder="请输入验证码" clearable :style="{width: '100%'}">
+                    <el-input v-model="formData.yzm" placeholder="请输入验证码" clearable :style="{width: '100%'}" @input="pdYzm">
                     </el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer">
                 <el-button @click="close">取消</el-button>
-                <el-button type="primary" @click="handelConfirm">确定</el-button>
+                <el-button type="primary" @click="handelConfirm" :disabled="okRegister">确定</el-button>
             </div>
         </el-dialog>
     </div>
@@ -48,6 +48,7 @@ export default {
     props: [],
     data() {
         return {
+            okRegister:true,
             formData: {
                 username: undefined,
                 password: undefined,
@@ -165,11 +166,14 @@ export default {
             })
         },
         checkPassword() {
-            console.log("123333")
+            // console.log("123333")
             if (this.formData.password !== this.formData.repassword) {
                 // console.log("32111111")
                 return this.rules.repassword[1].message = "两次输入密码不同";
             }
+        },
+        pdYzm(){
+            this.okRegister = this.formData.yzm.length !== 6;
         }
     }
 }
