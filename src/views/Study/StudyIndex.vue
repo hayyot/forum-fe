@@ -76,7 +76,7 @@
 
 <script>
 import {getStudyList} from '@/api/api';
-// import Prismjs from 'prismjs';
+import Prismjs from 'prismjs';
 import axios from "axios";
 import 'github-markdown-css'
 
@@ -132,6 +132,7 @@ export default {
               .then(function (res) {
                   _this.message=res.data.data.sneirong;
                   console.log(res.data.data.sneirong)
+                  Prismjs.highlightAll()
               })
               .catch(function (error) {
                   console.log(error);
@@ -149,5 +150,15 @@ export default {
 }
 .tac{
   text-align: left;
+}
+::v-deep .markdown-body{
+    margin-left: 20%;
+    width: 70%;
+    svg {
+        display: none;
+    }
+    .top {
+        display: none;
+    }
 }
 </style>
