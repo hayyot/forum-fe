@@ -16,11 +16,24 @@
             </div>`
         </div>
         <div>
-            <div class="index-mid_top">
-
+            <div class="index-mid_top" ref="carousel">
+                <el-carousel trigger="click" :height="carouselHeight" :interval="3000" arrow="always" style="border-radius: 5px">
+                  <el-carousel-item v-for="item in 4" :key="item">
+                    <h3 class="small">{{ item }}</h3>
+                  </el-carousel-item>
+                </el-carousel>
             </div>
             <div class="index-mid_content">
-
+              <div class="infinite-list-wrapper" style="overflow:auto">
+                <ul
+                    class="list"
+                    v-infinite-scroll="load"
+                    infinite-scroll-disabled="disabled">
+                  <li v-for="i in count" class="list-item" :key="i">{{ i }}</li>
+                </ul>
+                <p v-if="loading">加载中...</p>
+                <p v-if="noMore">没有更多了</p>
+              </div>
             </div>
         </div>
         <div>
@@ -43,23 +56,45 @@ export default {
             // indexLeft: [],
             currentClick: "java",
             SectionList: [],
+            carouselHeight: null,
+            count: 0,
+            loading: false
         };
     },
-
+  computed: {
+    noMore () {
+      return this.count >= 20
+    },
+    disabled () {
+      return this.loading || this.noMore
+    }
+  },
     mounted() {
       this.getList();
+      // 获取div的ref=“carousel”的高度
+      let carousel_height = window.getComputedStyle(this.$refs.carousel).height;
+      // 赋值给 el-carousel中height动态绑定的carouselHeight
+      this.carouselHeight = carousel_height
     },
 
     methods: {
+
         ChangeLeftitem(index) {
             this.currentClick = index
         },
-      getList(){
-          getSection().then((res) =>{
-            this.SectionList = res.data;
-            console.log(res.data)
-          })
-      }
+        getList(){
+            getSection().then((res) =>{
+              this.SectionList = res.data;
+              console.log(res.data)
+            })
+        },
+        load () {
+          this.loading = true
+          setTimeout(() => {
+            this.count += 2
+            this.loading = false
+          }, 2000)
+        }
     },
 };
 </script>
@@ -141,5 +176,19 @@ export default {
     min-width: 200px;
     border-radius: 7.5px;
     background-color: #ffffff;
+}
+.el-carousel__item h3 {
+  color: #475669;
+  font-size: 14px;
+  opacity: 0.75;
+  margin: 0;
+}
+
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n+1) {
+  background-color: #d3dce6;
 }
 </style>
