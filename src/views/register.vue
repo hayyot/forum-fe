@@ -23,7 +23,7 @@
                 </el-form-item>
                 <el-form-item label="邮箱" prop="email">
                     <el-input v-model="formData.email" placeholder="请输入邮箱" clearable :style="{width: '100%'}">
-                        <el-button slot="append" @click="getVerify">获取验证码</el-button>
+                        <el-button slot="append" @click="getVerify" :disabled="formData.email==undefined">获取验证码</el-button>
                     </el-input>
                 </el-form-item>
                 <el-form-item label="验证码" prop="yzm">
@@ -128,7 +128,7 @@ export default {
                 };
                 var config = {
                     method: 'post',
-                    url: 'http://47.107.225.176:8080/insertUser2',
+                    url: 'http://47.107.225.176:8808/insertUser2',
                     headers: {
                         'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
                         'Content-Type': 'application/json'
@@ -144,26 +144,45 @@ export default {
             // axios.post(`http://47.107.225.176:8080/insertUser1`, userList).then()
         },
         getVerify() {
-            // console.log(this.formData.username)
-            let userList = {
-                username: this.formData.username,
-                email: this.formData.email
-            };
-            // axios.post(`http://47.107.225.176:8080/insertUser1`, userList).then((response) => {
-            //     console.log(response.data)
-            // })
-            var config = {
-                method: 'post',
-                url: 'http://47.107.225.176:8080/insertUser1',
-                headers: {
-                    'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
-                    'Content-Type': 'application/json'
-                },
-                data : JSON.parse(JSON.stringify(userList))
-            };
-            axios(config).then(res=>{
-                console.log(res.data)
-            })
+                // console.log(this.formData.username)
+                let userList = {
+                    username: this.formData.username,
+                    email: this.formData.email
+                };
+                // axios.post(`http://47.107.225.176:8080/insertUser1`, userList).then((response) => {
+                //     console.log(response.data)
+                // })
+                var config = {
+                    method: 'post',
+                    url: 'http://47.107.225.176:8808/insertUser1',
+                    headers: {
+                        'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
+                        'Content-Type': 'application/json'
+                    },
+                    data : JSON.parse(JSON.stringify(userList))
+                };
+                axios(config).then(res=>{
+                    // console.log(res.data)
+                    if(res.data.code==201){
+                        // console.log("1222222")
+                        if(res.data.message=='用户名已经存在')
+                            // alert('用户名已存在');
+                            this.$alert('用户名已经存在', '出错啦', {
+                                confirmButtonText: '确定',
+                            });
+                        else if(res.data.message=='邮箱已经存在')
+                            // this.rules.email[1].message='邮箱已经存在'
+                            // alert('邮箱已经存在')
+                            this.$alert('邮箱已经存在', '出错啦', {
+                                confirmButtonText: '确定',
+                            });
+                    }
+                })
+        },
+        open() {
+            this.$alert('这是一段内容', '出错啦', {
+                confirmButtonText: '确定',
+            });
         },
         checkPassword() {
             // console.log("123333")

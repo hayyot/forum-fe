@@ -140,6 +140,11 @@ export default {
         else if(this.$route.path == '/aboutus'){
             this.currentClick = '关于我们'
         }
+        if (this.$store.getters.getUser.username) {
+            // this.user.username = this.$store.getters.getUser.username
+            // this.user.avatar = this.$store.getters.getUser.avatar
+            this.hasLogin = true
+        }
     },
 
     methods: {

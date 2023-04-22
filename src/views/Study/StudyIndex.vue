@@ -33,7 +33,9 @@
                         background-color="#fff"
                         text-color="#000000"
                         @open="getChildrens"
-                        active-text-color="#66CC99">
+                        active-text-color="#66CC99"
+                        v-loading="loading"
+                        :unique-opened="true">
                     <el-submenu v-for="item in list" :key="item.sid" :index="item.sid+''">
                         <template slot="title">
                             <span>{{item.sname}}</span>
@@ -87,7 +89,8 @@ export default {
         return {
             list: [],
             childrenList:[],
-            message:''
+            message:'',
+            loading: true
         };
     },
 
@@ -102,15 +105,18 @@ export default {
         getStudyList(id).then(res =>{
           this.list = res.data;
           // console.log(res.data)
+            this.loading=false;
         })
       },
       //判断此目录下是否有子节点
       getChildrens(id){
+          this.loading=true;
           // console.log("12321")
         this.childrenList=[];
         getStudyList(id).then(res => {
           this.childrenList = res.data;
           // console.log(res.data);
+            this.loading=false;
         })
       },
       getMessage(value){
@@ -160,5 +166,9 @@ export default {
     .top {
         display: none;
     }
+}
+.markdown-body {
+    border-radius: 15px;
+    padding: 20px;
 }
 </style>

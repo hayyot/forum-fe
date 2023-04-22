@@ -80,29 +80,46 @@ export default {
             this.$emit('update:visible', false)
         },
         handelConfirm() {
-            this.$refs['elForm'].validate(() => {
-                let userList = {
-                    username: this.formData.username,
-                    password:this.formData.password,
-                };
-                var config = {
-                    method: 'post',
-                    url: 'http://47.107.225.176:8080/login',
-                    headers: {
-                        'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
-                        'Content-Type': 'application/json'
-                    },
-                    data : JSON.parse(JSON.stringify(userList))
-                };
-                axios(config)
-                    .then(function (response) {
-                        console.log(JSON.stringify(response.data));
-                        this.$emit('hasLogin',this.flag)
+            this.$refs['elForm'].validate((valid) => {
+                if (valid) {
+                    let userList = {
+                        // username: this.formData.username,
+                        // password:this.formData.password,
+                        username:'船长',
+                        password:'1111',
+                        email:'3229699520@qq.com'
+                    };
+                    var config = {
+                        method: 'post',
+                        url: 'http://47.107.225.176:8808/login',
+                        headers: {
+                            'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
+                            'Content-Type': 'application/json'
+                        },
+                        data : JSON.parse(JSON.stringify(userList))
+                    };
+                    const _this = this
+                    axios(config).then(res => {
+                        console.log(res.data.data)
+                        console.log(res.data.data.token)
+                        // this.$emit('hasLogin',this.flag)
+                        const jwt = res.data.data.token
+                        const userInfo = res.data.data
+
+                        // 把数据共享出去
+                        _this.$store.commit("SET_TOKEN", jwt)
+                        _this.$store.commit("SET_USERINFO", userInfo)
+
+                        // 获取
+                        console.log(_this.$store.getters.getUser)
                         this.close()
+
                     })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+
+                } else {
+                    console.log('error submit!!');
+                    return false;
+                }
             })
         },
         pdYzm(){
