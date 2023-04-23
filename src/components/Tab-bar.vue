@@ -1,7 +1,7 @@
 <template>
     <div class="tabBar" @click="handleTabBarClick">
         <div class="tabBarContent">
-            <a href="#"><img style="height: 50px; width: 50px;" src="../assets/logo.png"></a>
+            <a href="#"><img style="height: 50px; width: 50px;" src="@/assets/logo.svg"></a>
             <ul class="navLeft">
                 <li v-for="(item, index) in itemList" :key="index" @click="handleAClick(item.title)">
                     <a :href="item.url" :class="[(currentClick === item.title) ? 'aActive' :'aNormal']">{{item.title}}</a>
@@ -19,7 +19,6 @@
                                 </a>
                             </li>
                         </div>
-                        <li @click="logout">登出</li>
                     </ul>
                 </li>
 
@@ -94,11 +93,11 @@ export default {
                     imageUrl: 'iconfont icon-message',
                     url: '#'
                 }],
-                // [{
-                //     title: '登出',
-                //     imageUrl: 'iconfont icon-message',
-                //     url: 'this.logout()'
-                // }]
+                [{
+                    title: '登出',
+                    imageUrl: 'iconfont icon-message',
+                    url: '#'
+                }]
             ],
             itemList: [{
                     title: '首页',
@@ -177,10 +176,7 @@ export default {
             if (this.isShow) {
                 this.isShow = !this.isShow
             }
-        },
-        // logout() {
-        //     this.$store.commit("REMOVE_INFO")
-        // }
+        }
     },
 };
 </script>

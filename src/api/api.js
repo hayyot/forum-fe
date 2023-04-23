@@ -4,7 +4,7 @@
  * @Description: 铁沸物
  * @FilePath: \forum-fe\src\api\api.js
  */
-import { get} from '../request'
+import { get } from '../request'
 
 export const ceshi = params => get('https://nothingnull.xyz/loginAll',params)
 

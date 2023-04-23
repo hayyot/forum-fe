@@ -61,7 +61,7 @@ export default {
 
     mounted() {
       this.getList(0);
-      // Prismjs.highlightAll()
+      Prismjs.highlightAll()
     },
 
     methods: {
@@ -102,7 +102,7 @@ export default {
           axios(config)
               .then(function (res) {
                   _this.message=res.data.data.sneirong;
-                  // console.log(res.data.data.sneirong)
+                  console.log(res.data.data.sneirong)
                   Prismjs.highlightAll()
               })
               .catch(function (error) {
@@ -136,8 +136,31 @@ export default {
   }
 }
 ::v-deep .markdown-body{
+    background-color: #fff;
     margin-left: 20%;
     width: 70%;
+    h1 {
+        margin-bottom: 10px;
+    }
+    h2 {
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    h3 {
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    a:visited {
+        color: blue;
+    }
+    p {
+        font-size: 17px;
+        line-height: 30px;
+    }
+    li {
+        font-size: 17px;
+        line-height: 30px;
+    }
     svg {
         display: none;
     }
