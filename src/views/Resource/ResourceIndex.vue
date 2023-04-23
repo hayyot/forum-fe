@@ -82,12 +82,12 @@ export default {
 }
 .ResourceIndex-bg {
     // z-index: -1;
-    margin-top: 0rem;
+    // margin-top: 0rem;
     overflow:auto;
     position: absolute;
     width: 100%;
-    min-height: 100.1%;
-    // margin-bottom: 100px;
+    min-height: 100%;
+    margin-bottom: 100px;
     background: #f1f1f1;
 }
 .el-btn {

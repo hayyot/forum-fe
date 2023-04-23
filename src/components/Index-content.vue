@@ -8,8 +8,9 @@
     <div class="index">
         <div>
             <div class="index-left">
-                <ul v-for="item , index in SectionList" :key="index">
-                    <li :class="[(currentClick === item) ? 'aActive' :'aNormal']" @click="ChangeLeftitem(item)">
+                <ul>
+                    <li class="currentClick">全部</li>
+                    <li :class="[(currentClick === item) ? 'aActive' :'aNormal']" @click="ChangeLeftitem(item)"  v-for="item , index in SectionList" :key="index">
                       <a href="#">{{ item.sname }}   {{item.scount}}篇</a>
                     </li>
                 </ul>

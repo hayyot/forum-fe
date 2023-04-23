@@ -6,26 +6,28 @@
 -->
 <template>
     <div id="posted">
-        <div>
+        <!-- <div>
             <el-input class="input_topic" size="100px" width="600px" v-model="topic" placeholder="请输入文章标题.."></el-input>
             <el-button type="success">发布</el-button>
             <div class="input_topic-img">
                 <el-avatar icon="el-icon-user-solid" :src="imgurl"></el-avatar>
             </div>
         </div>
-        <Editor></Editor>
+        <Editor></Editor> -->
+        <WangEditor @change="changeWang" :value="WangValue"></WangEditor>
     </div>
 </template>
 
 <script>
-import Editor from '../components/moven-editor.vue'
+import WangEditor from '../components/moven-editor.vue'
 export default {
     name: 'ForumFePosted',
 
     data() {
         return {
             topic: '',
-            imgurl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
+            imgurl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
+            WangValue:'',
         };
     },
 
@@ -38,7 +40,7 @@ export default {
     },
 
     components: {
-    Editor,
+        WangEditor,
 }
 };
 </script>

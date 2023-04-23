@@ -37,4 +37,5 @@ export default {
     height: 100%;
     background: #f1f1f1;
 }
+
 </style>

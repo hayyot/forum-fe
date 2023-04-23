@@ -36,10 +36,11 @@ export default {
 }
 .tabbar {
   width: 100%;
-  /* position: fixed; */
+  position: fixed;
   z-index: 999;
 }
 .view {
-  /* margin-top: 3.75rem; */
+  position: relative;
+  top: 3.75rem;
 }
 </style>

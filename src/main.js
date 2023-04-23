@@ -15,11 +15,19 @@ import QS from 'qs';
 import 'element-ui/lib/theme-chalk/index.css';
 import Vant from 'vant';
 import 'vant/lib/index.css';
+// 引用highlight
+
 Vue.use(Vant);
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.use(VueAxios, axios);
 Vue.use(QS);
+Vue.directive('highlight',function (el) {
+  let blocks = el.querySelectorAll('pre code');
+  blocks.forEach((block)=>{
+      hljs.highlightBlock(block)
+  })
+})
 new Vue({
   router,
   store,
