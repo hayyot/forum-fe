@@ -100,8 +100,8 @@ export default {
                     };
                     const _this = this
                     axios(config).then(res => {
-                        console.log(res.data.data)
-                        console.log(res.data.data.token)
+                        // console.log(res.data.data)
+                        // console.log(res.data.data.token)
                         // this.$emit('hasLogin',this.flag)
                         const jwt = res.data.data.token
                         const userInfo = res.data.data
@@ -111,7 +111,8 @@ export default {
                         _this.$store.commit("SET_USERINFO", userInfo)
 
                         // 获取
-                        console.log(_this.$store.getters.getUser)
+                        // console.log(_this.$store.getters.getUser)
+                        location.reload();
                         this.close()
 
                     })

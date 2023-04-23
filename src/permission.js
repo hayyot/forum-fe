@@ -9,7 +9,7 @@ router.beforeEach((to, from, next) => {
     // console.log("------------" + token)
 
     if (token) { // 判断当前的token是否存在 ； 登录存入的token
-      if (to.path === '/login') {
+      if (to.path === 'http://47.107.225.176:8808/login') {
 
       } else {
         next()

@@ -19,6 +19,7 @@
                                 </a>
                             </li>
                         </div>
+                        <li @click="logout">登出</li>
                     </ul>
                 </li>
 
@@ -93,11 +94,11 @@ export default {
                     imageUrl: 'iconfont icon-message',
                     url: '#'
                 }],
-                [{
-                    title: '登出',
-                    imageUrl: 'iconfont icon-message',
-                    url: '#'
-                }]
+                // [{
+                //     title: '登出',
+                //     imageUrl: 'iconfont icon-message',
+                //     url: 'this.logout()'
+                // }]
             ],
             itemList: [{
                     title: '首页',
@@ -176,7 +177,10 @@ export default {
             if (this.isShow) {
                 this.isShow = !this.isShow
             }
-        }
+        },
+        // logout() {
+        //     this.$store.commit("REMOVE_INFO")
+        // }
     },
 };
 </script>

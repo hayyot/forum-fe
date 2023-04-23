@@ -7,7 +7,7 @@
 <template>
   <div id="app">
     <TabBar class="tabbar"></TabBar>
-    <router-view class="view"></router-view>
+    <router-view class="view" v-if="isRouterAlive"></router-view>
   </div>
 </template>
 
@@ -17,7 +17,27 @@ export default {
   name: 'App',
   components: {
     TabBar,
-  }
+  },
+    provide() {
+        return {
+            reload : this.reload,
+        }
+    },
+    data() {
+        return {
+            isRouterAlive:true,
+        };
+    },
+    created(){},
+    methods: {
+        // 通过声明reload方法，控制router-view的显示或隐藏，从而控制页面的再次加载
+        reload(){
+            this.isRouterAlive = false;
+            this.$nextTick(() => {
+                this.isRouterAlive = true;
+            })
+        },
+    },
 }
 </script>
 
