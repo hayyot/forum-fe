@@ -137,7 +137,7 @@ export default {
           axios(config)
               .then(function (res) {
                   _this.message=res.data.data.sneirong;
-                  console.log(res.data.data.sneirong)
+                  // console.log(res.data.data.sneirong)
                   Prismjs.highlightAll()
               })
               .catch(function (error) {
