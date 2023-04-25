@@ -10,7 +10,8 @@
             <div class="index-left">
                 <ul>
                     <li :class="[(currentClick === item.sname) ? 'aActive' :'aNormal']" @click="ChangeLeftitem(item)"  v-for="item , index in SectionList" :key="index">
-                      <a href="#">{{ item.sname }}&nbsp;&nbsp;—&nbsp;&nbsp;{{item.scount}}篇</a>
+                      <a href="#" v-if="item.sid == 0">{{ item.sname }}</a>
+                      <a href="#" v-else>{{ item.sname }}&nbsp;&nbsp;—&nbsp;&nbsp;{{item.scount}}篇</a>
                     </li>
                 </ul>
             </div>`
@@ -31,6 +32,18 @@
                   <div class="date">{{ item.createTime }}</div>
                 </li>
               </ul>
+              <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                class="pagination"
+                background
+                layout="prev, pager, next, jumper"
+                :total="total"
+                :page-size="limit">
+              </el-pagination>
+              <div style="height: 20px;">
+
+              </div>
               <!-- <div class="infinite-list-wrapper" style="overflow:auto">
                 <ul
                     class="list"
@@ -53,7 +66,7 @@
 
 <script>
 import {getSection} from "@/api/api";
-import { getSectionBysid } from "@/api/home";
+import { getAllContent, getSectionBysid } from "@/api/home";
 
 export default {
     name: 'ForumFeIndexContent',
@@ -62,14 +75,23 @@ export default {
         return {
             indexLeft: ["1","2","3"],
             // indexLeft: [],
-            currentClick: "java",
-            SectionList: [],
+            currentClick: "全部",
+            SectionList: [
+              {
+                sid: 0,
+                scount:0,
+                sjianjie:'主页简介',
+                sname:'全部'
+              }
+            ],
             carouselHeight: "200px",
             count: 0,
             loading: false,
             data_list:[],//主页数据列表
             current:1,//分页：当前页
             limit:10,//分页：限制数量
+            total:0,
+            item_sid:0,
         };
     },
   computed: {
@@ -87,25 +109,42 @@ export default {
       // 赋值给 el-carousel中height动态绑定的carouselHeight
       this.carouselHeight = carousel_height
 
-      getSectionBysid(this.current,this.limit,{sid:1}).then(res => {
-        console.log(res);
+      getAllContent(this.current,this.limit).then(res => {
         this.data_list = res.data.records
-        console.log(this.data_list);
-      })
+        // console.log(res);
+        this.total = res.data.total
+      }) 
     },
 
     methods: {
         ChangeLeftitem(item) {
+            this.item_sid = item.sid
             this.currentClick = item.sname;
-            getSectionBysid(item.sid).then(res => {
-              // console.log(res);
-              this.data_list = res.data[1].wzList
-              console.log(this.data_list);
-            })
+            this.current = 1;
+            this.limit = 10;
+            if(item.sid == 0){
+              getAllContent(this.current,this.limit).then(res => {
+                this.data_list = res.data.records
+                // console.log(res);
+                this.total = res.data.total
+              })
+            }
+            else{
+              getSectionBysid(this.current,this.limit,{sid:item.sid}).then(res => {
+                this.data_list = res.data.records
+                // console.log(res);
+                this.total = res.data.total
+              })
+            }
+            
         },
         getList(){
             getSection().then((res) =>{
-              this.SectionList = res.data;
+              res.data.forEach(item => {
+                this.SectionList.push(item);
+              });
+              console.log(this.SectionList);
+              // this.SectionList = res.data;
               console.log(res.data)
             })
         },
@@ -117,8 +156,31 @@ export default {
           }, 2000)
         },
         to_page(index){
-          console.log(index);
+          // console.log(index);
           this.$router.push("/forum/"+index)
+          document.documentElement.scrollTop = document.body.scrollTop =0; 
+        },
+        // 改变每页条数
+        handleSizeChange(val) {
+          console.log(`每页 ${val} 条`);
+        },
+        // 当前页
+        async handleCurrentChange(val) {
+          // console.log(`当前页: ${val}`);
+          if(this.item_sid == 0){
+            await getAllContent(val,this.limit).then(res => {
+              this.data_list = res.data.records
+              console.log(res);
+              this.total = res.data.total
+            })
+          }
+          else {
+            await getSectionBysid(val,this.limit,{sid:this.item_sid}).then(res => {
+              // console.log(res);
+              this.data_list = res.data.records
+              // console.log(this.data_list);
+            })
+          }
         }
     },
 };
@@ -152,18 +214,20 @@ export default {
             height: 3rem;
             // background-color: aquamarine;
             a {
-                display: block;
-                width: 100%;
-                height: 3rem;
-                text-decoration: none;
-                color: #000000;
+              display: block;
+              width: 100%;
+              height: 3rem;
+              text-decoration: none;
+              color: #000000;
             }
             a:hover {
-                color: #66CCCC;
+              border-radius: 5px;
+              background-color: #eeeeee;
+              color: #66CCCC;
             }
             li:hover{
-                background-color: #eeeeee;
-                 color: #66CCCC;
+              background-color: #eeeeee;
+              color: #66CCCC;
             }
         }
     }
@@ -188,7 +252,7 @@ export default {
     background: #ffffff;
 }
 .index-mid_content {
-    height: 80%;
+    // height: 80%;
     min-width: 500px;
     margin:0px 20px 20px 20px;
     border-radius: 7.5px;
@@ -215,6 +279,11 @@ export default {
 
 .el-carousel__item:nth-child(2n+1) {
   background-color: #d3dce6;
+}
+
+.pagination {
+  margin-top: 20px;
+  // margin-bottom: 20px;
 }
 .imc-list {
   text-align: left  ;
@@ -247,7 +316,6 @@ export default {
       -webkit-box-orient: vertical;
     }
     & .date {
-      
       // margin-bottom: 30px;
       //   width: 152px;
       font-family: Microsoft YaHei-Regular, Microsoft YaHei;
