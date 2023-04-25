@@ -54,6 +54,10 @@ export default {
             this.sections = res.data
             console.log(res);
         })
+
+        this.$nextTick(() => {
+            Prismjs.highlightAll()
+        });
     },
 
     methods: {

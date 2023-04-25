@@ -9,9 +9,8 @@
         <div>
             <div class="index-left">
                 <ul>
-                    <li class="currentClick">全部</li>
-                    <li :class="[(currentClick === item) ? 'aActive' :'aNormal']" @click="ChangeLeftitem(item)"  v-for="item , index in SectionList" :key="index">
-                      <a href="#">{{ item.sname }}   {{item.scount}}篇</a>
+                    <li :class="[(currentClick === item.sname) ? 'aActive' :'aNormal']" @click="ChangeLeftitem(item)"  v-for="item , index in SectionList" :key="index">
+                      <a href="#">{{ item.sname }}&nbsp;&nbsp;—&nbsp;&nbsp;{{item.scount}}篇</a>
                     </li>
                 </ul>
             </div>`
@@ -25,7 +24,14 @@
                 </el-carousel>
             </div>
             <div class="index-mid_content">
-              <div class="infinite-list-wrapper" style="overflow:auto">
+              <ul class="imc-list">
+                <li v-for="item,index in data_list" :key="index" @click="to_page(item.tid)">
+                  <div class="title">{{ item.biaoTi }}</div>
+                  <div class="des">{{ item.jianjie }}</div>
+                  <div class="date">{{ item.createTime }}</div>
+                </li>
+              </ul>
+              <!-- <div class="infinite-list-wrapper" style="overflow:auto">
                 <ul
                     class="list"
                     v-infinite-scroll="load"
@@ -34,7 +40,7 @@
                 </ul>
                 <p v-if="loading">加载中...</p>
                 <p v-if="noMore">没有更多了</p>
-              </div>
+              </div> -->
             </div>
         </div>
         <div>
@@ -47,6 +53,7 @@
 
 <script>
 import {getSection} from "@/api/api";
+import { getSectionBysid } from "@/api/home";
 
 export default {
     name: 'ForumFeIndexContent',
@@ -57,9 +64,12 @@ export default {
             // indexLeft: [],
             currentClick: "java",
             SectionList: [],
-            carouselHeight: null,
+            carouselHeight: "200px",
             count: 0,
-            loading: false
+            loading: false,
+            data_list:[],//主页数据列表
+            current:1,//分页：当前页
+            limit:10,//分页：限制数量
         };
     },
   computed: {
@@ -76,12 +86,22 @@ export default {
       let carousel_height = window.getComputedStyle(this.$refs.carousel).height;
       // 赋值给 el-carousel中height动态绑定的carouselHeight
       this.carouselHeight = carousel_height
+
+      getSectionBysid(this.current,this.limit,{sid:1}).then(res => {
+        console.log(res);
+        this.data_list = res.data.records
+        console.log(this.data_list);
+      })
     },
 
     methods: {
-
-        ChangeLeftitem(index) {
-            this.currentClick = index
+        ChangeLeftitem(item) {
+            this.currentClick = item.sname;
+            getSectionBysid(item.sid).then(res => {
+              // console.log(res);
+              this.data_list = res.data[1].wzList
+              console.log(this.data_list);
+            })
         },
         getList(){
             getSection().then((res) =>{
@@ -95,6 +115,10 @@ export default {
             this.count += 2
             this.loading = false
           }, 2000)
+        },
+        to_page(index){
+          console.log(index);
+          this.$router.push("/forum/"+index)
         }
     },
 };
@@ -156,7 +180,7 @@ export default {
 
 // 中间
 .index-mid_top {
-    height: 15%;
+    // height: 20%;
     border-radius: 7.5px;
     // width: 100%;
     min-width: 500px;
@@ -191,5 +215,45 @@ export default {
 
 .el-carousel__item:nth-child(2n+1) {
   background-color: #d3dce6;
+}
+.imc-list {
+  text-align: left  ;
+  padding: 10px;
+  padding-top: 20px;
+  cursor: pointer;
+  li {
+    // border: 1px solid black;
+    border-bottom: 2px solid gainsboro;
+    height: 100px;
+    padding: 10px;
+    font-family: Microsoft YaHei-Bold, Microsoft YaHei;
+    & > .title {
+      font-size: 22px;
+      font-family: Microsoft YaHei-Bold, Microsoft YaHei;
+      font-weight: bold;
+      color: #66CCCC;
+    }
+    & .des {
+      margin-top: 10px;
+      height: 48px;
+      font-size: 18px;
+      font-family: Microsoft YaHei-Regular, Microsoft YaHei;
+      font-weight: 400;
+      color: #858585;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    & .date {
+      
+      // margin-bottom: 30px;
+      //   width: 152px;
+      font-family: Microsoft YaHei-Regular, Microsoft YaHei;
+      font-weight: 400;
+      color: #cdcdcd;
+    }
+  }
 }
 </style>

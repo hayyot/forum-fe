@@ -61,7 +61,7 @@ export default {
 
     mounted() {
       this.getList(0);
-      Prismjs.highlightAll()
+      Prismjs.highlightAll();
     },
 
     methods: {
@@ -126,6 +126,7 @@ export default {
 .tac{
   text-align: left;
   .left-gundong {
+    
     float:left;
     overflow: auto;
     position: fixed;

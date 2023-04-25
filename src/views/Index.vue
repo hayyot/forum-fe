@@ -1,3 +1,9 @@
+<!--
+ * @Author: hayyot
+ * @Date: 2023-04-08 18:56:27
+ * @Description: 铁沸物
+ * @FilePath: \forum-fe\src\views\Index.vue
+-->
 <template>
     <div class="index-bg">
         <IndexContent></IndexContent>
@@ -32,9 +38,11 @@ export default {
 
 <style lang="scss" scoped>
 .index-bg {
+    overflow:auto;
     position: absolute;
     width: 100%;
-    height: 100%;
+    min-height: 100%;
+    margin-bottom: 100px;
     background: #f1f1f1;
 }
 

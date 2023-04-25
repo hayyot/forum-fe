@@ -12,6 +12,7 @@ import Posted from '../views/Posted.vue'
 import ResourceIndexVue from '@/views/Resource/ResourceIndex.vue'
 import StudyIndexVue from '@/views/Study/StudyIndex.vue'
 import AboutUsIndex from '@/views/AboutUs/AboutUsIndex.vue'
+import index_itemVue from '@/views/index/index_item.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -19,6 +20,11 @@ const routes = [
     path: '/',
     name: 'home',
     component: Home
+  },
+  {
+    path:'/forum/:id',
+    name:'forum-item',
+    component: index_itemVue
   },
   {
     path: '/posted',
