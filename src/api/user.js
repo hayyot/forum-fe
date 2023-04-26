@@ -1,4 +1,5 @@
 import request from '@/request'
+import { get,post } from '@/request'
 
 export function userInfo(id) {
   return request({
@@ -21,3 +22,5 @@ export function updateUser(user) {
     data: user
   })
 }
+
+export const getUserinfoById = params => get('http://47.107.225.176:8808/getUserByUid/'+params)

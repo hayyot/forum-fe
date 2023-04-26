@@ -79,27 +79,42 @@ const routes = [
         // path: '/personal/info/:id',
         path: '/user/personal/info/:id',
         name:'info',
-        component: r => require.ensure([], () => r(require('@/views/person/Info')), 'info')
+        component: r => require.ensure([], () => r(require('@/views/person/Info')), 'info'),
+        meta:{
+          keepAlive:true, //自定义属性,通过改属性动态设置保活
+        }
       },
       {
         path:'/user/personal/myarticle/:id',
         name:'myarticle',
-        component: r => require.ensure([], () => r(require('@/views/person/MyArticle')), 'myarticle')
+        component: r => require.ensure([], () => r(require('@/views/person/MyArticle')), 'myarticle'),
+        meta:{
+          keepAlive:true, //自定义属性,通过改属性动态设置保活
+        }
       },
       {
         path:'/user/personal/mycollect/:id',
         name:'mycollect',
-        component: r => require.ensure([], () => r(require('@/views/person/MyCollect')), 'mycollect')
+        component: r => require.ensure([], () => r(require('@/views/person/MyCollect')), 'mycollect'),
+        meta:{
+          keepAlive:true, //自定义属性,通过改属性动态设置保活
+        }
       },
       {
         path:'/user/personal/myfan/:id',
         name:'myfan',
-        component: r => require.ensure([], () => r(require('@/views/person/MyFanAndFollow')), 'myfan')
+        component: r => require.ensure([], () => r(require('@/views/person/MyFanAndFollow')), 'myfan'),
+        meta:{
+          keepAlive:true, //自定义属性,通过改属性动态设置保活
+        }
       },
       {
         path:'/user/personal/myfollow/:id',
         name:'myfollow',
-        component: r => require.ensure([], () => r(require('@/views/person/MyFanAndFollow')), 'myfollow')
+        component: r => require.ensure([], () => r(require('@/views/person/MyFanAndFollow')), 'myfollow'),
+        meta:{
+          keepAlive:true, //自定义属性,通过改属性动态设置保活
+        }
       }
     ]
   }

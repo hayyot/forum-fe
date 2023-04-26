@@ -10,20 +10,21 @@
             </el-button>
             <el-form ref="elForm" :model="formData" :rules="rules" size="medium" >
                 <el-form-item label="" prop="username">
-                    <el-input v-model="formData.username" placeholder="用户名/邮箱" clearable :style="{width: '100%'}">
+                    <el-input v-model="formData.email" placeholder="用户名/邮箱" clearable :style="{width: '100%'}">
                     </el-input>
                 </el-form-item>
                 <el-form-item label="" prop="password">
                     <el-input v-model="formData.password" placeholder="请输入密码" clearable show-password
                               :style="{width: '100%'}"></el-input>
                 </el-form-item>
-                <el-form-item label="" prop="yzm">
-                    <el-input v-model="formData.yzm" placeholder="请输入验证码" clearable :style="{width: '100%'}" >
-                        <el-button slot="append" @click="pdYzm" v-show="flag">验证</el-button>
-                    </el-input>
-                </el-form-item>
-                <verify v-show="flag" ref="verify" @changeOkLogin="callback"></verify>
+                
             </el-form>
+            <!-- <el-form-item label="" prop="yzm"> -->
+                <el-input v-model="yzm" placeholder="请输入验证码" clearable :style="{width: '100%'}" >
+                    <el-button slot="append" @click="pdYzm" v-show="flag">验证</el-button>
+                </el-input>
+                <verify v-show="flag" ref="verify" @changeOkLogin="callback"></verify>
+            <!-- </el-form-item> -->
             <div slot="footer">
                 <el-button type="primary" @click="handelConfirm" :disabled="okLogin">登录</el-button>
             </div>
@@ -42,10 +43,10 @@ export default {
         return {
             showDialog: false,
             formData: {
-                username: undefined,
+                email: undefined,
                 password: undefined,
-                yzm: undefined,
             },
+            yzm: '',
             rules: {
                 username: [{
                     required: true,
@@ -80,7 +81,25 @@ export default {
             this.$emit('update:visible', false)
         },
         handelConfirm() {
-            this.$refs['elForm'].validate((valid) => {
+            console.log(this.formData);
+            var config = {
+                method: 'post',
+                url: 'http://47.107.225.176:8808/login',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data : JSON.parse(JSON.stringify(this.formData))
+            };
+            axios(config).then(res => {
+                console.log(res);
+                localStorage.setItem('uid',res.data.data.uid);
+                localStorage.setItem('username', res.data.data.username);
+                localStorage.setItem('headImage',res.data.data.headImage);
+                localStorage.setItem('email',res.data.data.email);
+                localStorage.setItem('token',res.data.data.token);
+                location.reload();
+            })
+            /*this.$refs['elForm'].validate((valid) => {
                 if (valid) {
                     let userList = {
                         // username: this.formData.username,
@@ -93,38 +112,39 @@ export default {
                         method: 'post',
                         url: 'http://47.107.225.176:8808/login',
                         headers: {
-                            'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
+                            // 'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
                             'Content-Type': 'application/json'
                         },
-                        data : JSON.parse(JSON.stringify(userList))
+                        data : JSON.parse(JSON.stringify(this.formData))
                     };
-                    const _this = this
+                    // const _this = this
                     axios(config).then(res => {
                         // console.log(res.data.data)
                         // console.log(res.data.data.token)
                         // this.$emit('hasLogin',this.flag)
-                        const jwt = res.data.data.token
-                        const userInfo = res.data.data
+                        // const jwt = res.data.data.token
+                        // const userInfo = res.data.data
 
                         // 把数据共享出去
-                        _this.$store.commit("SET_TOKEN", jwt)
-                        _this.$store.commit("SET_USERINFO", userInfo)
+                        // _this.$store.commit("SET_TOKEN", jwt)
+                        // _this.$store.commit("SET_USERINFO", userInfo)
 
                         // 获取
                         // console.log(_this.$store.getters.getUser)
-                        location.reload();
-                        this.close()
+                        // location.reload();
+                        // this.close()
 
+                        console.log(res);
                     })
 
                 } else {
                     console.log('error submit!!');
                     return false;
                 }
-            })
+            })*/
         },
         pdYzm(){
-            this.$refs.verify.checkCode(this.formData.yzm)
+            this.$refs.verify.checkCode(this.yzm)
         },
         callback(flag){
             if(flag==1)this.okLogin = !this.okLogin

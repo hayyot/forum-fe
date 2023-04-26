@@ -10,12 +10,19 @@
             <ul class="navRight">
 
                 <li @click.stop v-if="hasLogin">
-                    <a @click="handleMenuClick" href="#"><img class="userAvater" src="../assets/logo.png"></a>
+                    <a @click="handleMenuClick" href="#"><img class="userAvater" :src="headImage"></a>
                     <ul class="navRight-menu-group" v-if="isMenuShow">
                         <div class="navRight-menu-item" v-for="(items, index) in menuList" :key="index">
                             <li v-for="(subItem, index) in items" :key="index">
                                 <a :href="subItem.url">
                                     {{subItem.title}}
+                                </a>
+                            </li>
+                        </div>
+                        <div class="navRight-menu-item">
+                            <li>
+                                <a href="#" @click="logout">
+                                    登出
                                 </a>
                             </li>
                         </div>
@@ -64,6 +71,7 @@ export default {
     },
     data() {
         return {
+            headImage:'',
             activeIndex: '1',
             menuList: [
                 [{
@@ -93,11 +101,6 @@ export default {
                     imageUrl: 'iconfont icon-message',
                     url: '#'
                 }],
-                [{
-                    title: '登出',
-                    imageUrl: 'iconfont icon-message',
-                    url: '#'
-                }]
             ],
             itemList: [{
                     title: '首页',
@@ -130,7 +133,8 @@ export default {
     },
 
     created() {
-        console.log(this.$route.path);
+        // console.log(this.$route.path);
+        this.headImage = localStorage.getItem('headImage')
         if(this.$route.path == '/resource'){
             this.currentClick = '资源'
         }
@@ -140,7 +144,7 @@ export default {
         else if(this.$route.path == '/aboutus'){
             this.currentClick = '关于我们'
         }
-        if (this.$store.getters.getUser.username) {
+        if (localStorage.getItem('username')) {
             // this.user.username = this.$store.getters.getUser.username
             // this.user.avatar = this.$store.getters.getUser.avatar
             this.hasLogin = true
@@ -176,6 +180,10 @@ export default {
             if (this.isShow) {
                 this.isShow = !this.isShow
             }
+        },
+        logout(){
+            localStorage.clear()
+            location.reload()
         }
     },
 };

@@ -123,7 +123,7 @@
 </template>
 
 <script>
-import { userInfo } from "@/api/user";
+import { getUserinfoById, userInfo } from "@/api/user";
 import {
   myFollow,
   addFollow,
@@ -152,6 +152,7 @@ export default {
         followId: "",
       },
       isfollowid: [],
+      
       // person_body_list: [
       //   {
       //     label: "个人简介",
@@ -182,7 +183,10 @@ export default {
     };
   },
   mounted() {
-    this.load();
+    // this.load();
+    getUserinfoById(localStorage.getItem('uid')).then(res => {
+      console.log(res);
+    })
   },
   watch: {
     $route(to) {
