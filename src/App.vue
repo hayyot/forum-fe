@@ -7,7 +7,9 @@
 <template>
   <div id="app">
     <TabBar class="tabbar"></TabBar>
-    <router-view class="view" v-if="isRouterAlive"></router-view>
+    <keep-alive >
+      <router-view class="view" v-if="$route.meta.keepAlive"></router-view>
+    </keep-alive>
   </div>
 </template>
 
@@ -45,6 +47,7 @@ export default {
 *{
   margin: 0px;
   padding: 0px;
+  /* font-family: -apple-system,system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial!important; */
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

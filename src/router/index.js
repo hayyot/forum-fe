@@ -19,39 +19,60 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home
+    component: Home,
+    meta:{
+      keepAlive:true, //自定义属性,通过改属性动态设置保活
+    }
   },
   {
     path:'/forum/:id',
     name:'forum-item',
-    component: index_itemVue
+    component: index_itemVue,meta:{
+      keepAlive:true, //自定义属性,通过改属性动态设置保活
+    }
   },
   {
     path: '/posted',
     name: 'posted',
-    component: Posted
+    component: Posted,
+    meta:{
+      keepAlive:true, //自定义属性,通过改属性动态设置保活
+    }
   },
   {
     path: '/forum',
     name: 'forum',
-    component: ForumVue
+    component: ForumVue,
+    meta:{
+      keepAlive:true, //自定义属性,通过改属性动态设置保活
+    }
   },{
     path: '/resource',
     name: 'ResourceIndexVue',
-    component: ResourceIndexVue
+    component: ResourceIndexVue,
+    meta:{
+      keepAlive:true, //自定义属性,通过改属性动态设置保活
+    }
   },{
     path: '/study',
     name: 'StudyIndexVue',
-    component: StudyIndexVue
+    component: StudyIndexVue,
+    meta:{
+      keepAlive:true, //自定义属性,通过改属性动态设置保活
+    }
   },{
     path: '/aboutus',
     name: 'AboutUsIndex',
-    component: AboutUsIndex
+    component: AboutUsIndex,
+    meta:{
+      keepAlive:true, //自定义属性,通过改属性动态设置保活
+    }
   },{
     path: '/user/personal/:id',
     component: r => require.ensure([], () => r(require('@/views/person/Personal')), 'personal'),
     meta: {
-      requireLogin: true
+      requireLogin: true,
+      keepAlive:true,
     },
     children: [
       {

@@ -29,7 +29,7 @@
                 <li v-for="item,index in data_list" :key="index" @click="to_page(item.tid)">
                   <div class="title">{{ item.biaoTi }}</div>
                   <div class="des">{{ item.jianjie }}</div>
-                  <div class="date">{{ item.createTime }}</div>
+                  <div class="date">{{ item.createTime | bltime }}</div>
                 </li>
               </ul>
               <el-pagination
@@ -183,6 +183,13 @@ export default {
           }
         }
     },
+
+    filters: {
+        bltime(item){
+            item = item.replace("T"," ")
+            return item.slice(0,19)
+        }
+    }
 };
 </script>
 
