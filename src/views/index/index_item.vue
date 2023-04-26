@@ -186,7 +186,8 @@ export default {
     border-radius: 5px;
     height: 36px;
     width: 142px;
-    border:1px solid #000000;
+    border:1px solid #66CCCC;
+    color: #66CCCC;
     background-color: #ccffcc;
 }
 

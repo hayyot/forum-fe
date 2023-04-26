@@ -158,6 +158,7 @@ export default {
         to_page(index){
           // console.log(index);
           this.$router.push("/forum/"+index)
+          this.$router.go(0)
           document.documentElement.scrollTop = document.body.scrollTop =0; 
         },
         // 改变每页条数
@@ -304,7 +305,7 @@ export default {
     padding: 10px;
     font-family: Microsoft YaHei-Bold, Microsoft YaHei;
     & > .title {
-      font-size: 22px;
+      font-size: 18px;
       font-family: Microsoft YaHei-Bold, Microsoft YaHei;
       font-weight: bold;
       color: #66CCCC;
@@ -312,8 +313,8 @@ export default {
     & .des {
       margin-top: 10px;
       height: 48px;
-      font-size: 18px;
-      font-family: Microsoft YaHei-Regular, Microsoft YaHei;
+      font-size: 16px;
+      // font-family: Microsoft YaHei-Regular, Microsoft YaHei;
       font-weight: 400;
       color: #858585;
       overflow: hidden;
@@ -325,6 +326,7 @@ export default {
     & .date {
       // margin-bottom: 30px;
       //   width: 152px;
+      font-size: 16px;
       font-family: Microsoft YaHei-Regular, Microsoft YaHei;
       font-weight: 400;
       color: #cdcdcd;
