@@ -9,20 +9,20 @@
       <div class="updateinfo">
   <div class="left">
       <el-form-item label="头像" prop="avatar">
-            <img style="width:150px;height:110px" :src="form.avatar">
+            <img style="width:150px;height:110px" :src="userInfo.headImage">
           </el-form-item>
                     <el-form-item label="账号密码" prop="password">
             <el-input v-model="form.password"></el-input>
           </el-form-item>
           <el-form-item label="昵称" prop="nickname">
-            <el-input v-model="form.nickname"></el-input>
+            <el-input v-model="userInfo.username"></el-input>
           </el-form-item>
           <el-form-item label="年龄" prop="age">
-            <el-input v-model="form.age"></el-input>
+            <el-input v-model="userInfo.age"></el-input>
           </el-form-item>
           <el-form-item label="性别" prop="sex">
             <el-switch
-              v-model="form.sex"
+              v-model="userInfo.sex"
               active-color="#13ce66"
               inactive-color="#ff4949"
               active-text="男"
@@ -33,32 +33,32 @@
             </el-switch>
           </el-form-item>
           <el-form-item label="邮箱" prop="email">
-            <el-input v-model="form.email"></el-input>
+            <el-input v-model="userInfo.email"></el-input>
           </el-form-item>
           
   </div>
   <div class="right">
       <el-form-item label="用户编号" prop="id">
-            <el-input v-model="form.id" disabled></el-input>
+            <el-input v-model="userInfo.uid" disabled></el-input>
           </el-form-item>
           <el-form-item label="账号" prop="account">
-            <el-input v-model="form.account" disabled></el-input>
+            <el-input v-model="userInfo.email" disabled></el-input>
           </el-form-item>
-          <el-form-item label="地区" prop="area">
+          <!-- <el-form-item label="地区" prop="area">
             <el-input v-model="form.area"></el-input>
-          </el-form-item>
+          </el-form-item> -->
           <el-form-item label="兴趣爱好" prop="hobby">
-            <el-input v-model="form.hobby"></el-input>
+            <el-input v-model="userInfo.hobby"></el-input>
           </el-form-item>
           <el-form-item label="职业" prop="work">
-            <el-input v-model="form.work"></el-input>
+            <el-input v-model="userInfo.job"></el-input>
           </el-form-item>
                     <el-form-item label="个性签名" prop="design">
-            <el-input v-model="form.design"></el-input>
+            <el-input v-model="userInfo.hobby"></el-input>
           </el-form-item>
-          <el-form-item label="手机号码" prop="mobilePhoneNumber">
-            <el-input v-model="form.mobilePhoneNumber"></el-input>
-          </el-form-item>
+          <!-- <el-form-item label="手机号码" prop="mobilePhoneNumber">
+            <el-input v-model="userInfo.mobilePhoneNumber"></el-input>
+          </el-form-item> -->
   </div>
   </div>
   </el-form>
@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import { userInfo, updateUser } from "@/api/user.js";
+import { userInfo, updateUser, getUserinfoById } from "@/api/user.js";
 
 export default {
   name: "PersonalDia",
@@ -93,6 +93,9 @@ export default {
         work: "",
         design: "",
       },
+      userInfo: {
+        
+      },
       rules: {
         nickname: [
           { required: true, message: "昵称不能为空", trigger: "blur" },
@@ -104,6 +107,10 @@ export default {
     };
   },
   mounted() {
+    getUserinfoById(localStorage.getItem('uid')).then(res => {
+      console.log(res);
+      this.userInfo = res.data
+    })
     this.load();
   },
   methods: {

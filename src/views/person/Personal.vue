@@ -2,7 +2,7 @@
   <div>
     <div class="PersonTop">
       <div class="PersonTop_img">
-        <img v-image-preview :src="avatar" />
+        <img v-image-preview :src="userInfo.headImage" />
       </div>
       <div class="PersonTop_text">
         <div class="user_text">
@@ -152,7 +152,7 @@ export default {
         followId: "",
       },
       isfollowid: [],
-      
+      userInfo:{}
       // person_body_list: [
       //   {
       //     label: "个人简介",
@@ -186,6 +186,7 @@ export default {
     // this.load();
     getUserinfoById(localStorage.getItem('uid')).then(res => {
       console.log(res);
+      this.userInfo = res.data
     })
   },
   watch: {

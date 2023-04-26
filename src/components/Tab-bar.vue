@@ -82,7 +82,7 @@ export default {
                 [{
                     title: '我的主页',
                     imageUrl: 'iconfont icon-message',
-                    url: '/user/personal/:id'
+                    url: `/user/personal/${localStorage.getItem('uid')}`
                 }, {
                     title: '我赞过的',
                     imageUrl: 'iconfont icon-message',
