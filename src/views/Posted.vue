@@ -11,15 +11,25 @@
                 <input class="posted-topic" type="text" v-model="input_topic" placeholder="请输入标题">
                 <el-select class="posted-select" v-model="value" placeholder="请选择板块" size="10">
                     <el-option
-                    v-for="item in sections"
-                    :key="item.sid"
-                    :label="item.sname"
-                    :value="item.sid">
+                        class="posted-option"
+                        v-for="item in sections"
+                        :key="item.sid"
+                        :label="item.sname"
+                        :value="item.sid">
                     </el-option>
                 </el-select>
                 <el-button class="el-btn" @click="subbmit">
                     提交
                 </el-button>
+            </div>
+            <div>
+                <el-input
+                    class="el-jianjie"
+                    type="textarea"
+                    :rows="3"
+                    placeholder="请输入简介"
+                    v-model="jianjie">
+                </el-input>
             </div>
         </div>
         <div>
@@ -32,6 +42,7 @@
 <script>
 import WangEditor from '../components/moven-editor.vue'
 import { getSection } from '@/api/api';
+import { Toast } from 'vant';
 import { insertContent } from '@/api/posted'
 export default {
     name: 'ForumFePosted',
@@ -43,9 +54,8 @@ export default {
             input_topic:'',
             sections: [],
             value: '',
-            content_params:{
-
-            }
+            content_params:{},
+            jianjie:''
         };
     },
 
@@ -73,9 +83,21 @@ export default {
             this.content_params.neiRong = this.WangValue;
             this.content_params.tstart = 0;
             this.content_params.tshou = 0;
-            console.log(this.content_params);
-            insertContent(this.content_params).then(res => {
+            this.content_params.jianjie = this.jianjie
+            // console.log(this.content_params);
+            this.axios({
+                url:'http://47.107.225.176:8808/insert',
+                method:'post',
+                data:this.content_params,
+                headers:{
+                    'Content-Type':'application/json'
+                }
+            }).then(res => {
                 console.log(res);
+                Toast.success({
+                    message: '发布成功',
+                    forbidClick: true,
+                });
             })
         }
     },
@@ -110,7 +132,7 @@ export default {
 }
 .posted-topic {
     height: 60px;
-    width: 1000px;
+    width: 800px;
     border: none;
     border-radius: 10px;
     font-size: 30px;
@@ -119,7 +141,7 @@ export default {
 .posted-select{
     position: relative;
     margin-left: 30px;
-    width: 600px!important;
+    width: 200px!important;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     ::v-deep {
@@ -163,5 +185,10 @@ export default {
 .el-btn:focus {
     color: white;
     background-color: #99CCCC;
+}
+.el-jianjie {
+    width: 800px;
+    margin-top: 20px;
+    font-size: 16px;
 }
 </style>
