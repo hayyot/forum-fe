@@ -7,22 +7,47 @@
 <template>
     <div class="item-bg">
         <div class="item-left">
-            <div @click="thumb = !thumb">
-                <img src="@/assets/thumb-later.svg" v-if="thumb"/>
-                <img src="@/assets/thumb-before.svg" v-else/>
+            <div @click="thumb1">
+                <img src="@/assets/thumb-later.svg" alt="点赞" v-if="thumb"/>
+                <img src="@/assets/thumb-before.svg" alt="点赞" v-else/>
             </div>
-            <div @click="star = !star">
-                <img src="@/assets/star-later.svg" v-if="star"/>
-                <img src="@/assets/star-before.svg" v-else/>
+            <div @click="star1">
+                <img src="@/assets/star-later.svg" alt="收藏" v-if="star"/>
+                <img src="@/assets/star-before.svg" alt="收藏" v-else/>
             </div>
             <div @click="remark = !remark">
-                <img src="@/assets/remark-later.svg" v-if="remark"/>
-                <img src="@/assets/remark-before.svg" v-else/>
+                <img src="@/assets/remark-later.svg" alt="评论" v-if="remark"/>
+                <img src="@/assets/remark-before.svg" alt="评论" v-else/>
             </div>
         </div>
         <div class="item-content">
-            <div v-html="content" v-highlight>
-
+            <div class="markdown-body" v-html="content" v-highlight></div>
+            <hr>
+            <div class="ic-remark_me">
+                <p>我来评论:</p>
+                <div>
+                    <el-input
+                        type="textarea"
+                        :rows="3"
+                        placeholder="请输入内容"
+                        v-model="textarea">
+                    </el-input>
+                    <div style="height: 1px;"></div>
+                    <button>发表评论</button>
+                </div>
+            </div>
+            <hr>
+            <div class="ic-remark">
+                <p>热门评论🔥</p>
+                <div class="ic-remark_content" v-for="item,index in content_remark" :key="index">
+                    <div>
+                        <img :src="item.user.headImage" alt="">
+                    </div>
+                    <div>
+                        <p>{{ item.user.username }} <span>{{ item.createTime | timecl }}</span></p>
+                        <p>{{ item.pneirong }}</p>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="item-right">
@@ -37,7 +62,7 @@
             </div>
             <!-- btn -->
             <div style="margin-top: 10px;margin-bottom: 10px;display: flex;justify-content: center;">
-                <button class="follow">关注</button>
+                <button class="follow" @click="follow()">关注</button>
             </div>
             <hr>
             <div class="ir-nr">
@@ -49,7 +74,8 @@
 </template>
 
 <script>
-import { getItemById } from '@/api/forum-item';
+import { Thumb, getItemById } from '@/api/forum-item';
+import { Toast } from 'vant';
 import Prismjs from 'prismjs';
 export default {
     name: 'ForumFeIndexItem',
@@ -62,16 +88,22 @@ export default {
             star:false,
             remark:false,
             user_info:{},
-            content_wenzhang: {}
+            content_wenzhang: {},
+            content_remark:[],
+            textarea:``
         };
     },
-    beforeCreate() {
-        getItemById({tid:this.$route.params.id,uid:1}).then(res => {
-            console.log(res);
+    async beforeCreate() {
+        await getItemById({tid:this.$route.params.id,uid:18}).then(res => {
+            // console.log(res);
             this.content_list = res.data
             this.content = res.data.wenzhang.neiRong
             this.user_info = res.data.user
             this.content_wenzhang = res.data.wenzhang
+            this.thumb = res.data.wenzhang.startFlag
+            this.star = res.data.wenzhang.shouFlag
+            this.content_remark = res.data.pinglun
+            console.log(this.content_remark);
         })
         
     },
@@ -82,10 +114,89 @@ export default {
     },
 
     methods: {
-        
+        async thumb1(){
+            // console.log(this.thumb);
+            if(this.thumb){
+                await this.axios({
+                    url:"http://47.107.225.176:8808/dianzan",
+                    method:'post',
+                    data:{"tid":this.$route.params.id,"uid":18,"count":-1},
+                    headers:{
+                        'Content-Type':'application/json'
+                    }
+                }).then(res => {
+                    // console.log(res);
+                    this.thumb = !this.thumb
+                    Toast.success({
+                        message: '取消点赞成功',
+                        forbidClick: true,
+                    });
+                })
+            }
+            else {
+                this.axios({
+                    url:"http://47.107.225.176:8808/dianzan",
+                    method:'post',
+                    data:{"tid":this.$route.params.id,"uid":18,"count":1},
+                    headers:{
+                        'Content-Type':'application/json'
+                    }
+                }).then(res => {
+                    // console.log(res);
+                    this.thumb = !this.thumb
+                    Toast.success({
+                        message: '点赞成功',
+                        forbidClick: true,
+                    });
+                })
+            }
+            
+        },
+        star1(){
+            // console.log(this.star);
+            if(this.star){
+                this.axios({
+                    url:"http://47.107.225.176:8808/shoucang",
+                    method:'post',
+                    data:{"tid":this.$route.params.id,"uid":18,"count":-1},
+                    headers:{
+                        'Content-Type':'application/json'
+                    }
+                }).then(res => {
+                    // console.log(res);
+                    this.star = !this.star
+                    Toast.success({
+                        message: '取消收藏成功',
+                        forbidClick: true,
+                    });
+                })
+            }
+            else{
+                this.axios({
+                    url:"http://47.107.225.176:8808/shoucang",
+                    method:'post',
+                    data:{"tid":this.$route.params.id,"uid":18,"count":1},
+                    headers:{
+                        'Content-Type':'application/json'
+                    }
+                }).then(res => {
+                    // console.log(res);
+                    this.star = !this.star
+                    Toast.success({
+                        message: '收藏成功',
+                        forbidClick: true,
+                    });
+                })
+            }
+            
+        }
     },
-
-    
+    filters: {
+        timecl(item){
+            item = item.replace("T"," ");
+            return item.slice(0,19)
+        }
+    }
 };
 </script>
 
@@ -162,10 +273,11 @@ export default {
     div:nth-child(2){
         margin: 10px;
         display: inline-block;
-        width: 100px;
+        // width: 150px;
         p:nth-child(1) {
             font-size: 18px;
             font-weight: 600;
+            // width: 100px;
         }
         p:nth-child(2) {
             margin-top: 5px;
@@ -187,8 +299,137 @@ export default {
     height: 36px;
     width: 142px;
     border:1px solid #66CCCC;
-    color: #66CCCC;
-    background-color: #ccffcc;
+    color: #ffffff;
+    background-color: #66cc99;
+    
 }
-
+.follow:hover {
+    background-color: #66CCCC;
+    color: white;
+}
+::v-deep .markdown-body{
+    background-color: #fff;
+    // margin-left: 20%;
+    // width: 70%;
+    margin-bottom: 40px;
+    h1 {
+        margin-bottom: 10px;
+    }
+    h2 {
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    h3 {
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    a:visited {
+        color: blue;
+    }
+    p {
+        font-size: 17px;
+        line-height: 30px;
+    }
+    li {
+        font-size: 17px;
+        line-height: 30px;
+    }
+    svg {
+        display: none;
+    }
+    .top {
+        display: none;
+    }
+}
+.ic-remark_me {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    p:nth-child(1) {
+        font-size: 18px;
+        font-weight: bold;
+        // margin-bottom: 20px;
+    }
+    div{
+        margin-top: 10px;
+        // padding: 20px;
+        // width: 800px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        el-input {
+            margin-top: 10px;
+            width: 400px;
+            left: 200px;
+        }
+        button {
+            // margin-top: 10px;
+            cursor: pointer;
+            height: 40px;
+            width: 100px;
+            // left: 200px;
+            border-radius: 5px;
+            background-color: #66cc99;
+            color: white;
+            border: none;
+        }
+        button:hover {
+            // margin-top: 10px;
+            cursor: pointer;
+            height: 40px;
+            width: 100px;
+            // left: 200px;
+            border-radius: 5px;
+            background-color: #66CCCC;
+            color: white;
+            border: none;
+        }
+    }
+}
+.ic-remark {
+    margin-top: 20px;
+    // margin-bottom: 20px;
+    p:nth-child(1) {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    .ic-remark_content {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        div {
+            margin-bottom: 20px;
+        }
+        div:nth-child(1) {
+            width: 50px;
+            img {
+                height: 48px;
+                width: 48px;
+                border-radius: 50%;
+            }
+        }
+        div:nth-child(2) {
+            width: 770px;
+            // background-color: #66CCCC;
+            p:nth-child(1) {
+                margin-left: 10px;
+                font-size: 18px;
+                margin-bottom: 0px;
+                span {
+                    font-size: 14px;
+                    color: #7a7a7a;
+                    font-weight: 400;
+                    margin-left: 10px;
+                }
+            }
+            p:nth-child(2) {
+                margin-left: 10px;
+                font-size: 16px;
+                font-weight: 400;
+            }
+        }
+    }
+}
 </style>

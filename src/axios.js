@@ -1,3 +1,9 @@
+/*
+ * @Author: hayyot
+ * @Date: 2023-04-23 22:06:28
+ * @Description: 铁沸物
+ * @FilePath: \forum-fe\src\axios.js
+ */
 import axios from 'axios'
 import Element from 'element-ui'
 import router from './router'

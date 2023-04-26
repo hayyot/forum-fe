@@ -16,7 +16,6 @@ import 'element-ui/lib/theme-chalk/index.css';
 import Vant from 'vant';
 import 'vant/lib/index.css';
 // 引用highlight
-
 Vue.use(Vant);
 Vue.config.productionTip = false
 Vue.use(ElementUI);
