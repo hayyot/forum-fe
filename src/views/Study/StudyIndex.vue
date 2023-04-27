@@ -104,6 +104,7 @@ export default {
                   _this.message=res.data.data.sneirong;
                   console.log(res.data.data.sneirong)
                   Prismjs.highlightAll()
+                  document.documentElement.scrollTop = 0;
               })
               .catch(function (error) {
                   console.log(error);

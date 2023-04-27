@@ -63,7 +63,9 @@
         </div>
         <div>
             <div class="index-right">
-
+              <div>
+                
+              </div>
             </div>
         </div>
     </div>
@@ -97,6 +99,7 @@ export default {
             limit:10,//分页：限制数量
             total:0,
             item_sid:0,
+            uid:0
         };
     },
   computed: {
@@ -108,6 +111,9 @@ export default {
     }
   },
     mounted() {
+      if(localStorage.getItem('uid')){
+        this.uid = localStorage.getItem('uid')
+      }
       this.getList();
       // 获取div的ref=“carousel”的高度
       let carousel_height = window.getComputedStyle(this.$refs.carousel).height;
@@ -272,8 +278,8 @@ export default {
     background: #ffffff;
 }
 .index-right {
-    height: 60%;
-    width: 40%;
+    height: 30%;
+    width: 60%;
     float: left;
     min-width: 200px;
     border-radius: 7.5px;
@@ -321,10 +327,10 @@ export default {
       display: inline-block;
       margin-left: 10px;
       // border: 1px solid black;
-      padding: 5px 10px 5px 10px;
+      padding: 5px 5px 5px 5px;
       background-color: #66CCCC;
       color: white;
-      font-weight: bold;
+      font-weight: 600;
       border-radius: 5px;
     }
     & .user {

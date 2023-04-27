@@ -30,3 +30,6 @@ export const getDianzanById = (current,limit,uid) => get('http://47.107.225.176:
 
 // 获取收藏列表
 export const getShoucangById = (current,limit,uid) => get('http://47.107.225.176:8808/shoucangList/'+current+'/'+limit+'/'+uid)
+
+//获取顶部数据
+export const getUserCount = uid => get('http://47.107.225.176:8808/getUserCount/'+uid);

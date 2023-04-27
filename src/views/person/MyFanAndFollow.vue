@@ -21,8 +21,8 @@
               <img :src="item.user.headImage" alt="" srcset="">
               <span>{{ item.user.username }}</span>
             </div>
-            <!-- <div class="des">{{ item.wenZhang.jianjie }}</div> -->
-            <!-- <div class="date">{{ item.wenZhang.createTime | bltime }}</div> -->
+            <div class="des">{{ item.wenZhang.jianjie }}</div>
+            <div class="date">{{ item.createTime | bltime }}</div>
           </li>
         </ul>
         <el-pagination
@@ -56,7 +56,7 @@ export default {
     getDianzanById(this.current,this.limit,this.$route.params.id).then(res => {
       // console.log(res);
       this.data_list = res.data.records
-      console.log(this.data_list);
+      console.log(res.data.records);
       console.log(this.data_list.length);
     })
   },
@@ -114,7 +114,7 @@ export default {
   li {
     // border: 1px solid black;
     border-bottom: 2px solid gainsboro;
-    height: 100px;
+    // height: 100px;
     padding: 10px;
     font-family: Microsoft YaHei-Bold, Microsoft YaHei;
     & > .title {

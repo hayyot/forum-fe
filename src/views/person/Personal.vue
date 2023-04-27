@@ -2,7 +2,7 @@
   <div class="Personal-bg">
     <div class="PersonTop">
       <div class="PersonTop_img">
-        <img v-image-preview :src="userInfo.headImage" />
+        <img :src="userInfo.headImage" />
       </div>
       <div class="PersonTop_text">
         <div class="user_text">
@@ -43,15 +43,15 @@
         </div>
         <div class="user_num">
           <div style="cursor: pointer" @click="myfan">
-            <div class="num_number">0</div>
+            <div class="num_number">{{ fensi }}</div>
             <span class="num_text">粉丝</span>
           </div>
           <div style="cursor: pointer" @click="myfollow">
-            <div class="num_number">0</div>
+            <div class="num_number">{{ guanzhu }}</div>
             <span class="num_text">关注</span>
           </div>
           <div>
-            <div class="num_number">0</div>
+            <div class="num_number">{{ huozan }}</div>
             <span class="num_text">获赞</span>
           </div>
         </div>
@@ -126,7 +126,7 @@
 </template>
 
 <script>
-import { getUserinfoById, userInfo } from "@/api/user";
+import { getUserinfoById, userInfo,getUserCount } from "@/api/user";
 import {
   myFollow,
   addFollow,
@@ -157,7 +157,10 @@ export default {
       isfollowid: [],
       userInfo:{},
       editshow: false,
-      followshow: false
+      followshow: false,
+      fensi: 0,
+      guanzhu: 0,
+      huozan: 0
       // person_body_list: [
       //   {
       //     label: "个人简介",
@@ -198,6 +201,12 @@ export default {
     getUserinfoById(localStorage.getItem('uid')).then(res => {
       console.log(res);
       this.userInfo = res.data
+    })
+    getUserCount(localStorage.getItem('uid')).then(res => {
+      console.log(res);
+      this.fensi = res.data.fansCount
+      this.guanzhu = res.data.followCount
+      this.dianzan = res.data.starCount
     })
   },
   watch: {
@@ -450,7 +459,7 @@ export default {
 .person_body_left {
   width: 27%;
   /* height: 600px; */
-  min-height: 380px;
+  height: 480px;
   border-radius: 5px;
   margin-right: 3%;
   text-align: center;
@@ -506,5 +515,8 @@ export default {
   margin-bottom: 100px;
   background: #f1f1f1;
   text-align: center;
+}
+.el-menu-vertical-demo{
+  height: 460px;
 }
 </style>

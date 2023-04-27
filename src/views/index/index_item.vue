@@ -37,9 +37,11 @@
                 </div>
             </div>
             <hr>
+            
             <div class="ic-remark">
                 <p>热门评论🔥</p>
-                <div class="ic-remark_content" v-for="item,index in content_remark" :key="index">
+                <el-empty description="暂无评论" v-if="content_remark <= 0"></el-empty>
+                <div v-else class="ic-remark_content" v-for="item,index in content_remark" :key="index">
                     <div>
                         <img :src="item.user.headImage" alt="">
                     </div>
@@ -62,7 +64,8 @@
             </div>
             <!-- btn -->
             <div style="margin-top: 10px;margin-bottom: 10px;display: flex;justify-content: center;">
-                <button class="follow" @click="follow()">关注</button>
+                <button class="follow" @click="follow()" v-if="!folled">关注</button>
+                <button class="follow" @click="follow()" v-else>已关注</button>
             </div>
             <hr>
             <div class="ir-nr">
@@ -74,7 +77,7 @@
 </template>
 
 <script>
-import { Thumb, getItemById } from '@/api/forum-item';
+import { Thumb, getItemById,Follow,isFollow } from '@/api/forum-item';
 import { Toast } from 'vant';
 import Prismjs from 'prismjs';
 export default {
@@ -90,11 +93,14 @@ export default {
             user_info:{},
             content_wenzhang: {},
             content_remark:[],
-            textarea:``
+            textarea: ``,
+            uid: 0,
+            folled: false
         };
     },
-    async beforeCreate() {
-        await getItemById({tid:this.$route.params.id,uid:18}).then(res => {
+    async created() {
+        // console.log(this.$route.params.id + " " + localStorage.getItem('uid'));
+        await getItemById({tid:this.$route.params.id,uid:localStorage.getItem('uid')}).then(res => {
             // console.log(res);
             this.content_list = res.data
             this.content = res.data.wenzhang.neiRong
@@ -105,9 +111,15 @@ export default {
             this.content_remark = res.data.pinglun
             console.log(this.content_remark);
         })
-        
+        await isFollow(this.user_info.uid,localStorage.getItem('uid')).then(res => {
+            console.log(res);
+            this.folled = res.data.followFlag
+        })
     },
     mounted() {
+        if(localStorage.getItem('uid')){
+            this.uid = localStorage.getItem('uid')
+        }
         this.$nextTick(() => {
             Prismjs.highlightAll()
         });
@@ -120,7 +132,7 @@ export default {
                 await this.axios({
                     url:"http://47.107.225.176:8808/dianzan",
                     method:'post',
-                    data:{"tid":this.$route.params.id,"uid":18,"count":-1},
+                    data:{"tid":this.$route.params.id,"uid":this.uid,"count":-1},
                     headers:{
                         'Content-Type':'application/json'
                     }
@@ -137,7 +149,7 @@ export default {
                 this.axios({
                     url:"http://47.107.225.176:8808/dianzan",
                     method:'post',
-                    data:{"tid":this.$route.params.id,"uid":18,"count":1},
+                    data:{"tid":this.$route.params.id,"uid":this.uid,"count":1},
                     headers:{
                         'Content-Type':'application/json'
                     }
@@ -158,7 +170,7 @@ export default {
                 this.axios({
                     url:"http://47.107.225.176:8808/shoucang",
                     method:'post',
-                    data:{"tid":this.$route.params.id,"uid":18,"count":-1},
+                    data:{"tid":this.$route.params.id,"uid":this.uid,"count":-1},
                     headers:{
                         'Content-Type':'application/json'
                     }
@@ -175,7 +187,7 @@ export default {
                 this.axios({
                     url:"http://47.107.225.176:8808/shoucang",
                     method:'post',
-                    data:{"tid":this.$route.params.id,"uid":18,"count":1},
+                    data:{"tid":this.$route.params.id,"uid":this.uid,"count":1},
                     headers:{
                         'Content-Type':'application/json'
                     }
@@ -189,6 +201,18 @@ export default {
                 })
             }
             
+        },
+        follow() {
+            Follow(this.user_info.uid,localStorage.getItem('uid')).then(res => {
+                console.log(res);
+                if(res.code == 200){
+                    this.$message({
+                        message: '关注成功',
+                        type: 'success'
+                    });
+                }
+                this.folled = true
+            })
         }
     },
     filters: {

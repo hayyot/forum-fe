@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import { userInfo, updateUser, getUserinfoById } from "@/api/user.js";
+import { getUserinfoById } from "@/api/user.js";
 
 export default {
   name: "PersonalDia",
@@ -112,27 +112,27 @@ export default {
       },
     };
   },
-  mounted() {
-    getUserinfoById(localStorage.getItem('uid')).then(res => {
+  async mounted() {
+    await getUserinfoById(localStorage.getItem('uid')).then(res => {
       // console.log(res); 
       this.userInfo = res.data
     })
-    this.load();
+    // this.load();
   },
   methods: {
     open() {
       this.dialogVisible = true;
     },
-    load() {
-      userInfo(this.$store.state.id)
-        .then((res) => {
-          console.log(res);
-          Object.assign(this.form, res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
+    // load() {
+    //   userInfo(this.$store.state.id)
+    //     .then((res) => {
+    //       console.log(res);
+    //       Object.assign(this.form, res.data);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // },
     submit() {
       updateUser(this.form)
         .then((res) => {
