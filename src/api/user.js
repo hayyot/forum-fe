@@ -24,3 +24,9 @@ export function updateUser(user) {
 }
 
 export const getUserinfoById = params => get('http://47.107.225.176:8808/getUserByUid/'+params)
+
+// 获取点赞列表
+export const getDianzanById = (current,limit,uid) => get('http://47.107.225.176:8808/dianZanList/'+current+'/'+limit+'/'+uid)
+
+// 获取收藏列表
+export const getShoucangById = (current,limit,uid) => get('http://47.107.225.176:8808/shoucangList/'+current+'/'+limit+'/'+uid)

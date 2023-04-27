@@ -1,3 +1,9 @@
+<!--
+ * @Author: hayyot
+ * @Date: 2023-04-19 15:41:44
+ * @Description: 铁沸物
+ * @FilePath: \forum-fe\src\views\person\PersonalDia.vue
+-->
 <template>
   <div>
       <el-dialog
@@ -108,7 +114,7 @@ export default {
   },
   mounted() {
     getUserinfoById(localStorage.getItem('uid')).then(res => {
-      console.log(res);
+      // console.log(res); 
       this.userInfo = res.data
     })
     this.load();

@@ -28,6 +28,11 @@
               <ul class="imc-list">
                 <li v-for="item,index in data_list" :key="index" @click="to_page(item.tid)">
                   <div class="title">{{ item.biaoTi }}</div>
+                  <div class="biaoqian">{{ item.section.sname }}</div>
+                  <div class="user">
+                    <img :src="item.user.headImage" alt="" srcset="">
+                    <span>{{ item.user.username }}</span>
+                  </div>
                   <div class="des">{{ item.jianjie }}</div>
                   <div class="date">{{ item.createTime | bltime }}</div>
                 </li>
@@ -297,18 +302,48 @@ export default {
   text-align: left  ;
   padding: 10px;
   padding-top: 20px;
+  // background-color: #CCFFCC;
   cursor: pointer;
   li {
     // border: 1px solid black;
     border-bottom: 2px solid gainsboro;
-    height: 100px;
+    height: 110px;
     padding: 10px;
     font-family: Microsoft YaHei-Bold, Microsoft YaHei;
     & > .title {
+      display: inline-block;
       font-size: 18px;
       font-family: Microsoft YaHei-Bold, Microsoft YaHei;
       font-weight: bold;
       color: #66CCCC;
+    }
+    & .biaoqian {
+      display: inline-block;
+      margin-left: 10px;
+      // border: 1px solid black;
+      padding: 5px 10px 5px 10px;
+      background-color: #66CCCC;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+    & .user {
+      position: relative;
+      left: 20px;
+      top: 10px;
+      display: inline-block;
+      img {
+        height: 30px;
+        width: 30px;
+        border: 1px solid #71777c;
+        border-radius: 50%;
+      }
+      span {
+        position: relative;
+        bottom: 10px;
+        left: 10px;
+        color: #71777c;
+      }
     }
     & .des {
       margin-top: 10px;
@@ -326,6 +361,7 @@ export default {
     & .date {
       // margin-bottom: 30px;
       //   width: 152px;
+      // display: inline-block;
       font-size: 16px;
       font-family: Microsoft YaHei-Regular, Microsoft YaHei;
       font-weight: 400;

@@ -1,10 +1,16 @@
+<!--
+ * @Author: hayyot
+ * @Date: 2023-04-19 15:41:44
+ * @Description: 铁沸物
+ * @FilePath: \forum-fe\src\views\person\Info.vue
+-->
 <template>
   <div>
     <el-card>
       <el-descriptions class="margin-top" title="简介" :column="2" border>
-        <template slot="extra">
+        <!-- <template slot="extra">
           <el-button type="primary" v-if="$route.params.id===$store.state.id" size="small">操作</el-button>
-        </template>
+        </template> -->
         <el-descriptions-item>
           <template slot="label">
             <i class="el-icon-picture-outline"></i>
@@ -80,7 +86,7 @@
         <el-descriptions-item>
           <template slot="label">
             <i class="el-icon-magic-stick"></i>
-            个性签名
+            座右铭
           </template>
           {{ userInfo.motto }}
         </el-descriptions-item>

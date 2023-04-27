@@ -1,3 +1,9 @@
+<!--
+ * @Author: hayyot
+ * @Date: 2023-04-11 16:38:39
+ * @Description: 铁沸物
+ * @FilePath: \forum-fe\src\views\Login.vue
+-->
 <template>
     <div>
         <el-dialog v-bind="$attrs" v-on="$listeners" @open="onOpen" @close="onClose" title="登录享受更多权限" :close-on-click-modal ="false" append-to-body width="30%">
@@ -7,6 +13,13 @@
                     <path transform="translate(30)" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" data-name="Path 10" id="Path_10"></path>
                 </svg>
                 <cardCustomRightsDialog :visible.sync="showDialog"></cardCustomRightsDialog>
+            </el-button>
+            <el-button class="cta" type="text" @click="outerVisible = true,showForget = !showForget">
+                <span class="hover-underline-animation">忘记密码</span>
+                <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg" id="arrow-horizontal">
+                    <path transform="translate(30)" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" data-name="Path 10" id="Path_10"></path>
+                </svg>
+                <forgetpassword :visible.sync="showForget"></forgetpassword>
             </el-button>
             <el-form ref="elForm" :model="formData" :rules="rules" size="medium" >
                 <el-form-item label="" prop="username">
@@ -34,14 +47,16 @@
 <script>
 import verify from "@/views/Verify.vue";
 import axios from "axios";
+import { Toast } from "vant";
 export default {
     name:"mRegisters",
     inheritAttrs: false,
-    components: { cardCustomRightsDialog: () => import('@/views/register.vue'),verify },
+    components: { cardCustomRightsDialog: () => import('@/views/register.vue'),verify,forgetpassword:() => import('@/views/forgetpassword.vue') },
     props: [],
     data() {
         return {
             showDialog: false,
+            showForget: false,
             formData: {
                 email: undefined,
                 password: undefined,
@@ -91,13 +106,22 @@ export default {
                 data : JSON.parse(JSON.stringify(this.formData))
             };
             axios(config).then(res => {
-                console.log(res);
-                localStorage.setItem('uid',res.data.data.uid);
-                localStorage.setItem('username', res.data.data.username);
-                localStorage.setItem('headImage',res.data.data.headImage);
-                localStorage.setItem('email',res.data.data.email);
-                localStorage.setItem('token',res.data.data.token);
-                location.reload();
+                console.log(res.data.code);
+                if(res.data.code == 201){
+                    this.$message.error('登录失败，请检查账号密码是否正确');
+                }
+                if(res.data.code == 200){
+                    localStorage.setItem('uid',res.data.data.uid);
+                    localStorage.setItem('username', res.data.data.username);
+                    localStorage.setItem('headImage',res.data.data.headImage);
+                    localStorage.setItem('email',res.data.data.email);
+                    localStorage.setItem('token',res.data.data.token);
+                    this.$message({
+                        message: '登录成功！',
+                        type: 'success'
+                    });
+                    location.reload();
+                }
             })
             /*this.$refs['elForm'].validate((valid) => {
                 if (valid) {

@@ -1,11 +1,11 @@
 <template>
   <div class="myart1">
-    <article-item v-for="a in allData" :key="a.id" v-bind="a"/>
-        <el-empty
-        v-if="allData.length === 0"
-        :image-size="250"
-        description="暂未发表任何文章额"
-      ></el-empty>
+    <!-- <article-item v-for="a in allData" :key="a.id" v-bind="a"/> -->
+      <el-empty
+      v-if="allData.length === 0"
+      :image-size="250"
+      description="暂未发表任何文章额"
+    ></el-empty>
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="Personal-bg">
     <div class="PersonTop">
       <div class="PersonTop_img">
         <img v-image-preview :src="userInfo.headImage" />
@@ -7,17 +7,11 @@
       <div class="PersonTop_text">
         <div class="user_text">
           <div class="user_name">
-            <span> {{ nickname }} </span>
-          </div>
-          <div class="user-v" v-if="v === 3">
-            <img src="@/assets/logo.png" class="user-v-img" />
-            <span class="user-v-font">优质创作者</span>
-          </div>
-          <div class="user_qianming">
-            <span> {{ design }}</span>
+            <span> {{ userInfo.username }} </span>
           </div>
           <div class="user_anniu">
             <el-button
+              v-if="editshow"
               class="el-icon-edit"
               type="primary"
               size="medium"
@@ -26,6 +20,7 @@
               >编辑</el-button
             >
             <el-button
+              v-if="followshow"
               @click="follow"
               type="primary"
               size="medium"
@@ -37,18 +32,26 @@
               "
             ></el-button>
           </div>
+          <!-- <div class="user-v" v-if="v === 3">
+            <img src="@/assets/logo.png" class="user-v-img" />
+            <span class="user-v-font">优质创作者</span>
+          </div> -->
+          <div class="user_qianming">
+            <span>{{ userInfo.email }}</span>
+          </div>
+          
         </div>
         <div class="user_num">
           <div style="cursor: pointer" @click="myfan">
-            <div class="num_number">{{ fanCounts }}</div>
+            <div class="num_number">0</div>
             <span class="num_text">粉丝</span>
           </div>
           <div style="cursor: pointer" @click="myfollow">
-            <div class="num_number">{{ followCounts }}</div>
+            <div class="num_number">0</div>
             <span class="num_text">关注</span>
           </div>
           <div>
-            <div class="num_number">{{ goodCounts }}</div>
+            <div class="num_number">0</div>
             <span class="num_text">获赞</span>
           </div>
         </div>
@@ -91,18 +94,18 @@
               <span slot="title">发帖</span>
             </el-menu-item>
             <el-menu-item
+              index="myfan"
+              :route="{ name: 'myfan', params: $route.params.id }"
+            >
+              <i class="el-icon-star-off"></i>
+              <span slot="title">点赞</span>
+            </el-menu-item>
+            <el-menu-item
               index="mycollect"
               :route="{ name: 'mycollect', params: $route.params.id }"
             >
               <i class="el-icon-document"></i>
               <span slot="title">收藏</span>
-            </el-menu-item>
-            <el-menu-item
-              index="myfan"
-              :route="{ name: 'myfan', params: $route.params.id }"
-            >
-              <i class="el-icon-tableware"></i>
-              <span slot="title">粉丝</span>
             </el-menu-item>
             <el-menu-item
               index="myfollow"
@@ -114,7 +117,7 @@
           </el-menu>
         </el-card>
       </div>
-      <div class="person_body_right">
+      <div class="person_body_right" style="height: 100%;">
         <router-view></router-view>
       </div>
     </div>
@@ -152,7 +155,9 @@ export default {
         followId: "",
       },
       isfollowid: [],
-      userInfo:{}
+      userInfo:{},
+      editshow: false,
+      followshow: false
       // person_body_list: [
       //   {
       //     label: "个人简介",
@@ -184,6 +189,12 @@ export default {
   },
   mounted() {
     // this.load();
+    if(this.$route.params.id == localStorage.getItem('uid')){
+      this.editshow = true
+    }
+    else {
+      this.followshow = true
+    }
     getUserinfoById(localStorage.getItem('uid')).then(res => {
       console.log(res);
       this.userInfo = res.data
@@ -363,10 +374,19 @@ export default {
   width: 60%;
   height: 100%;
   line-height: 30px;
+  text-align: left;
 }
-
+.user_anniu {
+  display: inline-block;
+  margin-left: 40px;
+  position: relative;
+  top: -3px;
+}
 .user_name {
+  margin-top: 20px;
   font-weight: bold;
+  display: inline-block;
+  font-size: 25px;
 }
 .user-v {
   margin-bottom: -5px;
@@ -382,6 +402,8 @@ export default {
 .user_qianming {
   font-size: 14px;
   color: #999;
+  margin-top: 10px;
+  /* display: inline; */
 }
 
 .user_num {
@@ -407,6 +429,7 @@ export default {
 .num_number {
   font-size: 20px;
   color: #333;
+  margin-bottom: 5px;
 }
 .el-menu-item>span {
   font-size: 16px;
@@ -426,7 +449,8 @@ export default {
 
 .person_body_left {
   width: 27%;
-  height: 600px;
+  /* height: 600px; */
+  min-height: 380px;
   border-radius: 5px;
   margin-right: 3%;
   text-align: center;
@@ -462,14 +486,25 @@ export default {
   /* height: 500px; */
   border-radius: 5px;
   background-color: white;
+  /* min-height: 280px; */
 }
 
 .box-card {
-  height: 500px;
+  /* min-height: 380px; */
+  height: 100%;
 }
 
 /*ui样式*/
 .el-button {
   width: 84px;
+}
+.Personal-bg {
+  overflow:auto;
+  position: absolute;
+  width: 100%;
+  min-height: 100%;
+  margin-bottom: 100px;
+  background: #f1f1f1;
+  text-align: center;
 }
 </style>

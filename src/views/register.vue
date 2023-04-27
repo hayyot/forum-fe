@@ -6,7 +6,7 @@
 -->
 <template>
     <div>
-        <el-dialog v-bind="$attrs" v-on="$listeners" @open="onOpen" @close="onClose" title="注册"
+        <el-dialog v-bind="$attrs" v-on="$listeners" @open="onOpen" @close="onClose" title="注册" 
                    :close-on-click-modal="false" append-to-body width="30%">
             <el-form ref="elForm" :model="formData" :rules="rules" size="small" label-width="100px">
                 <el-form-item label="用户名" prop="username">
@@ -23,7 +23,7 @@
                 </el-form-item>
                 <el-form-item label="邮箱" prop="email">
                     <el-input v-model="formData.email" placeholder="请输入邮箱" clearable :style="{width: '100%'}">
-                        <el-button slot="append" @click="getVerify" :disabled="formData.email==undefined">获取验证码</el-button>
+                        <el-button slot="append" @click="getVerify" :disabled="formData.email==undefined || !canClick">{{ getCode }}</el-button>
                     </el-input>
                 </el-form-item>
                 <el-form-item label="验证码" prop="yzm">
@@ -40,6 +40,7 @@
 </template>
 <script>
 import axios from "axios";
+import { Toast } from "vant";
 
 export default {
     name: "mRegister",
@@ -71,8 +72,8 @@ export default {
                     message: '请输入密码',
                     trigger: 'blur'
                 }, {
-                    pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,16}$/,
-                    message: '格式错误，8-16位至少包括一个字母一个数字以及一个特殊字符',
+                    pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/,
+                    message: '格式错误，6-16位由字母数字组成',
                     trigger: 'blur'
                 }],
                 repassword: [{
@@ -99,6 +100,9 @@ export default {
                     trigger: 'blur'
                 }],
             },
+            getCode:'获取验证码',
+            canClick:true, // 验证码是否禁用
+            totalTime:60
         }
     },
     computed: {
@@ -108,6 +112,11 @@ export default {
     created() {
     },
     mounted() {
+        // this.$message({
+        //     showClose: true,
+        //     message: '验证码发送成功',
+        //     type: 'success'
+        // });
     },
     methods: {
         onOpen() {
@@ -130,13 +139,26 @@ export default {
                     method: 'post',
                     url: 'http://47.107.225.176:8808/insertUser2',
                     headers: {
-                        'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
+                        // 'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
                         'Content-Type': 'application/json'
                     },
                     data : JSON.parse(JSON.stringify(userList))
                 };
                 axios(config).then(res=>{
                     console.log(res.data)
+                    if(res.message == "注册成功"){
+                        Toast.success({
+                            message: '注册成功',
+                            forbidClick: true,
+                        });
+                        this.$router.push('/')
+                    }
+                    else {
+                        Toast.fail({
+                            message: '注册失败,请检查信息是否输入正确',
+                            forbidClick: true,
+                        });
+                    }
                 })
             })
             // var userList = [];
@@ -152,6 +174,19 @@ export default {
                 // axios.post(`http://47.107.225.176:8080/insertUser1`, userList).then((response) => {
                 //     console.log(response.data)
                 // })
+                if (!this.canClick) return  
+                this.canClick = false
+                this.getCode = this.totalTime + 's后重新发送'
+                let clock = window.setInterval(() => {
+                    this.totalTime--
+                    this.getCode = this.totalTime + 's后重新发送'
+                    if (this.totalTime < 0) {
+                    window.clearInterval(clock)
+                    this.getCode = '重新发送验证码'
+                    this.totalTime = 60
+                    this.canClick = true  
+                    }
+                },1000)
                 var config = {
                     method: 'post',
                     url: 'http://47.107.225.176:8808/insertUser1',
@@ -176,6 +211,13 @@ export default {
                             this.$alert('邮箱已经存在', '出错啦', {
                                 confirmButtonText: '确定',
                             });
+                    }
+                    else {
+                        this.$message({
+                            showClose: true,
+                            message: '验证码发送成功',
+                            type: 'success'
+                        });
                     }
                 })
         },
