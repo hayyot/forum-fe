@@ -214,7 +214,7 @@ export default {
         },
         async follow() {
             await Follow(this.user_info.uid,localStorage.getItem('uid')).then(res => {
-                // console.log(res);
+                console.log(res);
                 if(res.code == 200){
                     this.$message({
                         message: '关注成功',

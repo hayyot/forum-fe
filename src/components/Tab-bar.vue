@@ -14,14 +14,14 @@
                     <ul class="navRight-menu-group" v-if="isMenuShow">
                         <div class="navRight-menu-item" v-for="(items, index) in menuList" :key="index">
                             <li v-for="(subItem, index) in items" :key="index">
-                                <a :href="subItem.url">
+                                <a class="subItem" :href="subItem.url">
                                     {{subItem.title}}
                                 </a>
                             </li>
                         </div>
                         <div class="navRight-menu-item">
                             <li>
-                                <a href="#" @click="logout">
+                                <a class="subItem" href="#" @click="logout">
                                     登出
                                 </a>
                             </li>
@@ -82,24 +82,20 @@ export default {
                 [{
                     title: '我的主页',
                     imageUrl: 'iconfont icon-message',
-                    url: `/user/personal/${localStorage.getItem('uid')}`
+                    url: `/user/personal/info/${localStorage.getItem('uid')}`
                 }, {
                     title: '我赞过的',
                     imageUrl: 'iconfont icon-message',
-                    url: '#'
+                    url: `/user/personal/myfan/${localStorage.getItem('uid')}`
                 }, {
-                    title: '我的收藏集',
+                    title: '我的收藏',
                     imageUrl: 'iconfont icon-message',
-                    url: '#'
+                    url: `/user/personal/mycollect/${localStorage.getItem('uid')}`
                 }],
                 [{
-                    title: '个人设置',
-                    imageUrl: 'iconfont icon-message',
-                    url: '#'
-                }, {
                     title: '关于',
                     imageUrl: 'iconfont icon-message',
-                    url: '#'
+                    url: '/aboutus'
                 }],
             ],
             itemList: [{
@@ -285,7 +281,9 @@ li {
 
 .navRight>li:first-child {
     height: 30px;
-    position: relative;
+    /* position: relative; */
+    /* width: ; */
+    /* width: 100px; */
 }
 
 .userAvater {
@@ -304,6 +302,14 @@ li {
     /* left: 50px;   */
     z-index: 9999;
     position: relative;
+    /* width: 100px; */
+}
+
+.subItem {
+    text-align: center;
+    width: 100px;
+    display: inline-block;
+    /* width: 100px; */
 }
 
 .navRight-menu-item {

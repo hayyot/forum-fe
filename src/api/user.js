@@ -1,3 +1,9 @@
+/*
+ * @Author: hayyot
+ * @Date: 2023-04-19 15:41:44
+ * @Description: 铁沸物
+ * @FilePath: \forum-fe\src\api\user.js
+ */
 import request from '@/request'
 import { get,post } from '@/request'
 
@@ -33,3 +39,9 @@ export const getShoucangById = (current,limit,uid) => get('http://47.107.225.176
 
 //获取顶部数据
 export const getUserCount = uid => get('http://47.107.225.176:8808/getUserCount/'+uid);
+
+// 获取关注列表
+export const getAllFollows = (current,limit,uid) => get('http://47.107.225.176:8808/followList/'+current+'/'+limit+'/'+uid)
+
+// 取消关注
+export const cancelFollow = (uid,followid) => post('http://47.107.225.176:8808/cancel/'+uid+'/'+followid)

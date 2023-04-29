@@ -74,7 +74,7 @@ export default {
     to_page(index){
       // console.log(index);
       this.$router.push("/forum/"+index)
-      this.$router.go(0)
+      window.location.reload()
       document.documentElement.scrollTop = document.body.scrollTop =0; 
     },
   },

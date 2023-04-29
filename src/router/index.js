@@ -123,6 +123,15 @@ const routes = [
           isAuth:true,
           keepAlive:true, //自定义属性,通过改属性动态设置保活
         }
+      },
+      {
+        path:'/user/personal/myfollows/:id',
+        name:'myfollows',
+        component: r => require.ensure([], () => r(require('@/views/person/MyFollow')), 'myfollows'),
+        meta:{
+          isAuth:true,
+          keepAlive:true, //自定义属性,通过改属性动态设置保活
+        }
       }
     ]
   }

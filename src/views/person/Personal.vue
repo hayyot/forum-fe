@@ -109,7 +109,7 @@
             </el-menu-item>
             <el-menu-item
               index="myfollow"
-              :route="{ name: 'myfollow', params: $route.params.id }"
+              :route="{ name: 'myfollows', params: $route.params.id }"
             >
               <i class="el-icon-circle-plus-outline"></i>
               <span slot="title">关注</span>
