@@ -21,6 +21,9 @@
             </div>
         </div>
         <div class="item-content">
+            <h1>{{ biaoTi }}</h1>
+            <div style="color: #7a7a7a;margin-top: 10px;">{{ createTime | timecl }} <span style="margin-left: 20px;">发帖人：{{ username }}</span></div>
+            <hr style="margin-top: 10px;margin-bottom: 20px;">
             <div class="markdown-body" v-html="content" v-highlight></div>
             <hr>
             <div class="ic-remark_me">
@@ -30,10 +33,10 @@
                         type="textarea"
                         :rows="3"
                         placeholder="请输入内容"
-                        v-model="textarea">
+                        v-model="remarkarea">
                     </el-input>
                     <div style="height: 1px;"></div>
-                    <button>发表评论</button>
+                    <button @click="submitremark">发表评论</button>
                 </div>
             </div>
             <hr>
@@ -65,7 +68,7 @@
             <!-- btn -->
             <div style="margin-top: 10px;margin-bottom: 10px;display: flex;justify-content: center;">
                 <button class="follow" @click="follow()" v-if="!folled">关注</button>
-                <button class="follow" @click="follow()" v-else>已关注</button>
+                <button class="follow" @click="unfollow()" v-else>已关注</button>
             </div>
             <hr>
             <div class="ir-nr">
@@ -77,7 +80,7 @@
 </template>
 
 <script>
-import { Thumb, getItemById,Follow,isFollow } from '@/api/forum-item';
+import { Thumb, getItemById,Follow,isFollow,UnFollow } from '@/api/forum-item';
 import { Toast } from 'vant';
 import Prismjs from 'prismjs';
 export default {
@@ -95,24 +98,31 @@ export default {
             content_remark:[],
             textarea: ``,
             uid: 0,
-            folled: false
+            folled: false,
+            remarkarea:'',
+            biaoTi: '',
+            createTime: '',
+            username: ''
         };
     },
     async created() {
         // console.log(this.$route.params.id + " " + localStorage.getItem('uid'));
         await getItemById({tid:this.$route.params.id,uid:localStorage.getItem('uid')}).then(res => {
-            // console.log(res);
+            console.log(res);
             this.content_list = res.data
+            this.username = res.data.user.username
+            this.biaoTi = res.data.wenzhang.biaoTi
+            this.createTime = res.data.wenzhang.createTime
             this.content = res.data.wenzhang.neiRong
             this.user_info = res.data.user
             this.content_wenzhang = res.data.wenzhang
             this.thumb = res.data.wenzhang.startFlag
             this.star = res.data.wenzhang.shouFlag
             this.content_remark = res.data.pinglun
-            console.log(this.content_remark);
+            // console.log(this.content_remark);
         })
         await isFollow(this.user_info.uid,localStorage.getItem('uid')).then(res => {
-            console.log(res);
+            // console.log(res);
             this.folled = res.data.followFlag
         })
     },
@@ -139,9 +149,9 @@ export default {
                 }).then(res => {
                     // console.log(res);
                     this.thumb = !this.thumb
-                    Toast.success({
+                    this.$message({
                         message: '取消点赞成功',
-                        forbidClick: true,
+                        type: 'success'
                     });
                 })
             }
@@ -156,9 +166,9 @@ export default {
                 }).then(res => {
                     // console.log(res);
                     this.thumb = !this.thumb
-                    Toast.success({
+                    this.$message({
                         message: '点赞成功',
-                        forbidClick: true,
+                        type: 'success'
                     });
                 })
             }
@@ -177,9 +187,9 @@ export default {
                 }).then(res => {
                     // console.log(res);
                     this.star = !this.star
-                    Toast.success({
+                    this.$message({
                         message: '取消收藏成功',
-                        forbidClick: true,
+                        type: 'success'
                     });
                 })
             }
@@ -194,25 +204,60 @@ export default {
                 }).then(res => {
                     // console.log(res);
                     this.star = !this.star
-                    Toast.success({
+                    this.$message({
                         message: '收藏成功',
-                        forbidClick: true,
+                        type: 'success'
                     });
                 })
             }
             
         },
-        follow() {
-            Follow(this.user_info.uid,localStorage.getItem('uid')).then(res => {
-                console.log(res);
+        async follow() {
+            await Follow(this.user_info.uid,localStorage.getItem('uid')).then(res => {
+                // console.log(res);
                 if(res.code == 200){
                     this.$message({
                         message: '关注成功',
                         type: 'success'
                     });
+                    this.folled = true
                 }
-                this.folled = true
             })
+        },
+        async unfollow() {
+            await UnFollow(this.user_info.uid,localStorage.getItem('uid')).then(res => {
+                if(res.code == 200){
+                    this.$message({
+                        message: '取消关注成功',
+                        type: 'success'
+                    });
+                    this.folled = false
+                }
+            })
+        },
+        async submitremark(){
+            await this.axios({
+                    url:"http://47.107.225.176:8808/insertPL",
+                    method:'post',
+                    data:{"tid":this.$route.params.id,"uid":this.uid,"pneirong":this.remarkarea},
+                    headers:{
+                        'Content-Type':'application/json'
+                    }
+                }).then(res => {
+                    // console.log(res);
+                    if(res.code == 200){
+                        this.$message({
+                            message: '发布评论成功',
+                            type: 'success'
+                        });
+                    }
+                    // console.log(res);
+                    // this.star = !this.star
+                    // Toast.success({
+                    //     message: '收藏成功',
+                    //     forbidClick: true,
+                    // });
+                })
         }
     },
     filters: {

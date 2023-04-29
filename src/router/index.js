@@ -28,6 +28,7 @@ const routes = [
     path:'/forum/:id',
     name:'forum-item',
     component: index_itemVue,meta:{
+      isAuth:true,
       keepAlive:true, //自定义属性,通过改属性动态设置保活
     }
   },
@@ -36,6 +37,7 @@ const routes = [
     name: 'posted',
     component: Posted,
     meta:{
+      isAuth:true,
       keepAlive:true, //自定义属性,通过改属性动态设置保活
     }
   },
@@ -71,6 +73,7 @@ const routes = [
     path: '/user/personal/:id',
     component: r => require.ensure([], () => r(require('@/views/person/Personal')), 'personal'),
     meta: {
+      isAuth:true,
       requireLogin: true,
       keepAlive:true,
     },
@@ -81,6 +84,7 @@ const routes = [
         name:'info',
         component: r => require.ensure([], () => r(require('@/views/person/Info')), 'info'),
         meta:{
+          isAuth:true,
           keepAlive:true, //自定义属性,通过改属性动态设置保活
         }
       },
@@ -89,6 +93,7 @@ const routes = [
         name:'myarticle',
         component: r => require.ensure([], () => r(require('@/views/person/MyArticle')), 'myarticle'),
         meta:{
+          isAuth:true,
           keepAlive:true, //自定义属性,通过改属性动态设置保活
         }
       },
@@ -97,6 +102,7 @@ const routes = [
         name:'mycollect',
         component: r => require.ensure([], () => r(require('@/views/person/MyCollect')), 'mycollect'),
         meta:{
+          isAuth:true,
           keepAlive:true, //自定义属性,通过改属性动态设置保活
         }
       },
@@ -105,6 +111,7 @@ const routes = [
         name:'myfan',
         component: r => require.ensure([], () => r(require('@/views/person/MyFanAndFollow')), 'myfan'),
         meta:{
+          isAuth:true,
           keepAlive:true, //自定义属性,通过改属性动态设置保活
         }
       },
@@ -113,6 +120,7 @@ const routes = [
         name:'myfollow',
         component: r => require.ensure([], () => r(require('@/views/person/MyFanAndFollow')), 'myfollow'),
         meta:{
+          isAuth:true,
           keepAlive:true, //自定义属性,通过改属性动态设置保活
         }
       }
@@ -126,5 +134,18 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-
+router.beforeEach((to,from,next) => {
+  if (to.meta.isAuth) {
+    //判断 如果school本地存储是qinghuadaxue的时候，可以进去
+    if (localStorage.getItem('uid') !== null) {
+        next()  //放行
+    } else {
+        alert('请登录后查看！')
+        router.push('/')
+    }
+} else {
+    // 否则，放行
+    next()
+} 
+})
 export default router
