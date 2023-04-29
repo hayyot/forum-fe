@@ -8,8 +8,8 @@
     <div id="posted">
         <div style="height: 180px; display: flex; flex-direction: column; justify-content: center; flex-wrap: nowrap;">
             <div>
-                <input class="posted-topic" type="text" v-model="input_topic" placeholder="请输入标题">
-                <el-select class="posted-select" v-model="value" placeholder="请选择板块" size="10">
+                <span style="font-size: 30px;">标题：</span><input class="posted-topic" type="text" v-model="input_topic" placeholder="请输入标题">
+                <span style="font-size: 30px; margin-left: 20px;">简介：</span><el-select class="posted-select" v-model="value" placeholder="请选择板块" size="20">
                     <el-option
                         class="posted-option"
                         v-for="item in sections"
@@ -18,11 +18,10 @@
                         :value="item.sid">
                     </el-option>
                 </el-select>
-                <el-button class="el-btn" @click="subbmit">
-                    提交
-                </el-button>
+                
             </div>
             <div>
+                <span style="font-size: 30px;position: relative;top: -45px;">简介：</span>
                 <el-input
                     class="el-jianjie"
                     type="textarea"
@@ -30,12 +29,21 @@
                     placeholder="请输入简介"
                     v-model="jianjie">
                 </el-input>
+                
             </div>
+            
         </div>
         <div>
             <WangEditor class="wangeditor" @change="changeWang" :value="WangValue"></WangEditor>
-            <div class="content-display" v-html="WangValue"></div>
+            <!-- <div class="content-display" v-html="WangValue"></div> -->
         </div>
+        <div style="display: flex; justify-content: center; margin-top: 20px;">
+            <el-button class="el-btn" @click="subbmit">
+                提交
+            </el-button>
+            
+        </div>
+        <div style="height: 20px;"></div>
     </div>
 </template>
 
@@ -44,6 +52,7 @@ import WangEditor from '../components/moven-editor.vue'
 import { getSection } from '@/api/api';
 import { Toast } from 'vant';
 import { insertContent } from '@/api/posted'
+import Prismjs from 'prismjs';
 export default {
     name: 'ForumFePosted',
 
@@ -68,6 +77,10 @@ export default {
         this.$nextTick(() => {
             Prismjs.highlightAll()
         });
+    },
+
+    updated() {
+        Prismjs.highlightAll()
     },
 
     methods: {
@@ -117,7 +130,7 @@ export default {
     display: inline-block;
     /* position: relative; */
     /* right: 25%; */
-    width: 50%;
+    width: 100%;
     z-index: 1;
 }
 .content-display {
@@ -128,7 +141,8 @@ export default {
     width: 49%;
     z-index: 0;
     overflow-y: scroll;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border: 1px solid #a3a3a3;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 5px;
 }
 .posted-topic {
     height: 60px;
@@ -139,9 +153,10 @@ export default {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .posted-select{
+    display: inline-block;
     position: relative;
     margin-left: 30px;
-    width: 200px!important;
+    width: 300px!important;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     ::v-deep {
@@ -171,7 +186,7 @@ export default {
 }
 .el-btn {
     height: 60px!important;
-    width: 100px!important;
+    width: 160px!important;
     font-size: 30px;
     margin-left: 30px;
     color: white;
