@@ -251,6 +251,7 @@ export default {
                             type: 'success'
                         });
                     }
+                    this.$router.go(0)
                     // console.log(res);
                     // this.star = !this.star
                     // Toast.success({

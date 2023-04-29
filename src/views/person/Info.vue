@@ -124,7 +124,7 @@ export default {
     };
   },
   mounted() {
-    getUserinfoById(localStorage.getItem('uid')).then(res => {
+    getUserinfoById(this.$route.params.id).then(res => {
       console.log(res);
       this.userInfo = res.data
     })

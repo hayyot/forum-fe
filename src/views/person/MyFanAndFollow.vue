@@ -102,7 +102,7 @@ export default {
 .index-mid_content {
     height: 80%;
     min-width: 500px;
-    margin:-15px 20px 0px 20px;
+    margin:-15px 20px 20px 20px;
     border-radius: 7.5px;
     background: #ffffff;
 }

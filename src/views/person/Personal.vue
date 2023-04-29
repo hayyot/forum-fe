@@ -198,30 +198,30 @@ export default {
     else {
       this.followshow = true
     }
-    getUserinfoById(localStorage.getItem('uid')).then(res => {
+    getUserinfoById(this.$route.params.id).then(res => {
       console.log(res);
       this.userInfo = res.data
     })
-    getUserCount(localStorage.getItem('uid')).then(res => {
+    getUserCount(this.$route.params.id).then(res => {
       console.log(res);
       this.fensi = res.data.fansCount
       this.guanzhu = res.data.followCount
       this.dianzan = res.data.starCount
     })
   },
-  watch: {
-    $route(to) {
-      if (to.path == `/newsuser/personal/${this.$store.state.id}`) {
-        // this.load();
-        // this.person_body_list.forEach((res) => {
-        //   res.params.id = this.$store.state.id;
-        // });
-        this.reload();
-      } else if (to.path == `/newsuser/personal/${this.$route.params.id}`) {
-        this.reload();
-      }
-    },
-  },
+  // watch: {
+  //   $route(to) {
+  //     if (to.path == `/newsuser/personal/${this.$store.state.id}`) {
+  //       // this.load();
+  //       // this.person_body_list.forEach((res) => {
+  //       //   res.params.id = this.$store.state.id;
+  //       // });
+  //       this.reload();
+  //     } else if (to.path == `/newsuser/personal/${this.$route.params.id}`) {
+  //       this.reload();
+  //     }
+  //   },
+  // },
   methods: {
     load() {
       // this.$store //必须使用此种方法，否则response拦截器会拦截
