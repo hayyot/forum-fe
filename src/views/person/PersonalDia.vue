@@ -17,9 +17,9 @@
       <el-form-item label="头像" prop="avatar">
             <img style="width:150px;height:110px" :src="userInfo.headImage">
           </el-form-item>
-                    <el-form-item label="账号密码" prop="password">
+                    <!-- <el-form-item label="账号密码" prop="password">
             <el-input v-model="form.password"></el-input>
-          </el-form-item>
+          </el-form-item> -->
           <el-form-item label="昵称" prop="nickname">
             <el-input v-model="userInfo.username"></el-input>
           </el-form-item>
@@ -34,7 +34,7 @@
               active-text="男"
               inactive-text="女"
               :active-value= "1"
-               :inactive-value= "0"
+              :inactive-value= "0"
             >
             </el-switch>
           </el-form-item>
@@ -59,8 +59,8 @@
           <el-form-item label="职业" prop="work">
             <el-input v-model="userInfo.job"></el-input>
           </el-form-item>
-                    <el-form-item label="个性签名" prop="design">
-            <el-input v-model="userInfo.hobby"></el-input>
+          <el-form-item label="座右铭" prop="design">
+            <el-input v-model="userInfo.motto"></el-input>
           </el-form-item>
           <!-- <el-form-item label="手机号码" prop="mobilePhoneNumber">
             <el-input v-model="userInfo.mobilePhoneNumber"></el-input>
@@ -134,7 +134,26 @@ export default {
     //     });
     // },
     submit() {
-      updateUser(this.form)
+      // console.log(this.userInfo);
+      this.axios({
+          url:'http://47.107.225.176:8808/updateUser',
+          method:'post',
+          data:this.userInfo,
+          headers:{
+              'Content-Type':'application/json'
+          }
+      }).then(res => {
+          console.log(res);
+          if(res.code == 200){
+            this.$message({
+                showClose: true,
+                message: "修改成功",
+                type: "success",
+            });
+          }
+          this.$router.go(0)
+      })
+      /*updateUser(this.form)
         .then((res) => {
           console.log(res);
           this.dialogVisible = false;
@@ -142,7 +161,7 @@ export default {
         })
         .catch((err) => {
           console.log(err);
-        });
+        });*/
     },
     handleClose() {
       this.dialogVisible = false;

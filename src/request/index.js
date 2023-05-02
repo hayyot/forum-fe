@@ -96,7 +96,7 @@ axios.interceptors.response.use(
                 // 其他错误，直接抛出错误提示
                 default:
                     Toast({
-                        message: error.response.data.message,
+                        message: "接口失效",
                         duration: 1500,
                         forbidClick: true
                     });

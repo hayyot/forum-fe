@@ -83,7 +83,9 @@
       to_page(index){
         // console.log(index);
         this.$router.push("/user/personal/info/"+index)
-        this.$router.go(0)
+        setTimeout(() => {
+          this.$router.go(0)
+        }, 500);
         // window.location.reload()
         document.documentElement.scrollTop = document.body.scrollTop =0; 
       },

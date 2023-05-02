@@ -20,7 +20,7 @@
                             <h3>主要编程语言:</h3>
                             <p>h5 c3 js vue,略懂一点后端</p>
                             <h3>联系方式：</h3>
-                            <div style="position: absolute;bottom: 16px;">
+                            <div style="width: 100%;margin-top: 60px;display: flex;flex-direction: row; justify-content:space-between ;">
                                 <el-link :underline="false" href="https://github.com/Hyhayhy" target="_blank">
                                     <el-tooltip content="GitHub" placement="bottom" effect="light">
                                         <svg t="1682611503446" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -67,13 +67,13 @@
                             <div class="card">
                                 <div class="block"><el-avatar :size="100" :src="circleUrl"></el-avatar></div>
                                 杰哥
-                                <p>项目负责人</p>
+                                <p>我是个菜鸡</p>
                                 <h3>个人介绍:</h3>
                                 <p>#</p>
                                 <h3>主要编程语言:</h3>
                                 <p>#</p>
                                 <h3>联系方式：</h3>
-                                <div style="position: absolute;bottom: 16px;">
+                                <div style="width: 100%;margin-top: 60px;display: flex;flex-direction: row; justify-content:space-between ;">
                                     <el-link :underline="false" href="#" target="_blank">
                                         <el-tooltip content="GitHub" placement="bottom" effect="light">
                                             <svg t="1682611503446" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -127,7 +127,7 @@
                                 <h3>主要编程语言:</h3>
                                 <p>#</p>
                                 <h3>联系方式：</h3>
-                                <div style="position: absolute;bottom: 16px;">
+                                <div style="width: 100%;margin-top: 60px;display: flex;flex-direction: row; justify-content:space-between ;">
                                     <el-link :underline="false" href="#" target="_blank">
                                         <el-tooltip content="GitHub" placement="bottom" effect="light">
                                             <svg t="1682611503446" class="icon" viewBox="0 0 1024 1024" version="1.1"

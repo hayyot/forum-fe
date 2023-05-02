@@ -138,6 +138,7 @@ export default {
   }
 }
 ::v-deep .markdown-body{
+    margin-top: 20px;
     background-color: #fff;
     margin-left: 20%;
     width: 70%;
@@ -166,6 +167,9 @@ export default {
     svg {
         display: none;
     }
+    img {
+        display: none;
+    }
     .top {
         display: none;
     }
@@ -176,6 +180,7 @@ export default {
 }
 
 .index-content{
+    margin-top: 20px;
     background-color: #fff;
     margin-left: 20%;
     width: 70%;
