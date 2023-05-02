@@ -64,11 +64,13 @@ export default {
             sections: [],
             value: '',
             content_params:{},
-            jianjie:''
+            jianjie:'',
+            uid: 0
         };
     },
 
     mounted() {
+        this.uid = localStorage.getItem('uid')
         getSection().then(res => {
             this.sections = res.data
             console.log(res);
@@ -90,7 +92,7 @@ export default {
             console.log(this.WangValue)
         },
         subbmit(){
-            this.content_params.uid = 1;
+            this.content_params.uid = this.uid;
             this.content_params.sid = this.value;
             this.content_params.biaoTi = this.input_topic;
             this.content_params.neiRong = this.WangValue;
@@ -111,6 +113,7 @@ export default {
                     message: '发布成功',
                     forbidClick: true,
                 });
+                this.$router.push('/')
             })
         }
     },
@@ -125,6 +128,12 @@ export default {
 #posted{
     margin-top: 0px;
     text-align: left;
+    overflow:auto;
+    position: absolute;
+    width: 100%;
+    min-height: 100%;
+    margin-bottom: 100px;
+    background: #f1f1f1;
 }
 .wangeditor {
     display: inline-block;

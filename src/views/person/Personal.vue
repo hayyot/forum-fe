@@ -192,6 +192,7 @@ export default {
   },
   mounted() {
     // this.load();
+    // this.$router.go(0)
     if(this.$route.params.id == localStorage.getItem('uid')){
       this.editshow = true
     }
@@ -199,11 +200,11 @@ export default {
       this.followshow = true
     }
     getUserinfoById(this.$route.params.id).then(res => {
-      console.log(res);
+      // console.log(res);
       this.userInfo = res.data
     })
     getUserCount(this.$route.params.id).then(res => {
-      console.log(res);
+      // console.log(res);
       this.fensi = res.data.fansCount
       this.guanzhu = res.data.followCount
       this.dianzan = res.data.starCount

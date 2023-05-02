@@ -62,8 +62,8 @@
             </div>
             <!-- 发帖人信息 -->
             <div>
-                <p>{{ user_info.username }}({{ user_info.job }})</p>
-                <p>{{ user_info.motto }}</p>
+                <p>{{ user_info.username }}({{ user_info.job == null ? '职业暂未设置' : user_info.job }})</p>
+                <p>{{ user_info.motto == null ? '座右铭暂未设置' :user_info.motto }}</p>
             </div>
             <!-- btn -->
             <div style="margin-top: 10px;margin-bottom: 10px;display: flex;justify-content: center;">
@@ -121,7 +121,7 @@ export default {
             this.content_remark = res.data.pinglun
             // console.log(this.content_remark);
         })
-        await isFollow(this.user_info.uid,localStorage.getItem('uid')).then(res => {
+        await isFollow(localStorage.getItem('uid'),this.user_info.uid).then(res => {
             // console.log(res);
             this.folled = res.data.followFlag
         })
@@ -213,7 +213,7 @@ export default {
             
         },
         async follow() {
-            await Follow(this.user_info.uid,localStorage.getItem('uid')).then(res => {
+            await Follow(localStorage.getItem('uid'),this.user_info.uid).then(res => {
                 console.log(res);
                 if(res.code == 200){
                     this.$message({
@@ -225,7 +225,7 @@ export default {
             })
         },
         async unfollow() {
-            await UnFollow(this.user_info.uid,localStorage.getItem('uid')).then(res => {
+            await UnFollow(localStorage.getItem('uid'),this.user_info.uid).then(res => {
                 if(res.code == 200){
                     this.$message({
                         message: '取消关注成功',
@@ -289,7 +289,7 @@ export default {
     border-radius: 5px;
     margin-top: 20px;
     width: 50%;
-    min-height: 1000px;
+    min-height: 800px;
     background: #ffffff;
     min-width: 820px;
     line-height: 35px;

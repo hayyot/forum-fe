@@ -48,3 +48,6 @@ export const cancelFollow = (uid,followid) => post('http://47.107.225.176:8808/c
 
 // 查询自己发的文章
 export const findArticalByuid = (current,limit,uid) => get('http://47.107.225.176:8808/findAllwzByUserId/'+current+'/'+limit+'/'+uid)
+
+// 删除发帖页的文章
+export const DeleteArtical = (tid) => post('http://47.107.225.176:8808/delete/'+tid);

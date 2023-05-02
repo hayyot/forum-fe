@@ -70,7 +70,7 @@
                   description="请登录"
                 ></el-empty>
               </div>
-              <div v-else>
+              <div v-else @click="$router.push('/user/personal/info/'+uid)">
                 <img :src="user_info.headImage" alt="">
                 <h1>{{ user_info.username }}</h1>
                 <h3>{{ user_info.job }}&nbsp;——&nbsp;{{ user_info.age }}岁</h3>
@@ -426,7 +426,7 @@ export default {
     }
   }
   li:hover {
-    padding: 0px 10px 20px 20px;
+    // padding: 0px 10px 20px 20px;
     background-color: #eeeeee;
   }
 }

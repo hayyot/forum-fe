@@ -15,14 +15,17 @@
       ></el-empty>
       <div class="index-mid_content">
         <ul class="imc-list">
-          <li v-for="item,index in data_list" :key="index" @click="to_page(item.wenZhang.tid)">
-            <div class="title">{{ item.wenZhang.biaoTi }}</div>
-            <div class="user">
+          <li v-for="item,index in data_list" :key="index">
+            <div class="title" @click="to_page(item.wenZhang.tid)">{{ item.wenZhang.biaoTi }}</div>
+            <div class="user" @click="to_page(item.wenZhang.tid)">
               <img :src="item.user.headImage" alt="" srcset="">
               <span>{{ item.user.username }}</span>
             </div>
-            <div class="des">{{ item.wenZhang.jianjie }}</div>
-            <div class="date">{{ item.createTime | bltime }}</div>
+            <div class="des" @click="to_page(item.wenZhang.tid)">{{ item.wenZhang.jianjie }}</div>
+            <div class="date" @click="to_page(item.wenZhang.tid)">{{ item.createTime | bltime }}</div>
+            <div class="delbtn">
+              <button v-if="uuid == uid" @click="ConnelCollect(item.tid)">取消收藏</button>
+            </div>
           </li>
         </ul>
         <el-pagination
@@ -49,14 +52,18 @@ export default {
       limit:10,//分页：限制数量
       total:0,
       item_sid:0,
+      uid: 0,
+      uuid: 0
     };
   },
   mounted() {
+    this.uuid = this.$route.params.id
+    this.uid = localStorage.getItem('uid')
     getShoucangById(this.current,this.limit,this.$route.params.id).then(res => {
       // console.log(res);
       this.data_list = res.data.records
-      console.log(this.data_list);
-      console.log(this.data_list.length);
+      // console.log(this.data_list);
+      // console.log(this.data_list.length);
     })
   },
   methods: {
@@ -65,9 +72,9 @@ export default {
     },
     async handleCurrentChange(val) {
       getShoucangById(val,this.limit,this.$route.params.id).then(res => {
-        console.log(res);
+        // console.log(res);
         this.data_list = res.data.records
-        console.log(this.data_list);
+        // console.log(this.data_list);
       })
     },
     to_page(index){
@@ -76,6 +83,24 @@ export default {
       this.$router.go(0)
       document.documentElement.scrollTop = document.body.scrollTop =0; 
     },
+    async ConnelCollect(index) {
+      await this.axios({
+          url:"http://47.107.225.176:8808/shoucang",
+          method:'post',
+          data:{"tid":index,"uid":this.uid,"count":-1},
+          headers:{
+              'Content-Type':'application/json'
+          }
+      }).then(res => {
+          // console.log(res);
+          this.star = !this.star
+          this.$message({
+              message: '取消收藏成功',
+              type: 'success'
+          });
+          this.$router.go(0)
+      })
+    }
   },
   filters: {
         bltime(item){
@@ -124,6 +149,7 @@ export default {
       display: inline-block;
     }
     & .des {
+      display: inline-block;
       margin-top: 10px;
       height: 48px;
       font-size: 16px;
@@ -139,6 +165,7 @@ export default {
     & .date {
       // margin-bottom: 30px;
       //   width: 152px;
+      display: inline-block;
       font-size: 16px;
       font-family: Microsoft YaHei-Regular, Microsoft YaHei;
       font-weight: 400;
@@ -161,6 +188,34 @@ export default {
         left: 10px;
       }
     }
+  }
+}
+.delbtn {
+  display: inline-block;
+  position: relative;
+  top: -50px;
+  left: 350px;
+  button {
+      // margin-top: 10px;
+      cursor: pointer;
+      height: 40px;
+      width: 100px;
+      // left: 200px;
+      border-radius: 5px;
+      background-color: #66cc99;
+      color: white;
+      border: none;
+  }
+  button:hover {
+      // margin-top: 10px;
+      cursor: pointer;
+      height: 40px;
+      width: 100px;
+      // left: 200px;
+      border-radius: 5px;
+      background-color: #66CCCC;
+      color: white;
+      border: none;
   }
 }
 </style>
