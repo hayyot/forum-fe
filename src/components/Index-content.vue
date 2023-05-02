@@ -19,8 +19,9 @@
         <div>
             <div class="index-mid_top" ref="carousel">
                 <el-carousel trigger="click" :height="carouselHeight" :interval="3000" arrow="always" style="border-radius: 5px">
-                  <el-carousel-item v-for="item in 4" :key="item">
-                    <h3 class="small">{{ item }}</h3>
+                  <el-carousel-item v-for="item in carousel_data" :key="item">
+                    <!-- <h3 class="small">{{ item }}</h3> -->
+                    <img :src="item" alt="" srcset="">
                   </el-carousel-item>
                 </el-carousel>
             </div>
@@ -63,8 +64,18 @@
         </div>
         <div>
             <div class="index-right">
-              <div>
-                
+              <div v-if="uid == 0">
+                <el-empty
+                  :image-size="250"
+                  description="请登录"
+                ></el-empty>
+              </div>
+              <div v-else>
+                <img :src="user_info.headImage" alt="">
+                <h1>{{ user_info.username }}</h1>
+                <h3>{{ user_info.job }}&nbsp;——&nbsp;{{ user_info.age }}岁</h3>
+                <h3>{{ user_info.email }}</h3>
+                <h3>{{ user_info.motto }}</h3>
               </div>
             </div>
         </div>
@@ -74,6 +85,7 @@
 <script>
 import {getSection} from "@/api/api";
 import { getAllContent, getSectionBysid } from "@/api/home";
+import { getUserinfoById } from "@/api/user"
 
 export default {
     name: 'ForumFeIndexContent',
@@ -91,6 +103,11 @@ export default {
                 sname:'全部'
               }
             ],
+            carousel_data:[
+              require('@/assets/carousel2.jpg'),
+              require('@/assets/carousel3.jpg'),
+              require('@/assets/carousel4.jpg'),
+            ],
             carouselHeight: "200px",
             count: 0,
             loading: false,
@@ -99,7 +116,8 @@ export default {
             limit:10,//分页：限制数量
             total:0,
             item_sid:0,
-            uid:0
+            uid:0,
+            user_info: {}
         };
     },
   computed: {
@@ -113,6 +131,10 @@ export default {
     mounted() {
       if(localStorage.getItem('uid')){
         this.uid = localStorage.getItem('uid')
+        getUserinfoById(this.uid).then(res => {
+          console.log(res);
+          this.user_info = res.data
+        })
       }
       this.getList();
       // 获取div的ref=“carousel”的高度
@@ -278,12 +300,29 @@ export default {
     background: #ffffff;
 }
 .index-right {
-    height: 30%;
+    height: 400px;
     width: 60%;
     float: left;
     min-width: 200px;
     border-radius: 7.5px;
     background-color: #ffffff;
+    cursor: pointer;
+    div {
+      img {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+        border: 1px solid #99a9bf;
+        margin-top: 50px;
+      }
+      h1 {
+        margin-top: 20px;
+      }
+      h3 {
+        margin-top: 20px;
+        color: #71777c;
+      }
+    }
 }
 .el-carousel__item h3 {
   color: #475669;
@@ -315,6 +354,7 @@ export default {
     border-bottom: 2px solid gainsboro;
     height: 110px;
     padding: 10px;
+    padding-bottom: 20px;
     font-family: Microsoft YaHei-Bold, Microsoft YaHei;
     & > .title {
       display: inline-block;
@@ -322,6 +362,17 @@ export default {
       font-family: Microsoft YaHei-Bold, Microsoft YaHei;
       font-weight: bold;
       color: #66CCCC;
+      background:linear-gradient( to right, #CCFFCC, #66CCCC) no-repeat right bottom;
+      /*即下划线（背景图）在默认情况下宽度为0 */
+      background-size: 0 2px; 
+      /* 设定过度时间 */
+      transition: background-size 1000ms; 
+    }
+    .title:hover {
+      /* 悬停 下划线的横向滑动位置为左 */
+      background-position-x: left;
+      /* 设定下划线宽度为100%展示 */
+      background-size: 100% 2px;
     }
     & .biaoqian {
       display: inline-block;
@@ -373,6 +424,10 @@ export default {
       font-weight: 400;
       color: #cdcdcd;
     }
+  }
+  li:hover {
+    padding: 0px 10px 20px 20px;
+    background-color: #eeeeee;
   }
 }
 </style>
