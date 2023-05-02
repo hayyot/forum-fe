@@ -45,7 +45,7 @@
             <i class="el-icon-female"></i>
             性别
           </template>
-          <el-tag size="small">{{ userInfo.gender == 0 ? '男' : '女' }}</el-tag>
+          <el-tag size="small">{{ userInfo.gender == 1 ? '男' : '女' }}</el-tag>
         </el-descriptions-item>
         <el-descriptions-item>
           <template slot="label">

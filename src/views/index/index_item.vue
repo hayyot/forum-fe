@@ -43,13 +43,13 @@
             
             <div class="ic-remark">
                 <p>热门评论🔥</p>
-                <el-empty description="暂无评论" v-if="content_remark <= 0"></el-empty>
-                <div v-else class="ic-remark_content" v-for="item,index in content_remark" :key="index">
+                <el-empty description="暂无评论" v-if="content_remark.length <= 0"></el-empty>
+                <div v-show="content_remark.length > 0" class="ic-remark_content" v-for="item,index in content_remark" :key="index">
                     <div>
                         <img :src="item.user.headImage" alt="">
                     </div>
                     <div>
-                        <p>{{ item.user.username }} <span>{{ item.createTime | timecl }}</span></p>
+                        <p>{{ item.user.username }} <span>{{ item.createTime | timecl }}</span><span class="del" v-if="item.user.uid == uid" @click="deleteremark(item.pid)">删除</span></p>
                         <p>{{ item.pneirong }}</p>
                     </div>
                 </div>
@@ -106,7 +106,7 @@ export default {
         };
     },
     async created() {
-        // console.log(this.$route.params.id + " " + localStorage.getItem('uid'));
+        console.log(this.$route.params.id + " " + localStorage.getItem('uid'));
         await getItemById({tid:this.$route.params.id,uid:localStorage.getItem('uid')}).then(res => {
             console.log(res);
             this.content_list = res.data
@@ -237,28 +237,42 @@ export default {
         },
         async submitremark(){
             await this.axios({
-                    url:"http://47.107.225.176:8808/insertPL",
-                    method:'post',
-                    data:{"tid":this.$route.params.id,"uid":this.uid,"pneirong":this.remarkarea},
-                    headers:{
-                        'Content-Type':'application/json'
-                    }
-                }).then(res => {
-                    // console.log(res);
-                    if(res.code == 200){
-                        this.$message({
-                            message: '发布评论成功',
-                            type: 'success'
-                        });
-                    }
+                url:"http://47.107.225.176:8808/insertPL",
+                method:'post',
+                data:{"tid":this.$route.params.id,"uid":this.uid,"pneirong":this.remarkarea},
+                headers:{
+                    'Content-Type':'application/json'
+                }
+            }).then(res => {
+                // console.log(res);
+                if(res.code == 200){
+                    this.$message({
+                        message: '发布评论成功',
+                        type: 'success'
+                    });
+                }
+                this.$router.go(0)
+            })
+        },
+        async deleteremark(index) {
+            await this.axios({
+                url:"http://47.107.225.176:8808/deletePl/"+index,
+                method:'post',
+                headers:{
+                    'Content-Type':'application/json'
+                }
+            }).then(res => {
+                // console.log(res);
+                if(res.code == 200){
+                    this.$message({
+                        message: '删除成功',
+                        type: 'success'
+                    });
+                }
+                setTimeout(() => {
                     this.$router.go(0)
-                    // console.log(res);
-                    // this.star = !this.star
-                    // Toast.success({
-                    //     message: '收藏成功',
-                    //     forbidClick: true,
-                    // });
-                })
+                }, 500);
+            })
         }
     },
     filters: {
@@ -501,5 +515,12 @@ export default {
             }
         }
     }
+}
+.del {
+    cursor: pointer;
+    color: #66cc99;
+}
+.del:hover {
+    color: #66CCCC
 }
 </style>

@@ -14,21 +14,21 @@
   <el-form :model="form" :rules="rules" ref="form" label-width="150px">
       <div class="updateinfo">
   <div class="left">
-      <el-form-item label="头像" prop="avatar">
+      <el-form-item label="头像">
             <img style="width:150px;height:110px" :src="userInfo.headImage">
           </el-form-item>
                     <!-- <el-form-item label="账号密码" prop="password">
             <el-input v-model="form.password"></el-input>
           </el-form-item> -->
-          <el-form-item label="昵称" prop="nickname">
+          <el-form-item label="昵称">
             <el-input v-model="userInfo.username"></el-input>
           </el-form-item>
-          <el-form-item label="年龄" prop="age">
+          <el-form-item label="年龄">
             <el-input v-model="userInfo.age"></el-input>
           </el-form-item>
-          <el-form-item label="性别" prop="sex">
+          <el-form-item label="性别">
             <el-switch
-              v-model="userInfo.sex"
+              v-model="userInfo.gender"
               active-color="#13ce66"
               inactive-color="#ff4949"
               active-text="男"
@@ -38,28 +38,28 @@
             >
             </el-switch>
           </el-form-item>
-          <el-form-item label="邮箱" prop="email">
+          <el-form-item label="邮箱">
             <el-input v-model="userInfo.email"></el-input>
           </el-form-item>
           
   </div>
   <div class="right">
-      <el-form-item label="用户编号" prop="id">
+      <el-form-item label="用户编号">
             <el-input v-model="userInfo.uid" disabled></el-input>
           </el-form-item>
-          <el-form-item label="账号" prop="account">
+          <el-form-item label="账号">
             <el-input v-model="userInfo.email" disabled></el-input>
           </el-form-item>
           <!-- <el-form-item label="地区" prop="area">
             <el-input v-model="form.area"></el-input>
           </el-form-item> -->
-          <el-form-item label="兴趣爱好" prop="hobby">
+          <el-form-item label="兴趣爱好">
             <el-input v-model="userInfo.hobby"></el-input>
           </el-form-item>
-          <el-form-item label="职业" prop="work">
+          <el-form-item label="职业">
             <el-input v-model="userInfo.job"></el-input>
           </el-form-item>
-          <el-form-item label="座右铭" prop="design">
+          <el-form-item label="座右铭">
             <el-input v-model="userInfo.motto"></el-input>
           </el-form-item>
           <!-- <el-form-item label="手机号码" prop="mobilePhoneNumber">
@@ -134,6 +134,7 @@ export default {
     //     });
     // },
     submit() {
+      // console.log(this.userInfo.gender);
       // console.log(this.userInfo);
       this.axios({
           url:'http://47.107.225.176:8808/updateUser',
@@ -168,6 +169,9 @@ export default {
       this.$emit("flesh");
     },
   },
+  watch:{
+    
+  }
 };
 </script>
 

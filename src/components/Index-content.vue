@@ -116,7 +116,7 @@ export default {
             limit:10,//分页：限制数量
             total:0,
             item_sid:0,
-            uid:0,
+            uid:'0',
             user_info: {}
         };
     },
@@ -128,10 +128,11 @@ export default {
       return this.loading || this.noMore
     }
   },
-    mounted() {
+    async mounted() {
       if(localStorage.getItem('uid')){
         this.uid = localStorage.getItem('uid')
-        getUserinfoById(this.uid).then(res => {
+        console.log(localStorage.getItem('uid'));
+        await getUserinfoById(this.uid).then(res => {
           console.log(res);
           this.user_info = res.data
         })

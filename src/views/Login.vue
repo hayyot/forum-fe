@@ -111,6 +111,7 @@ export default {
                     this.$message.error('登录失败，请检查账号密码是否正确');
                 }
                 if(res.data.code == 200){
+                    // console.log(res.data);
                     localStorage.setItem('uid',res.data.data.uid);
                     localStorage.setItem('username', res.data.data.username);
                     localStorage.setItem('headImage',res.data.data.headImage);
