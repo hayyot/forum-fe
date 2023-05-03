@@ -73,7 +73,7 @@ export default {
         this.uid = localStorage.getItem('uid')
         getSection().then(res => {
             this.sections = res.data
-            console.log(res);
+            // console.log(res);
         })
 
         this.$nextTick(() => {
@@ -89,7 +89,7 @@ export default {
         changeWang(html){
             //这里的html是带有标签的
             this.WangValue=html
-            console.log(this.WangValue)
+            // console.log(this.WangValue)
         },
         subbmit(){
             this.content_params.uid = this.uid;
@@ -108,7 +108,7 @@ export default {
                     'Content-Type':'application/json'
                 }
             }).then(res => {
-                console.log(res);
+                // console.log(res);
                 Toast.success({
                     message: '发布成功',
                     forbidClick: true,

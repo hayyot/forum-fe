@@ -44,7 +44,7 @@ export default {
     },
 
     mounted() {
-        console.log(this.data_list);
+        // console.log(this.data_list);
         this.data_list = data.data.list
         this.elActive.push(true)
         for(let i=1;i<13;i++){
@@ -65,7 +65,7 @@ export default {
             }else{
                 data.data.list.forEach(item => {
                     if(item.category == this.topic_list[index]){
-                        console.log(item.category)
+                        // console.log(item.category)
                         this.data_list.push(item)
                     }
                 });

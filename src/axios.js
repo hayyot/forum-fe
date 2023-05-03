@@ -20,9 +20,9 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(response => {
     let res = response.data;
 
-    console.log("=================")
-    console.log(res)
-    console.log("=================")
+    // console.log("=================")
+    // console.log(res)
+    // console.log("=================")
 
     if (res.code === 200) {
       return response
@@ -34,7 +34,7 @@ axios.interceptors.response.use(response => {
     }
   },
   error => {
-    console.log(error)
+    // console.log(error)
     if(error.response.data) {
       error.message = error.response.data.msg
     }

@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
+      // console.log(`每页 ${val} 条`);
     },
     async handleCurrentChange(val) {
       getShoucangById(val,this.limit,this.$route.params.id).then(res => {

@@ -144,7 +144,7 @@ export default {
               'Content-Type':'application/json'
           }
       }).then(res => {
-          console.log(res);
+          // console.log(res);
           if(res.code == 200){
             this.$message({
                 showClose: true,
@@ -156,12 +156,12 @@ export default {
       })
       /*updateUser(this.form)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           this.dialogVisible = false;
           this.$emit("flesh");
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });*/
     },
     handleClose() {

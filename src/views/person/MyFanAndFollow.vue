@@ -63,19 +63,19 @@ export default {
     getDianzanById(this.current,this.limit,this.$route.params.id).then(res => {
       // console.log(res);
       this.data_list = res.data.records
-      console.log(res.data.records);
-      console.log(this.data_list.length);
+      // console.log(res.data.records);
+      // console.log(this.data_list.length);
     })
   },
   methods: {
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
+      // console.log(`每页 ${val} 条`);
     },
     async handleCurrentChange(val) {
       getDianzanById(val,this.limit,this.$route.params.id).then(res => {
-        console.log(res);
+        // console.log(res);
         this.data_list = res.data.records
-        console.log(this.data_list);
+        // console.log(this.data_list);
       })
     },
     to_page(index){

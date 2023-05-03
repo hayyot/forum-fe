@@ -202,18 +202,18 @@ export default {
       // console.log(res);
       this.fensi = res.data.fansCount
       this.guanzhu = res.data.followCount
-      this.dianzan = res.data.starCount
+      this.huozan = res.data.starCount
     })
   },
   methods: {
     changeFile(e){
         // 获取文件信息 e.target.files
-        console.log(e.target.files[0]);
+        // console.log(e.target.files[0]);
         this.file=e.target.files[0];
         var reader = new FileReader()
         reader.readAsDataURL(this.file)
         reader.onload = e => {
-          console.log('读取成功');
+          // console.log('读取成功');
           // e.target.result 获取 读取成功后的  文件DataURL
           this.dialogImageUrl = e.target.result
         }
@@ -228,14 +228,14 @@ export default {
     load() {
       userInfo(this.$route.params.id)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           this.avatar = res.data.avatar;
           this.nickname = res.data.nickname;
           this.v = res.data.v;
           this.design = res.data.design;
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
 
       myFollow(this.$store.state.id)
@@ -245,7 +245,7 @@ export default {
           });
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
 
       followAndFanCount(this.$route.params.id)
@@ -254,7 +254,7 @@ export default {
           this.fanCounts = res.data.fanCounts;
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
 
       mygoodCount(this.$route.params.id)
@@ -262,7 +262,7 @@ export default {
           this.goodCounts = res.data.goodCounts;
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
     },
     myfan() {
@@ -302,7 +302,7 @@ export default {
               this.reload();
             })
             .catch((err) => {
-              console.log(err);
+              // console.log(err);
             });
         } else if (!this.isfollow) {
           addFollow(this.followData)
@@ -316,7 +316,7 @@ export default {
               this.reload();
             })
             .catch((err) => {
-              console.log(err);
+              // console.log(err);
             });
         }
       }
@@ -343,8 +343,8 @@ export default {
       let formData=new FormData()
       formData.append('file',this.file)
       formData.append('uid',localStorage.getItem('uid'))
-      console.log(formData.get("file"));
-      console.log(formData.get("uid"));
+      // console.log(formData.get("file"));
+      // console.log(formData.get("uid"));
       this.axios({
           url:'http://47.107.225.176:8808/updateImage',
           method:'post',

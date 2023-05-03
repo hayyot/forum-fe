@@ -58,14 +58,14 @@ export default {
   mounted() {
     this.uid = localStorage.getItem('uid')
     findArticalByuid(this.current,this.limit,this.$route.params.id).then(res => {
-      console.log(res);
+      // console.log(res);
       this.data_list = res.data.records
       this.total = res.data.total
     })
   },
   methods: {
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
+      // console.log(`每页 ${val} 条`);
     },
     async handleCurrentChange(val) {
       await findArticalByuid(val,this.limit,this.$route.params.id).then(res => {
@@ -80,7 +80,7 @@ export default {
     },
     async Deleteartical(tid) {
       await DeleteArtical(tid).then(res => {
-        console.log(res);
+        // console.log(res);
         // this.$router.go(0)
         if(res.code == 200){
           this.$message({

@@ -106,9 +106,9 @@ export default {
         };
     },
     async created() {
-        console.log(this.$route.params.id + " " + localStorage.getItem('uid'));
+        // console.log(this.$route.params.id + " " + localStorage.getItem('uid'));
         await getItemById({tid:this.$route.params.id,uid:localStorage.getItem('uid')}).then(res => {
-            console.log(res);
+            // console.log(res);
             this.content_list = res.data
             this.username = res.data.user.username
             this.biaoTi = res.data.wenzhang.biaoTi
@@ -119,7 +119,7 @@ export default {
             this.thumb = res.data.wenzhang.startFlag
             this.star = res.data.wenzhang.shouFlag
             this.content_remark = res.data.pinglun
-            console.log(this.content_remark);
+            // console.log(this.content_remark);
         })
         await isFollow(localStorage.getItem('uid'),this.user_info.uid).then(res => {
             // console.log(res);
@@ -214,7 +214,7 @@ export default {
         },
         async follow() {
             await Follow(localStorage.getItem('uid'),this.user_info.uid).then(res => {
-                console.log(res);
+                // console.log(res);
                 if(res.code == 200){
                     this.$message({
                         message: '关注成功',

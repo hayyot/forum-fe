@@ -59,7 +59,7 @@
       },
       state(value){
         //true是启用 false是禁用
-        console.log(value)
+        // console.log(value)
         // debugger
         if (value===true){
           // 启用
@@ -109,34 +109,34 @@
         this.editor.config.uploadImgHooks = {
           fail: (xhr, editor, result) => {
             // 插入图片失败回调
-            console.log(xhr)
-            console.log(editor)
-            console.log(result)
+            // console.log(xhr)
+            // console.log(editor)
+            // console.log(result)
           },
           success: (xhr, editor, result) => {
             // 图片上传成功回调
    
-            console.log(xhr)
-            console.log(editor)
-            console.log(result)
+            // console.log(xhr)
+            // console.log(editor)
+            // console.log(result)
           },
           timeout: (xhr, editor) => {
             // 网络超时的回调
-            console.log(xhr)
-            console.log(editor)
+            // console.log(xhr)
+            // console.log(editor)
    
           },
           error: (xhr, editor) => {
             // 图片上传错误的回调
-            console.log(xhr)
-            console.log(editor)
+            // console.log(xhr)
+            // console.log(editor)
           },
           customInsert: (insertImg, result, editor) => {
             //循环插入图片
-            console.log(result)
+            // console.log(result)
    
             result.data.url = result.data.url
-            console.log(result.data.url);
+            // console.log(result.data.url);
             insertImg(result.data.url)
           }
         }

@@ -195,7 +195,7 @@ export default {
                     data : JSON.parse(JSON.stringify(userList))
                 };
                 axios(config).then(res=>{
-                    console.log(res)
+                    // console.log(res)
                     if(res.data.code==201){
                         // console.log("1222222")
                         if(res.data.message=='用户名已经存在')

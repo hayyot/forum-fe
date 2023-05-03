@@ -126,9 +126,9 @@ export default {
                     data : JSON.parse(JSON.stringify(userList))
                 };
                 axios(config).then(res=>{
-                    console.log(res.data)
-                    if(res.data.code == 200){
-                        this.$message({
+                    // console.log(res.data)
+                    if(res.message == "修改成功"){
+                        Toast.success({
                             message: '修改成功',
                             type: 'success'
                         });
@@ -169,7 +169,7 @@ export default {
                     params : JSON.parse(JSON.stringify(userList))
                 };
                 axios(config).then(res=>{
-                    console.log(res.data)
+                    // console.log(res.data)
                     if(res.data.code==200){
                         this.$message({
                             showClose: true,

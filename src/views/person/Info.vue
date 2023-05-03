@@ -125,7 +125,7 @@ export default {
   },
   mounted() {
     getUserinfoById(this.$route.params.id).then(res => {
-      console.log(res);
+      // console.log(res);
       this.userInfo = res.data
       localStorage.setItem('headImage',res.data.headImage)
     })

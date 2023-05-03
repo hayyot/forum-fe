@@ -66,22 +66,22 @@
             // console.log(res);
             this.data_list = res.data.records
             this.total = res.data.total
-            console.log(this.data_list);
+            // console.log(this.data_list);
       })
     },
     methods: {
       handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
+        // console.log(`每页 ${val} 条`);
       },
       async handleCurrentChange(val) {
         getAllFollows(val,this.limit,this.$route.params.id).then(res => {
-          console.log(res);
+          // console.log(res);
           this.data_list = res.data.records
-          console.log(this.data_list);
+          // console.log(this.data_list);
         })
       },
       to_page(index){
-        console.log(index);
+        // console.log(index);
         this.$router.push("/user/personal/info/"+index)
         setTimeout(() => {
           this.$router.go(0)
@@ -91,7 +91,7 @@
       },
       concelfollow(uid) {
         cancelFollow(localStorage.getItem('uid'),uid).then(res => {
-            console.log(res);
+            // console.log(res);
             this.$message({
                 showClose: true,
                 message: "取消关注成功",

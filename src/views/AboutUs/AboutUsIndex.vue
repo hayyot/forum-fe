@@ -18,7 +18,7 @@
                             <h3>个人介绍:</h3>
                             <p>青岛工学院 软件工程 大二</p>
                             <h3>主要编程语言:</h3>
-                            <p>h5 c3 js vue,略懂一点后端</p>
+                            <p>h5 c3 js vue,略懂一点后端</p>·
                             <h3>联系方式：</h3>
                             <div style="width: 100%;margin-top: 60px;display: flex;flex-direction: row; justify-content:space-between ;">
                                 <el-link :underline="false" href="https://github.com/Hyhayhy" target="_blank">

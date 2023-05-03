@@ -123,9 +123,9 @@ export default {
     async mounted() {
       if(localStorage.getItem('uid')){
         this.uid = localStorage.getItem('uid')
-        console.log(localStorage.getItem('uid'));
+        // console.log(localStorage.getItem('uid'));
         await getUserinfoById(this.uid).then(res => {
-          console.log(res);
+          // console.log(res);
           this.user_info = res.data
         })
       }
@@ -169,9 +169,9 @@ export default {
               res.data.forEach(item => {
                 this.SectionList.push(item);
               });
-              console.log(this.SectionList);
+              // console.log(this.SectionList);
               // this.SectionList = res.data;
-              console.log(res.data)
+              // console.log(res.data)
             })
         },
         load () {
@@ -189,7 +189,7 @@ export default {
         },
         // 改变每页条数
         handleSizeChange(val) {
-          console.log(`每页 ${val} 条`);
+          // console.log(`每页 ${val} 条`);
         },
         // 当前页
         async handleCurrentChange(val) {
@@ -197,7 +197,7 @@ export default {
           if(this.item_sid == 0){
             await getAllContent(val,this.limit).then(res => {
               this.data_list = res.data.records
-              console.log(res);
+              // console.log(res);
               this.total = res.data.total
             })
           }

@@ -96,7 +96,7 @@ export default {
             this.$emit('update:visible', false)
         },
         handelConfirm() {
-            console.log(this.formData);
+            // console.log(this.formData);
             var config = {
                 method: 'post',
                 url: 'http://47.107.225.176:8808/login',
@@ -106,7 +106,7 @@ export default {
                 data : JSON.parse(JSON.stringify(this.formData))
             };
             axios(config).then(res => {
-                console.log(res.data.code);
+                // console.log(res.data.code);
                 if(res.data.code == 201){
                     this.$message.error('登录失败，请检查账号密码是否正确');
                 }
@@ -159,11 +159,11 @@ export default {
                         // location.reload();
                         // this.close()
 
-                        console.log(res);
+                        // console.log(res);
                     })
 
                 } else {
-                    console.log('error submit!!');
+                    // console.log('error submit!!');
                     return false;
                 }
             })*/
