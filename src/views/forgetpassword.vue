@@ -127,12 +127,12 @@ export default {
                 };
                 axios(config).then(res=>{
                     // console.log(res.data)
-                    if(res.message == "修改成功"){
-                        Toast.success({
+                    if(res.data.code == 200){
+                        this.$message({
                             message: '修改成功',
                             type: 'success'
                         });
-                        this.$router.push('/')
+                        // this.$router.push('/')
                     }
                     else {
                         this.$message.error('修改失败，请检查信息');

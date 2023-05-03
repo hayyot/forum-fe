@@ -9,7 +9,7 @@
         <div style="height: 180px; display: flex; flex-direction: column; justify-content: center; flex-wrap: nowrap;">
             <div>
                 <span style="font-size: 30px;">标题：</span><input class="posted-topic" type="text" v-model="input_topic" placeholder="请输入标题">
-                <span style="font-size: 30px; margin-left: 20px;">简介：</span><el-select class="posted-select" v-model="value" placeholder="请选择板块" size="20">
+                <span style="font-size: 30px; margin-left: 20px;">板块：</span><el-select class="posted-select" v-model="value" placeholder="请选择板块" size="20">
                     <el-option
                         class="posted-option"
                         v-for="item in sections"
@@ -33,7 +33,7 @@
             </div>
             
         </div>
-        <div>
+        <div style="display: flex;">
             <WangEditor class="wangeditor" @change="changeWang" :value="WangValue"></WangEditor>
             <!-- <div class="content-display" v-html="WangValue"></div> -->
         </div>
@@ -127,7 +127,7 @@ export default {
 <style lang="scss" scoped>
 #posted{
     margin-top: 0px;
-    text-align: left;
+    text-align: center;
     overflow:auto;
     position: absolute;
     width: 100%;
@@ -139,7 +139,7 @@ export default {
     display: inline-block;
     /* position: relative; */
     /* right: 25%; */
-    width: 100%;
+    width: 60%;
     z-index: 1;
 }
 .content-display {

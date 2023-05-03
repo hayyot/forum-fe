@@ -428,6 +428,10 @@ export default {
     .top {
         display: none;
     }
+    code {
+        overflow: hidden;
+        overflow-x:scroll
+    }
 }
 .ic-remark_me {
     margin-top: 20px;
