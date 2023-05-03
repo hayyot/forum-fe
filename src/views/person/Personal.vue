@@ -2,8 +2,9 @@
   <div class="Personal-bg">
     <div class="PersonTop">
       <div class="PersonTop_img">
-        <img :src="userInfo.headImage" />
+        <img style="cursor: pointer;" :src="userInfo.headImage" @click="uploadVisible = true"/>
       </div>
+      
       <div class="PersonTop_text">
         <div class="user_text">
           <div class="user_name">
@@ -19,7 +20,7 @@
               @click="edit"
               >编辑</el-button
             >
-            <el-button
+            <!-- <el-button
               v-if="followshow"
               @click="follow"
               type="primary"
@@ -30,7 +31,7 @@
                   ? '已关注'
                   : '关注'
               "
-            ></el-button>
+            ></el-button> -->
           </div>
           <!-- <div class="user-v" v-if="v === 3">
             <img src="@/assets/logo.png" class="user-v-img" />
@@ -57,6 +58,29 @@
         </div>
       </div>
     </div>
+    <el-dialog
+        title="头像上传"
+        :visible.sync="uploadVisible"
+        width="30%"
+        :before-close="handleCloseupload">
+        <!-- <span>头像上传</span> -->
+        <!-- <el-upload
+          class="avatar-uploader"
+          action="http://47.107.225.176:8808/updateImage"
+          data="up_data1"
+          :show-file-list="false"
+          :on-success="handleAvatarSuccess"
+          :before-upload="beforeAvatarUpload">
+          <img style="border: 1px solid #424242;" v-if="imageUrl" :src="imageUrl" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload> -->
+        <!-- <div>{{ imageUrl }}</div> -->
+        <input type="file" @change="changeFile">
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="uploadVisible = false">取 消</el-button>
+          <el-button type="primary" @click="uploadImage()">确 定</el-button>
+        </span>
+      </el-dialog>
     <div class="person_body">
       <div class="person_body_left">
         <el-card class="box-card" :body-style="{ padding: '0px' }">
@@ -65,15 +89,6 @@
               >个人中心</span
             >
           </div>
-          <!-- <div
-            class="person_body_list"
-            v-for="(item, index) in person_body_list"
-            :key="index"
-          >
-            <router-link :to="{ name: item.name, params: item.params }">{{
-              item.label
-            }}</router-link>
-          </div> -->
           <el-menu
             router
             active-text-color="#00c3ff"
@@ -135,6 +150,7 @@ import {
 } from "@/api/follow.js";
 import { mygoodCount } from "@/api/good";
 import PersonalDia from "./PersonalDia.vue";
+import { Upload } from "element-ui";
 
 export default {
   components: { PersonalDia },
@@ -160,37 +176,14 @@ export default {
       followshow: false,
       fensi: 0,
       guanzhu: 0,
-      huozan: 0
-      // person_body_list: [
-      //   {
-      //     label: "个人简介",
-      //     name: "info",
-      //     params: { id: this.$route.params.id },
-      //   },
-      //   {
-      //     label: "发帖",
-      //     name: "myarticle",
-      //     params: { id: this.$route.params.id },
-      //   },
-      //   {
-      //     label: "收藏",
-      //     name: "mycollect",
-      //     params: { id: this.$route.params.id },
-      //   },
-      //   {
-      //     label: "粉丝",
-      //     name: "myfan",
-      //     params: { id: this.$route.params.id },
-      //   },
-      //   {
-      //     label: "关注",
-      //     name: "myfollow",
-      //     params: { id: this.$route.params.id },
-      //   },
-      // ],
+      huozan: 0,
+      uploadVisible: false,
+      imageUrl: '',
+      file: null
     };
   },
   mounted() {
+    // this.up_data1.uid = localStorage.getItem('uid')
     // this.load();
     // this.$router.go(0)
     if(this.$route.params.id == localStorage.getItem('uid')){
@@ -210,27 +203,20 @@ export default {
       this.dianzan = res.data.starCount
     })
   },
-  // watch: {
-  //   $route(to) {
-  //     if (to.path == `/newsuser/personal/${this.$store.state.id}`) {
-  //       // this.load();
-  //       // this.person_body_list.forEach((res) => {
-  //       //   res.params.id = this.$store.state.id;
-  //       // });
-  //       this.reload();
-  //     } else if (to.path == `/newsuser/personal/${this.$route.params.id}`) {
-  //       this.reload();
-  //     }
-  //   },
-  // },
   methods: {
+    changeFile(e){
+        // 获取文件信息 e.target.files
+        console.log(e.target.files[0]);
+        this.file=e.target.files[0];
+    },
+    handleCloseupload(){
+      this.$confirm('确认关闭？')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {});
+    },
     load() {
-      // this.$store //必须使用此种方法，否则response拦截器会拦截
-      //   .dispatch("getUserInfo", this.$store.state.token) //利用vuex
-      //   .then((res) => {})
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
       userInfo(this.$route.params.id)
         .then((res) => {
           console.log(res);
@@ -329,6 +315,47 @@ export default {
     edit() {
       this.$refs.dia.open();
     },
+    handleAvatarSuccess(res, file) {
+        this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === 'image/jpeg';
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG 格式!');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!');
+      }
+      return isJPG && isLt2M;
+    },
+    uploadImage() {
+      let formData=new FormData()
+      formData.append('file',this.file)
+      formData.append('uid',localStorage.getItem('uid'))
+      console.log(formData.get("file"));
+      console.log(formData.get("uid"));
+      this.axios({
+          url:'http://47.107.225.176:8808/updateImage',
+          method:'post',
+          data:formData,
+          // headers:{
+          //     'Content-Type':'application/json'
+          // }
+      }).then(res => {
+          console.log(res);
+          this.uploadVisible = false
+          // if(res.code == 200){
+          //   this.$message({
+          //       showClose: true,
+          //       message: "修改成功",
+          //       type: "success",
+          //   });
+          // }
+          // this.$router.go(0)
+      })
+    }
   },
 };
 </script>
@@ -520,4 +547,28 @@ export default {
 .el-menu-vertical-demo{
   height: 460px;
 }
+.avatar-uploader .el-upload {
+    /* border-color: #409EFF; */
+    border: 1px solid #424242;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
 </style>
