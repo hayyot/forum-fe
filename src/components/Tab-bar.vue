@@ -8,7 +8,6 @@
                 </li>
             </ul>
             <ul class="navRight">
-
                 <li @click.stop v-if="hasLogin">
                     <a @click="handleMenuClick" href="#"><img class="userAvater" :src="headImage"></a>
                     <ul class="navRight-menu-group" v-if="isMenuShow">
@@ -265,6 +264,7 @@ li {
 .navLeft li a:hover,
 .aActive {
     color: #66CCCC;
+    border-bottom: 4px solid #66CCCC;
 }
 
 

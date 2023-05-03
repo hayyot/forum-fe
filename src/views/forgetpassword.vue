@@ -1,14 +1,9 @@
-<!--
- * @Author: hayyot
- * @Date: 2023-04-27 16:28:02
- * @Description: 铁沸物
- * @FilePath: \forum-fe\src\views\forgetpassword.vue
--->
+
 <!--
  * @Author: hayyot
  * @Date: 2023-04-11 16:38:39
  * @Description: 铁沸物
- * @FilePath: \forum-fe\src\views\register.vue
+ * @FilePath: \forum-fe\src\views\forgetpassword.vue
 -->
 <template>
     <div>
@@ -70,15 +65,6 @@ export default {
                 }, {
                     pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/,
                     message: '格式错误，6-16位由字母数字组成',
-                    trigger: 'blur'
-                }],
-                repassword: [{
-                    required: true,
-                    message: '重复密码',
-                    trigger: 'blur'
-                },{
-                    pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,16}$/,
-                    message: '',
                     trigger: 'blur'
                 }],
                 email: [{
@@ -143,14 +129,14 @@ export default {
                     console.log(res.data)
                     if(res.message == "修改成功"){
                         Toast.success({
-                            message: '注册成功',
+                            message: '修改成功',
                             forbidClick: true,
                         });
                         this.$router.push('/')
                     }
                     else {
                         Toast.fail({
-                            message: '注册失败,请检查信息是否输入正确',
+                            message: '修改失败,请检查信息是否输入正确',
                             forbidClick: true,
                         });
                     }
@@ -163,7 +149,7 @@ export default {
         getVerify() {
                 // console.log(this.formData.username)
                 let userList = {
-                    email: "1275796924@qq.com"
+                    email: this.formData.email
                 };
                 if (!this.canClick) return  
                 this.canClick = false

@@ -81,7 +81,7 @@ export default {
                     message: '重复密码',
                     trigger: 'blur'
                 },{
-                    pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,16}$/,
+                    pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/,
                     message: '',
                     trigger: 'blur'
                 }],
@@ -145,19 +145,16 @@ export default {
                     data : JSON.parse(JSON.stringify(userList))
                 };
                 axios(config).then(res=>{
-                    console.log(res.data)
-                    if(res.message == "注册成功"){
-                        Toast.success({
+                    // console.log(res.data)
+                    if(res.code == 200){
+                        this.$message({
                             message: '注册成功',
-                            forbidClick: true,
+                            type: 'success'
                         });
                         this.$router.push('/')
                     }
                     else {
-                        Toast.fail({
-                            message: '注册失败,请检查信息是否输入正确',
-                            forbidClick: true,
-                        });
+                        this.$message.error('注册失败，请检查信息');
                     }
                 })
             })
