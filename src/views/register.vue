@@ -151,11 +151,12 @@ export default {
                             message: '注册成功',
                             type: 'success'
                         });
-                        this.$router.push('/')
+                        // this.$router.push('/')
                     }
                     else {
                         this.$message.error('注册失败，请检查信息');
                     }
+                    this.close();
                 })
             })
             // var userList = [];
@@ -194,7 +195,7 @@ export default {
                     data : JSON.parse(JSON.stringify(userList))
                 };
                 axios(config).then(res=>{
-                    // console.log(res.data)
+                    console.log(res)
                     if(res.data.code==201){
                         // console.log("1222222")
                         if(res.data.message=='用户名已经存在')
