@@ -127,19 +127,17 @@ export default {
                 };
                 axios(config).then(res=>{
                     console.log(res.data)
-                    if(res.message == "修改成功"){
-                        Toast.success({
+                    if(res.data.code == 200){
+                        this.$message({
                             message: '修改成功',
-                            forbidClick: true,
+                            type: 'success'
                         });
                         this.$router.push('/')
                     }
                     else {
-                        Toast.fail({
-                            message: '修改失败,请检查信息是否输入正确',
-                            forbidClick: true,
-                        });
+                        this.$message.error('修改失败，请检查信息');
                     }
+                    this.close();
                 })
             })
             // var userList = [];
