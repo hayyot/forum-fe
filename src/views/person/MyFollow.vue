@@ -16,7 +16,7 @@
         <div class="index-mid_content">
           <ul class="imc-list">
             <li v-for="item,index in data_list" :key="index" style="margin-top: 20px;">
-                <div class="imc-img" @click="to_page(item.uid)">
+                <div class="imc-img" @click="to_page(item.userList[0].uid)">
                     <img :src="item.userList[0].headImage" alt="">
                     
                 </div>
@@ -81,7 +81,7 @@
         })
       },
       to_page(index){
-        // console.log(index);
+        console.log(index);
         this.$router.push("/user/personal/info/"+index)
         setTimeout(() => {
           this.$router.go(0)

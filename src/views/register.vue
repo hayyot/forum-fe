@@ -146,7 +146,7 @@ export default {
                 };
                 axios(config).then(res=>{
                     // console.log(res.data)
-                    if(res.code == 200){
+                    if(res.data.code == 200){
                         this.$message({
                             message: '注册成功',
                             type: 'success'
