@@ -7,20 +7,22 @@
 <template>
     <div>
         <div class="AboutUs-bg">
+            <h1 style="font-size: 50px;">项目介绍</h1><br><br>
+            <h3 style="margin-bottom: 50px;">本项目旨在打造一个学习平台，为大家带来更好的学习体验，方便搜取内容等。</h3>
             <h1 style="font-size: 50px;">关于我们</h1><br><br>
             <el-row :gutter="20">
                 <el-col :span="8">
                     <div class="grid-content bg-purple">
                         <div class="card">
                             <div class="block"><el-avatar :size="100" :src="circleUrl"></el-avatar></div>
-                            hexpect
+                            <h2>hexpect</h2>
                             <p>本项目的前端</p>
                             <h3>个人介绍:</h3>
                             <p>青岛工学院 软件工程 大二</p>
                             <h3>主要编程语言:</h3>
                             <p>h5 c3 js vue,略懂一点后端</p>·
                             <h3>联系方式：</h3>
-                            <div style="width: 100%;margin-top: 60px;display: flex;flex-direction: row; justify-content:space-between ;">
+                            <div style="width: 100%;margin-top: 30px;display: flex;flex-direction: row; justify-content:space-between ;">
                                 <el-link :underline="false" href="https://github.com/Hyhayhy" target="_blank">
                                     <el-tooltip content="GitHub" placement="bottom" effect="light">
                                         <svg t="1682611503446" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -65,16 +67,17 @@
                     <div class="grid-content bg-purple">
                         <div class="grid-content bg-purple">
                             <div class="card">
-                                <div class="block"><el-avatar :size="100" :src="circleUrl"></el-avatar></div>
-                                杰哥
-                                <p>我是个菜鸡</p>
+                                <div class="block"><el-avatar :size="100" src="https://avatars.githubusercontent.com/u/87374558?v=4"></el-avatar></div>
+                                <h2>申恒杰</h2>
+                                <p>菜鸡</p>
                                 <h3>个人介绍:</h3>
-                                <p>#</p>
+                                <p>青岛工学院 软件工程 大三</p>
                                 <h3>主要编程语言:</h3>
-                                <p>#</p>
+                                <p>C/C++,Java,JS</p>
                                 <h3>联系方式：</h3>
-                                <div style="width: 100%;margin-top: 60px;display: flex;flex-direction: row; justify-content:space-between ;">
-                                    <el-link :underline="false" href="#" target="_blank">
+                                <p>1275796924@qq.com</p>
+                                <div style="width: 100%;margin-top: 30px;display: flex;flex-direction: row; justify-content:space-between ;">
+                                    <el-link :underline="false" href="https://github.com/ShenHengjie" target="_blank">
                                         <el-tooltip content="GitHub" placement="bottom" effect="light">
                                             <svg t="1682611503446" class="icon" viewBox="0 0 1024 1024" version="1.1"
                                                 xmlns="http://www.w3.org/2000/svg" p-id="2603" width="40" height="40">
@@ -84,7 +87,7 @@
                                             </svg>
                                         </el-tooltip></el-link>
                                     <el-link :underline="false" href="#" target="_blank">
-                                        <el-tooltip content="2745553068" placement="bottom" effect="light">
+                                        <el-tooltip content="1275796924" placement="bottom" effect="light">
                                             <svg t="1682611650508" class="icon" viewBox="0 0 1024 1024" version="1.1"
                                                 xmlns="http://www.w3.org/2000/svg" p-id="3588" width="40" height="40">
                                                 <path
@@ -93,7 +96,7 @@
                                             </svg>
                                         </el-tooltip></el-link>
                                     <el-link :underline="false" href="#" target="_blank">
-                                        <el-tooltip content="暂无" placement="bottom" effect="light">
+                                        <el-tooltip content="s1275796924" placement="bottom" effect="light">
                                             <svg t="1682611681329" class="icon" viewBox="0 0 1024 1024" version="1.1"
                                                 xmlns="http://www.w3.org/2000/svg" p-id="4618" width="40" height="40">
                                                 <path
@@ -101,7 +104,7 @@
                                                     fill="#5D5D5D" p-id="4619"></path>
                                             </svg>
                                         </el-tooltip></el-link>
-                                    <el-link :underline="false" href="#" target="_blank">
+                                    <el-link :underline="false" href="https://space.bilibili.com/418259997" target="_blank">
                                         <el-tooltip content="bilibili" placement="bottom" effect="light">
                                             <svg t="1682611787319" class="icon" viewBox="0 0 1024 1024" version="1.1"
                                                 xmlns="http://www.w3.org/2000/svg" p-id="5620" width="40" height="40">
@@ -120,14 +123,14 @@
                         <div class="grid-content bg-purple">
                             <div class="card">
                                 <div class="block"><el-avatar :size="100" :src="circleUrl"></el-avatar></div>
-                                江哥
-                                <p>本项目的后端负责人</p>
+                                <h2>江哥</h2>
+                                <p>本项目的负责人</p>
                                 <h3>个人介绍:</h3>
                                 <p>#</p>
                                 <h3>主要编程语言:</h3>
                                 <p>#</p>
                                 <h3>联系方式：</h3>
-                                <div style="width: 100%;margin-top: 60px;display: flex;flex-direction: row; justify-content:space-between ;">
+                                <div style="width: 100%;margin-top: 30px;display: flex;flex-direction: row; justify-content:space-between ;">
                                     <el-link :underline="false" href="#" target="_blank">
                                         <el-tooltip content="GitHub" placement="bottom" effect="light">
                                             <svg t="1682611503446" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -170,8 +173,6 @@
                     </div>
                 </el-col>
             </el-row><br><br>
-            <h1 style="font-size: 50px;">项目介绍</h1><br><br>
-            <p>本项目旨在打造一个学习平台，为大家带来更好的学习体验，方便搜取内容等。</p>
         </div>
     </div>
 </template>
@@ -216,12 +217,15 @@ export default {
 
 .card {
     margin: auto;
-    padding: 20px;
+    padding: 80px;
     width: 50%;
     height: 40vh;
     border-radius: 30px;
     background: #eaeaea;
     box-shadow: 15px 15px 30px #bebebe,
         -15px -15px 30px #ffffff;
+    p {
+        margin: 10px;
+    }
 }
 </style>
