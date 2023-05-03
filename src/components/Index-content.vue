@@ -17,14 +17,16 @@
             </div>`
         </div>
         <div>
+
             <div class="index-mid_top" ref="carousel">
                 <el-carousel trigger="click" :height="carouselHeight" :interval="3000" arrow="always" style="border-radius: 5px">
                   <el-carousel-item v-for="item in carousel_data" :key="item">
                     <!-- <h3 class="small">{{ item }}</h3> -->
-                    <img :src="item" alt="" srcset="">
+                    <img :src="item" alt="" srcset="" class="carousel-img">
                   </el-carousel-item>
                 </el-carousel>
             </div>
+
             <div class="index-mid_content">
               <ul class="imc-list">
                 <li v-for="item,index in data_list" :key="index" @click="to_page(item.tid)">
@@ -98,7 +100,7 @@ export default {
               require('@/assets/carousel3.jpg'),
               require('@/assets/carousel4.jpg'),
             ],
-            carouselHeight: "200px",
+            carouselHeight: "180px",
             count: 0,
             loading: false,
             data_list:[],//主页数据列表
@@ -422,4 +424,18 @@ export default {
     background-color: #eeeeee;
   }
 }
+
+
+
+.carousel-item {
+    width: 100%;
+    // height: 100%;
+    background: white;
+    display: flex;
+    justify-content: center;
+  }
+  .carousel-img {
+    max-width: 100%;
+    // max-height: 100%;
+  }
 </style>
