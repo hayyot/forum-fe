@@ -115,15 +115,16 @@ export default {
 }
 .ResourceIndex-content {
     width: 80%;
-    height: 120%;
+    // height: 120%;
     margin-top: 30px;
     display: grid;
-    // grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-columns: repeat(auto-fit, 380px);
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    // grid-template-columns: repeat(auto-fit, 380px);
 }
 .ResourceIndex-content_data {
     height: 100px;
     // width: 23.6%;
+    min-width: 300px;
     border-radius: 10px;
     background-color: #ffffff;
     margin: 10px;
