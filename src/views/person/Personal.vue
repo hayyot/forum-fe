@@ -52,7 +52,7 @@
             <span class="num_text">关注</span>
           </div>
           <div>
-            <div class="num_number">{{ huozan }}</div>
+            <div class="num_number">{{ huozan == null ? 0 : huozan }}</div>
             <span class="num_text">获赞</span>
           </div>
         </div>
@@ -353,7 +353,7 @@ export default {
           //     'Content-Type':'application/json'
           // }
       }).then(res => {
-          // console.log(res);
+          console.log(res);
           if(res.code == 200){
             this.$message({
                 showClose: true,
@@ -361,6 +361,8 @@ export default {
                 type: "success",
             });
             this.uploadVisible = false
+          }else {
+            this.$message.error("修改失败,请向管理员反映问题");
           }
           // this.$router.go(0)
       })
@@ -417,7 +419,7 @@ export default {
 }
 
 .user_text {
-  width: 60%;
+  width: 80%;
   height: 100%;
   line-height: 30px;
   text-align: left;
