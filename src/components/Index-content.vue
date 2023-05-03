@@ -50,16 +50,6 @@
               <div style="height: 20px;">
 
               </div>
-              <!-- <div class="infinite-list-wrapper" style="overflow:auto">
-                <ul
-                    class="list"
-                    v-infinite-scroll="load"
-                    infinite-scroll-disabled="disabled">
-                  <li v-for="i in count" class="list-item" :key="i">{{ i }}</li>
-                </ul>
-                <p v-if="loading">加载中...</p>
-                <p v-if="noMore">没有更多了</p>
-              </div> -->
             </div>
         </div>
         <div>
@@ -341,6 +331,7 @@ export default {
 }
 
 .pagination {
+  color: #66CCCC !important;
   margin-top: 20px;
   // margin-bottom: 20px;
 }
