@@ -43,7 +43,7 @@
           
         </div>
         <div class="user_num">
-          <div style="cursor: pointer" @click="myfan">
+          <div style="cursor: pointer">
             <div class="num_number">{{ fensi }}</div>
             <span class="num_text">粉丝</span>
           </div>
@@ -199,7 +199,7 @@ export default {
       this.userInfo = res.data
     })
     getUserCount(this.$route.params.id).then(res => {
-      // console.log(res);
+      console.log(res);
       this.fensi = res.data.fansCount
       this.guanzhu = res.data.followCount
       this.huozan = res.data.starCount
@@ -267,12 +267,12 @@ export default {
     },
     myfan() {
       this.$router.push({
-        path: `/user/personal/myfan/${this.$route.params.id}`,
+        path: `/user/personal/myfollow/${this.$route.params.id}`,
       });
     },
     myfollow() {
       this.$router.push({
-        path: `/user/personal/myfollow/${this.$route.params.id}`,
+        path: `/user/personal/myfollows/${this.$route.params.id}`,
       });
     },
     follow() {

@@ -4,7 +4,7 @@
             <a href="#"><img style="height: 50px; width: 50px;" src="@/assets/logo.svg"></a>
             <ul class="navLeft">
                 <li v-for="(item, index) in itemList" :key="index" @click="handleAClick(item.title)">
-                    <a :href="item.url" :class="[(currentClick === item.title) ? 'aActive' :'aNormal']">{{item.title}}</a>
+                    <a style="cursor: pointer;" @click="to_page(item.url)" :class="[(currentClick === item.title) ? 'aActive' :'aNormal']">{{item.title}}</a>
                 </li>
             </ul>
             <ul class="navRight">
@@ -13,7 +13,7 @@
                     <ul class="navRight-menu-group" v-if="isMenuShow">
                         <div class="navRight-menu-item" v-for="(items, index) in menuList" :key="index">
                             <li v-for="(subItem, index) in items" :key="index">
-                                <a class="subItem" :href="subItem.url">
+                                <a style="cursor: pointer;" class="subItem" @click="to_page(subItem.url)">
                                     {{subItem.title}}
                                 </a>
                             </li>
@@ -45,7 +45,7 @@
 
                 <li class="subNav writeArticle">
                     <div class="more" @click.stop>
-                        <a href="/posted"><span>写文章</span></a>
+                        <a style="cursor: pointer;" @click="to_page('/posted')"><span>写文章</span></a>
                     </div>
                 </li>
                 
@@ -179,6 +179,15 @@ export default {
         logout(){
             localStorage.clear()
             location.reload()
+        },
+        to_page(index){
+            if(index == 'https://github.com/ShenHengjie/forum-fe'){
+                window.location.replace('https://github.com/ShenHengjie/forum-fe')
+            }
+            else {
+                this.$router.push(index)
+            }
+            
         }
     },
 };
@@ -246,7 +255,7 @@ li {
 }
 
 .navLeft li {
-    width: 70px;
+    width: 100px;
     float: left;
 }
 
