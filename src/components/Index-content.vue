@@ -63,9 +63,9 @@
               <div v-else @click="$router.push('/user/personal/info/'+uid)">
                 <img :src="user_info.headImage" alt="">
                 <h1>{{ user_info.username }}</h1>
-                <h3>{{ user_info.job }}&nbsp;——&nbsp;{{ user_info.age }}岁</h3>
+                <h3>{{ user_info.job == null ? '请设置工作' : user_info.job }}&nbsp;——&nbsp;{{ user_info.age == null ? '请设置年龄' : user_info.age }}(岁)</h3>
                 <h3>{{ user_info.email }}</h3>
-                <h3>{{ user_info.motto }}</h3>
+                <h3>{{ user_info.motto == null ? '请设置座右铭' : user_info.motto }}</h3>
               </div>
             </div>
         </div>

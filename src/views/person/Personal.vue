@@ -75,6 +75,8 @@
         </el-upload> -->
         <!-- <div>{{ imageUrl }}</div> -->
         <input type="file" @change="changeFile">
+        <br>
+        <img style="width: 30%; margin-top: 20px;" :src="dialogImageUrl" alt="">
         <span slot="footer" class="dialog-footer">
           <el-button @click="uploadVisible = false">取 消</el-button>
           <el-button type="primary" @click="uploadImage()">确 定</el-button>
@@ -178,7 +180,8 @@ export default {
       huozan: 0,
       uploadVisible: false,
       imageUrl: '',
-      file: null
+      file: null ,
+      dialogImageUrl: ''
     };
   },
   mounted() {
@@ -207,6 +210,13 @@ export default {
         // 获取文件信息 e.target.files
         console.log(e.target.files[0]);
         this.file=e.target.files[0];
+        var reader = new FileReader()
+        reader.readAsDataURL(this.file)
+        reader.onload = e => {
+          console.log('读取成功');
+          // e.target.result 获取 读取成功后的  文件DataURL
+          this.dialogImageUrl = e.target.result
+        }
     },
     handleCloseupload(){
       // this.$confirm('确认关闭？')
@@ -343,15 +353,15 @@ export default {
           //     'Content-Type':'application/json'
           // }
       }).then(res => {
-          console.log(res);
-          this.uploadVisible = false
-          // if(res.code == 200){
-          //   this.$message({
-          //       showClose: true,
-          //       message: "修改成功",
-          //       type: "success",
-          //   });
-          // }
+          // console.log(res);
+          if(res.code == 200){
+            this.$message({
+                showClose: true,
+                message: "修改成功",
+                type: "success",
+            });
+            this.uploadVisible = false
+          }
           // this.$router.go(0)
       })
     }

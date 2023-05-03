@@ -57,7 +57,7 @@
         </div>
         <div class="item-right">
             <!-- 头像 -->
-            <div>
+            <div @click="to_page(user_info.uid)">
                 <img :src="user_info.headImage" alt="">
             </div>
             <!-- 发帖人信息 -->
@@ -273,6 +273,9 @@ export default {
                     this.$router.go(0)
                 }, 500);
             })
+        },
+        to_page(index) {
+            this.$router.push('/user/personal/info/'+index)
         }
     },
     filters: {
@@ -333,6 +336,7 @@ export default {
     }
 }
 .item-right {
+    cursor: pointer;
     border-radius: 5px;
     margin-top: 20px;
     min-width: 250px;
