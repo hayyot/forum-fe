@@ -103,7 +103,7 @@ export default {
 
 <style lang="scss" scoped>
 .myart1{
-  line-height: 30px;
+  line-height: 25px;
 }
 .index-mid_content {
     height: 80%;
@@ -137,6 +137,7 @@ export default {
     & .des {
       margin-top: 10px;
       height: 48px;
+      width: 500px;
       font-size: 16px;
       // font-family: Microsoft YaHei-Regular, Microsoft YaHei;
       font-weight: 400;

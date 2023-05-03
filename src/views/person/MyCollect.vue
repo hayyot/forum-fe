@@ -121,7 +121,7 @@ export default {
 
 }
 .myart1{
-  line-height: 30px;
+  line-height: 25px;
 }
 .index-mid_content {
     height: 80%;
@@ -151,6 +151,7 @@ export default {
     & .des {
       display: inline-block;
       margin-top: 10px;
+      width: 500px;
       height: 48px;
       font-size: 16px;
       // font-family: Microsoft YaHei-Regular, Microsoft YaHei;

@@ -122,7 +122,7 @@ export default {
 
 }
 .myart1{
-  line-height: 30px;
+  line-height: 25px;
 }
 .index-mid_content {
     height: 80%;
@@ -151,6 +151,7 @@ export default {
       display: inline-block;
     }
     & .des {
+      width: 500px;
       display: inline-block;
       margin-top: 10px;
       height: 48px;

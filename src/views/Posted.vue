@@ -6,32 +6,34 @@
 -->
 <template>
     <div id="posted">
-        <div style="height: 180px; display: flex; flex-direction: column; justify-content: center; flex-wrap: nowrap;">
-            <div>
-                <span style="font-size: 30px;">标题：</span><input class="posted-topic" type="text" v-model="input_topic" placeholder="请输入标题">
-                <span style="font-size: 30px; margin-left: 20px;">板块：</span><el-select class="posted-select" v-model="value" placeholder="请选择板块" size="20">
-                    <el-option
-                        class="posted-option"
-                        v-for="item in sections"
-                        :key="item.sid"
-                        :label="item.sname"
-                        :value="item.sid">
-                    </el-option>
-                </el-select>
-                
-            </div>
-            <div>
-                <span style="font-size: 30px;position: relative;top: -45px;">简介：</span>
-                <el-input
-                    class="el-jianjie"
-                    type="textarea"
-                    :rows="3"
-                    placeholder="请输入简介"
-                    v-model="jianjie">
-                </el-input>
-                
-            </div>
-            
+        <div style="height: 320px; display: flex; flex-direction: column; justify-content: center;">
+            <div style="text-align: left;position: relative;left: 20%;">
+                <div>
+                    <span style="font-size: 30px;">标题：</span><input class="posted-topic" type="text" v-model="input_topic" placeholder="请输入标题">
+                </div>
+                <div style="margin-top: 20px;">
+                    <span style="font-size: 30px;">板块：</span><el-select class="posted-select" v-model="value" placeholder="请选择板块" size="20">
+                        <el-option
+                            class="posted-option"
+                            v-for="item in sections"
+                            :key="item.sid"
+                            :label="item.sname"
+                            :value="item.sid">
+                        </el-option>
+                    </el-select>
+                </div>
+                <div>
+                    <span style="font-size: 30px;position: relative;top: -20px;">简介：</span>
+                    <el-input
+                        class="el-jianjie"
+                        type="textarea"
+                        :rows="3"
+                        placeholder="请输入简介"
+                        v-model="jianjie">
+                    </el-input>
+                    
+                </div>
+         </div>
         </div>
         <div style="display: flex;">
             <WangEditor class="wangeditor" @change="changeWang" :value="WangValue"></WangEditor>
@@ -122,7 +124,7 @@ export default {
         WangEditor,
 }
 };
-</script>
+</script>f
 
 <style lang="scss" scoped>
 #posted{
@@ -164,7 +166,7 @@ export default {
 .posted-select{
     display: inline-block;
     position: relative;
-    margin-left: 30px;
+    // margin-left: 30px;
     width: 300px!important;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
