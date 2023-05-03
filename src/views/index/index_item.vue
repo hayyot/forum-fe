@@ -119,7 +119,7 @@ export default {
             this.thumb = res.data.wenzhang.startFlag
             this.star = res.data.wenzhang.shouFlag
             this.content_remark = res.data.pinglun
-            // console.log(this.content_remark);
+            console.log(this.content_remark);
         })
         await isFollow(localStorage.getItem('uid'),this.user_info.uid).then(res => {
             // console.log(res);

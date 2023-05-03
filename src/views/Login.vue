@@ -22,8 +22,8 @@
                 <forgetpassword :visible.sync="showForget"></forgetpassword>
             </el-button>
             <el-form ref="elForm" :model="formData" :rules="rules" size="medium" >
-                <el-form-item label="" prop="username">
-                    <el-input v-model="formData.email" placeholder="用户名/邮箱" clearable :style="{width: '100%'}">
+                <el-form-item label="" prop="email">
+                    <el-input v-model="formData.email" placeholder="请输入邮箱" clearable :style="{width: '100%'}">
                     </el-input>
                 </el-form-item>
                 <el-form-item label="" prop="password">
@@ -39,7 +39,7 @@
                 <verify v-show="flag" ref="verify" @changeOkLogin="callback"></verify>
             <!-- </el-form-item> -->
             <div slot="footer">
-                <el-button type="primary" @click="handelConfirm" :disabled="okLogin">登录</el-button>
+                <el-button type="info" @click="handelConfirm" :disabled="okLogin" class="edit">登录</el-button>
             </div>
         </el-dialog>
     </div>
@@ -65,7 +65,7 @@ export default {
             rules: {
                 username: [{
                     required: true,
-                    message: '用户名/邮箱',
+                    message: '请输入邮箱',
                     trigger: 'blur'
                 }],
                 password: [{
@@ -227,5 +227,16 @@ export default {
 .cta:hover .hover-underline-animation:after {
     transform: scaleX(1);
     transform-origin: bottom left;
+}
+.edit {
+  color: #fff;
+  background-color: #66CC99;
+  border-color: #66CC99;
+}
+.edit:hover,
+.edit:focus {
+  background: #66CC99;
+  border-color: #66CC99;
+  color: #fff;
 }
 </style>

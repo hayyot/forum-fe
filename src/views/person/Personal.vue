@@ -61,8 +61,7 @@
     <el-dialog
         title="头像上传"
         :visible.sync="uploadVisible"
-        width="30%"
-        :before-close="handleCloseupload">
+        width="30%">
         <!-- <span>头像上传</span> -->
         <!-- <el-upload
           class="avatar-uploader"
@@ -210,11 +209,11 @@ export default {
         this.file=e.target.files[0];
     },
     handleCloseupload(){
-      this.$confirm('确认关闭？')
-          .then(_ => {
-            done();
-          })
-          .catch(_ => {});
+      // this.$confirm('确认关闭？')
+      //     .then(_ => {
+      //       done();
+      //     })
+      //     .catch(_ => {});
     },
     load() {
       userInfo(this.$route.params.id)
