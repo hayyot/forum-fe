@@ -354,7 +354,7 @@ export default {
           // }
       }).then(res => {
           console.log(res);
-          if(res.code == 200){
+          if(res.data.code == 200){
             this.$message({
                 showClose: true,
                 message: "修改成功",

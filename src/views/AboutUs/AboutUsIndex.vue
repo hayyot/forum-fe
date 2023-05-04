@@ -9,19 +9,22 @@
         <div class="AboutUs-bg">
             <h1 style="font-size: 50px;">项目介绍</h1><br><br>
             <h3 style="margin-bottom: 50px;">本项目旨在打造一个学习平台，为大家带来更好的学习体验，方便搜取内容等。</h3>
+            <h3>前段技术栈：vue2.0；html；scss；js；vuex；router</h3>
+            <h3>后端技术栈：spring boot；redis；mysql；mybatis-plus</h3>
             <h1 style="font-size: 50px;">关于我们</h1><br><br>
             <el-row :gutter="20">
                 <el-col :span="8">
                     <div class="grid-content bg-purple">
                         <div class="card">
-                            <div class="block"><el-avatar :size="100" :src="circleUrl"></el-avatar></div>
-                            <h2>hexpect</h2>
+                            <div class="block"><el-avatar :size="100" src="http://image.szj.icu/8525bf70e2bd43ae96d635f703af47cf.jpg?e=1683088814&token=X46yk_LGEtRxth8E5ORMxkX8HEzNSL1wMpXY_liq:6Hzp7NZLdRUMIksWu0kRdFc4iNg="></el-avatar></div>
+                            <h2>黄瑶</h2>
                             <p>本项目的前端</p>
                             <h3>个人介绍:</h3>
                             <p>青岛工学院 软件工程 大二</p>
                             <h3>主要编程语言:</h3>
-                            <p>h5 c3 js vue,略懂一点后端</p>·
+                            <p>h5 c3 js vue,略懂一点后端</p>
                             <h3>联系方式：</h3>
+                            <p>2745553068@qq.com</p>
                             <div style="width: 100%;margin-top: 30px;display: flex;flex-direction: row; justify-content:space-between ;">
                                 <el-link :underline="false" href="https://github.com/Hyhayhy" target="_blank">
                                     <el-tooltip content="GitHub" placement="bottom" effect="light">
@@ -122,16 +125,17 @@
                     <div class="grid-content bg-purple">
                         <div class="grid-content bg-purple">
                             <div class="card">
-                                <div class="block"><el-avatar :size="100" :src="circleUrl"></el-avatar></div>
-                                <h2>江哥</h2>
+                                <div class="block"><el-avatar :size="100" src="http://47.99.34.48:9000/springboot/profile.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=admin%2F20230504%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230504T054705Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=c9dd6e3d78e05b4e41f9b033e96a7bfaae5b86daac53c39aa57e0d7c772d2571"></el-avatar></div>
+                                <h2>尚智江</h2>
                                 <p>本项目的负责人</p>
                                 <h3>个人介绍:</h3>
-                                <p>#</p>
+                                <p>青岛工学院 软件工程 大三</p>
                                 <h3>主要编程语言:</h3>
-                                <p>#</p>
+                                <p>java spring全家桶 sql</p>
                                 <h3>联系方式：</h3>
+                                <p>shangzhijiang@qit.edu.cn</p>
                                 <div style="width: 100%;margin-top: 30px;display: flex;flex-direction: row; justify-content:space-between ;">
-                                    <el-link :underline="false" href="#" target="_blank">
+                                    <el-link :underline="false" href="https://github.com/jok-shang" target="_blank">
                                         <el-tooltip content="GitHub" placement="bottom" effect="light">
                                             <svg t="1682611503446" class="icon" viewBox="0 0 1024 1024" version="1.1"
                                                 xmlns="http://www.w3.org/2000/svg" p-id="2603" width="40" height="40">
@@ -141,7 +145,7 @@
                                             </svg>
                                         </el-tooltip></el-link>
                                     <el-link :underline="false" href="#" target="_blank">
-                                        <el-tooltip content="2745553068" placement="bottom" effect="light">
+                                        <el-tooltip content="" placement="bottom" effect="light">
                                             <svg t="1682611650508" class="icon" viewBox="0 0 1024 1024" version="1.1"
                                                 xmlns="http://www.w3.org/2000/svg" p-id="3588" width="40" height="40">
                                                 <path
