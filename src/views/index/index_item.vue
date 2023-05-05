@@ -189,7 +189,7 @@ export default {
                 }).then(res => {
                     // console.log(res);
                     this.star = !this.star
-                    this.content_wenzhang.content_wenzhang.tshou --;
+                    this.content_wenzhang.tshou --;
                     this.$message({
                         message: '取消收藏成功',
                         type: 'success'
@@ -207,7 +207,7 @@ export default {
                 }).then(res => {
                     // console.log(res);
                     this.star = !this.star
-                    this.content_wenzhang.content_wenzhang.tshou ++;
+                    this.content_wenzhang.tshou ++;
                     this.$message({
                         message: '收藏成功',
                         type: 'success'
@@ -323,9 +323,12 @@ export default {
     line-height: 35px;
 }
 .item-left {
-    position: fixed;
-    top: 15%;
-    left: 11%;
+    position: relative;
+    top: 100px;
+    left: -30px;
+    // top: 15%;
+    // left: 11%;
+    height: 50px;
     border-radius: 5px;
     margin-top: 20px;
     margin-right: 20px;
