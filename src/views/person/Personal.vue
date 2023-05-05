@@ -187,6 +187,12 @@ export default {
       uuid: 0,
     };
   },
+  activated(){
+    // if (location.href.indexOf("#reloaded") == -1) {
+    //   location.href = location.href + "#reloaded";
+    //   location.reload();
+    // }
+  },
   mounted() {
     // if (location.href.indexOf("#reloaded") == -1) {
     //     location.href = location.href + "#reloaded";
