@@ -149,6 +149,7 @@ export default {
                 }).then(res => {
                     // console.log(res);
                     this.thumb = !this.thumb
+                    this.content_wenzhang.tstart --;
                     this.$message({
                         message: '取消点赞成功',
                         type: 'success'
@@ -166,6 +167,7 @@ export default {
                 }).then(res => {
                     // console.log(res);
                     this.thumb = !this.thumb
+                    this.content_wenzhang.tstart ++;
                     this.$message({
                         message: '点赞成功',
                         type: 'success'
@@ -187,6 +189,7 @@ export default {
                 }).then(res => {
                     // console.log(res);
                     this.star = !this.star
+                    this.content_wenzhang.content_wenzhang.tshou --;
                     this.$message({
                         message: '取消收藏成功',
                         type: 'success'
@@ -204,6 +207,7 @@ export default {
                 }).then(res => {
                     // console.log(res);
                     this.star = !this.star
+                    this.content_wenzhang.content_wenzhang.tshou ++;
                     this.$message({
                         message: '收藏成功',
                         type: 'success'

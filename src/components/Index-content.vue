@@ -398,7 +398,8 @@ export default {
     }
     & .des {
       margin-top: 10px;
-      height: 48px;
+      margin-bottom: 5px;
+      height: 46px;
       font-size: 16px;
       // font-family: Microsoft YaHei-Regular, Microsoft YaHei;
       font-weight: 400;
