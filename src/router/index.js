@@ -75,7 +75,7 @@ const routes = [
     meta: {
       isAuth:true,
       requireLogin: true,
-      keepAlive:true,
+      keepAlive:false,
     },
     children: [
       {

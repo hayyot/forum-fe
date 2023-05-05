@@ -2,7 +2,8 @@
   <div class="Personal-bg">
     <div class="PersonTop">
       <div class="PersonTop_img">
-        <img style="cursor: pointer;" :src="userInfo.headImage" @click="uploadVisible = true"/>
+        <img v-if="uid == uuid" style="cursor: pointer;" :src="userInfo.headImage" @click="uploadVisible = true"/>
+        <img v-else :src="userInfo.headImage" />
       </div>
       
       <div class="PersonTop_text">
@@ -181,13 +182,22 @@ export default {
       uploadVisible: false,
       imageUrl: '',
       file: null ,
-      dialogImageUrl: ''
+      dialogImageUrl: '',
+      uid: '',
+      uuid: 0,
     };
   },
   mounted() {
+    // if (location.href.indexOf("#reloaded") == -1) {
+    //     location.href = location.href + "#reloaded";
+    //     location.reload();
+    // }
     // this.up_data1.uid = localStorage.getItem('uid')
     // this.load();
     // this.$router.go(0)
+    this.uid = localStorage.getItem('uid')
+    this.uuid = this.$route.params.id
+    // console.log(this.uid +' ' + this.uuid);
     if(this.$route.params.id == localStorage.getItem('uid')){
       this.editshow = true
     }
@@ -199,7 +209,7 @@ export default {
       this.userInfo = res.data
     })
     getUserCount(this.$route.params.id).then(res => {
-      console.log(res);
+      // console.log(res);
       this.fensi = res.data.fansCount
       this.guanzhu = res.data.followCount
       this.huozan = res.data.starCount

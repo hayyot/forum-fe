@@ -236,23 +236,30 @@ export default {
             })
         },
         async submitremark(){
-            await this.axios({
-                url:"http://47.107.225.176:8808/insertPL",
-                method:'post',
-                data:{"tid":this.$route.params.id,"uid":this.uid,"pneirong":this.remarkarea},
-                headers:{
-                    'Content-Type':'application/json'
-                }
-            }).then(res => {
-                // console.log(res);
-                if(res.code == 200){
-                    this.$message({
-                        message: '发布评论成功',
-                        type: 'success'
-                    });
-                }
-                this.$router.go(0)
-            })
+            // console.log(this.remarkarea);
+            if(this.remarkarea == ''){
+                this.$message.error('请输入内容');
+            }
+            else {
+                await this.axios({
+                    url:"http://47.107.225.176:8808/insertPL",
+                    method:'post',
+                    data:{"tid":this.$route.params.id,"uid":this.uid,"pneirong":this.remarkarea},
+                    headers:{
+                        'Content-Type':'application/json'
+                    }
+                }).then(res => {
+                    // console.log(res);
+                    if(res.code == 200){
+                        this.$message({
+                            message: '发布评论成功',
+                            type: 'success'
+                        });
+                    }
+                    this.$router.go(0)
+                })
+            }
+            
         },
         async deleteremark(index) {
             await this.axios({
