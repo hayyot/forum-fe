@@ -156,19 +156,7 @@ export default {
                 let userList = {
                     email: this.formData.email
                 };
-                if (!this.canClick) return  
-                this.canClick = false
-                this.getCode = this.totalTime + 's后重新发送'
-                let clock = window.setInterval(() => {
-                    this.totalTime--
-                    this.getCode = this.totalTime + 's后重新发送'
-                    if (this.totalTime < 0) {
-                    window.clearInterval(clock)
-                    this.getCode = '重新发送验证码'
-                    this.totalTime = 60
-                    this.canClick = true  
-                    }
-                },1000)
+                
                 
                 var config = {
                     method: 'get',
@@ -183,6 +171,22 @@ export default {
                             message: '验证码发送成功',
                             type: 'success'
                         });
+                        if (!this.canClick) return  
+                        this.canClick = false
+                        this.getCode = this.totalTime + 's后重新发送'
+                        let clock = window.setInterval(() => {
+                            this.totalTime--
+                            this.getCode = this.totalTime + 's后重新发送'
+                            if (this.totalTime < 0) {
+                            window.clearInterval(clock)
+                            this.getCode = '重新发送验证码'
+                            this.totalTime = 60
+                            this.canClick = true  
+                            }
+                        },1000)
+                    }
+                    else {
+                        this.$message.error('验证码发送失败，请检查邮箱是否正确');
                     }
                 })
         },

@@ -178,19 +178,7 @@ export default {
                 // axios.post(`http://47.107.225.176:8080/insertUser1`, userList).then((response) => {
                 //     console.log(response.data)
                 // })
-                if (!this.canClick) return  
-                this.canClick = false
-                this.getCode = this.totalTime + 's后重新发送'
-                let clock = window.setInterval(() => {
-                    this.totalTime--
-                    this.getCode = this.totalTime + 's后重新发送'
-                    if (this.totalTime < 0) {
-                    window.clearInterval(clock)
-                    this.getCode = '重新发送验证码'
-                    this.totalTime = 60
-                    this.canClick = true  
-                    }
-                },1000)
+                
                 var config = {
                     method: 'post',
                     url: 'http://47.107.225.176:8808/insertUser1',
@@ -203,18 +191,20 @@ export default {
                 axios(config).then(res=>{
                     // console.log(res)
                     if(res.data.code==201){
-                        // console.log("1222222")
-                        if(res.data.message=='用户名已经存在')
-                            // alert('用户名已存在');
-                            this.$alert('用户名已经存在', '出错啦', {
-                                confirmButtonText: '确定',
-                            });
-                        else if(res.data.message=='邮箱已经存在')
-                            // this.rules.email[1].message='邮箱已经存在'
-                            // alert('邮箱已经存在')
-                            this.$alert('邮箱已经存在', '出错啦', {
-                                confirmButtonText: '确定',
-                            });
+                        // console.log("1222222"
+                        this.$message.error('验证码发送失败，请检查邮箱是否正确');
+                        // if(res.data.message=='用户名已经存在')
+                        //     // alert('用户名已存在');
+                        //     this.$alert('用户名已经存在', '出错啦', {
+                        //         confirmButtonText: '确定',
+                        //     });
+                        // else if(res.data.message=='邮箱已经存在')
+                        //     // this.rules.email[1].message='邮箱已经存在'
+                        //     // alert('邮箱已经存在')
+                        //     this.$alert('邮箱已经存在', '出错啦', {
+                        //         confirmButtonText: '确定',
+                        //     });
+                        
                     }
                     else {
                         this.$message({
@@ -222,6 +212,19 @@ export default {
                             message: '验证码发送成功',
                             type: 'success'
                         });
+                        if (!this.canClick) return  
+                        this.canClick = false
+                        this.getCode = this.totalTime + 's后重新发送'
+                        let clock = window.setInterval(() => {
+                            this.totalTime--
+                            this.getCode = this.totalTime + 's后重新发送'
+                            if (this.totalTime < 0) {
+                            window.clearInterval(clock)
+                            this.getCode = '重新发送验证码'
+                            this.totalTime = 60
+                            this.canClick = true  
+                            }
+                        },1000)
                     }
                 })
         },

@@ -62,9 +62,13 @@ export default {
             },
             yzm: '',
             rules: {
-                username: [{
+                email: [{
                     required: true,
                     message: '请输入邮箱',
+                    trigger: 'blur'
+                },{
+                    pattern: /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
+                    message: '请输入正确邮箱',
                     trigger: 'blur'
                 }],
                 password: [{
