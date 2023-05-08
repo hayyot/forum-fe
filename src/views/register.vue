@@ -40,7 +40,6 @@
 </template>
 <script>
 import axios from "axios";
-import { Toast } from "vant";
 
 export default {
     name: "mRegister",
@@ -49,7 +48,7 @@ export default {
     props: [],
     data() {
         return {
-            okRegister:true,
+            okRegister:false,
             formData: {
                 username: undefined,
                 password: undefined,
@@ -78,7 +77,7 @@ export default {
                 }],
                 repassword: [{
                     required: true,
-                    message: '重复密码',
+                    message: '请输入重复密码',
                     trigger: 'blur'
                 },{
                     pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/,
@@ -128,36 +127,43 @@ export default {
             this.$emit('update:visible', false)
         },
         handelConfirm() {
-            this.$refs['elForm'].validate(() => {
-                let userList = {
-                    username: this.formData.username,
-                    email: this.formData.email,
-                    password:this.formData.password,
-                    yzm:this.formData.yzm
-                };
-                var config = {
-                    method: 'post',
-                    url: 'http://47.107.225.176:8808/insertUser2',
-                    headers: {
-                        // 'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
-                        'Content-Type': 'application/json'
-                    },
-                    data : JSON.parse(JSON.stringify(userList))
-                };
-                axios(config).then(res=>{
-                    // console.log(res.data)
-                    if(res.data.code == 200){
-                        this.$message({
-                            message: '注册成功',
-                            type: 'success'
-                        });
-                        // this.$router.push('/')
-                    }
-                    else {
-                        this.$message.error('注册失败，请检查信息');
-                    }
-                    this.close();
-                })
+            this.$refs['elForm'].validate((valid) => {
+                if (valid) {
+                    let userList = {
+                        username: this.formData.username,
+                        email: this.formData.email,
+                        password:this.formData.password,
+                        yzm:this.formData.yzm
+                    };
+                    var config = {
+                        method: 'post',
+                        url: 'http://47.107.225.176:8808/insertUser2',
+                        headers: {
+                            // 'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
+                            'Content-Type': 'application/json'
+                        },
+                        data : JSON.parse(JSON.stringify(userList))
+                    };
+                    axios(config).then(res=>{
+                        // console.log(res.data)
+                        if(res.data.code == 200){
+                            this.$message({
+                                message: '注册成功',
+                                type: 'success'
+                            });
+                            // this.$router.push('/')
+                        }
+                        else {
+                            this.$message.error('注册失败，请检查信息');
+                        }
+                        this.close();
+                    })
+                }
+                else {
+                    // console.log('error submit!!');
+                    this.$message.error('注册失败，请检查表单')
+                    return false;
+                }
             })
             // var userList = [];
             // userList.push({username: this.formData.username, email: this.formData.email,yzm:this.formData.yzm});
@@ -231,9 +237,9 @@ export default {
                 return this.rules.repassword[1].message = "两次输入密码不同";
             }
         },
-        pdYzm(){
-            this.okRegister = this.formData.yzm.length !== 6;
-        }
+        // pdYzm(){
+        //     this.okRegister = this.formData.yzm.length !== 6;
+        // }
     }
 }
 

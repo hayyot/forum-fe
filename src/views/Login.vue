@@ -47,7 +47,6 @@
 <script>
 import verify from "@/views/Verify.vue";
 import axios from "axios";
-import { Toast } from "vant";
 export default {
     name:"mRegisters",
     inheritAttrs: false,
@@ -97,31 +96,40 @@ export default {
         },
         handelConfirm() {
             // console.log(this.formData);
-            var config = {
-                method: 'post',
-                url: 'http://47.107.225.176:8808/login',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                data : JSON.parse(JSON.stringify(this.formData))
-            };
-            axios(config).then(res => {
-                // console.log(res.data.code);
-                if(res.data.code == 201){
-                    this.$message.error('登录失败，请检查账号密码是否正确');
+            this.$refs['elForm'].validate((valid) => {
+                if (valid) {
+                    var config = {
+                        method: 'post',
+                        url: 'http://47.107.225.176:8808/login',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        data : JSON.parse(JSON.stringify(this.formData))
+                    };
+                    axios(config).then(res => {
+                        // console.log(res.data.code);
+                        if(res.data.code == 201){
+                            this.$message.error('登录失败，请检查账号密码是否正确');
+                        }
+                        if(res.data.code == 200){
+                            // console.log(res.data);
+                            localStorage.setItem('uid',res.data.data.uid);
+                            localStorage.setItem('username', res.data.data.username);
+                            localStorage.setItem('headImage',res.data.data.headImage);
+                            localStorage.setItem('email',res.data.data.email);
+                            localStorage.setItem('token',res.data.data.token);
+                            this.$message({
+                                message: '登录成功！',
+                                type: 'success'
+                            });
+                            location.reload();
+                        }
+                    })
                 }
-                if(res.data.code == 200){
-                    // console.log(res.data);
-                    localStorage.setItem('uid',res.data.data.uid);
-                    localStorage.setItem('username', res.data.data.username);
-                    localStorage.setItem('headImage',res.data.data.headImage);
-                    localStorage.setItem('email',res.data.data.email);
-                    localStorage.setItem('token',res.data.data.token);
-                    this.$message({
-                        message: '登录成功！',
-                        type: 'success'
-                    });
-                    location.reload();
+                else {
+                    // console.log('error submit!!');
+                    this.$message.error('登录失败，请检查表单')
+                    return false;
                 }
             })
             /*this.$refs['elForm'].validate((valid) => {

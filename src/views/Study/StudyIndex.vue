@@ -106,7 +106,7 @@ export default {
                   Prismjs.highlightAll()
                   document.documentElement.scrollTop = 0;
               })
-              .catch(function (error) {
+              .catch(function () {
                 //   console.log(error);
               });
       }
