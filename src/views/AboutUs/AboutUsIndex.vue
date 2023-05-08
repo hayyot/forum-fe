@@ -8,9 +8,9 @@
     <div>
         <div class="AboutUs-bg">
             <h1 style="font-size: 50px;">项目介绍</h1><br><br>
-            <h3 style="margin-bottom: 50px;">本项目旨在打造一个学习平台，为大家带来更好的学习体验，方便搜取内容等。</h3>
-            <h3>前段技术栈：vue2.0；html；scss；js；vuex；router</h3>
-            <h3>后端技术栈：spring boot；redis；mysql；mybatis-plus</h3>
+            <h3 style="margin-bottom: 10px;">本项目旨在打造一个学习平台，为大家带来更好的学习体验，方便搜取内容等。</h3>
+            <h3 style="margin-bottom: 10px;">前段技术栈：vue2.0；html；scss；js；vuex；router</h3>
+            <h3 style="margin-bottom: 30px;">后端技术栈：spring boot；redis；mysql；mybatis-plus</h3>
             <h1 style="font-size: 50px;">关于我们</h1><br><br>
             <el-row :gutter="20">
                 <el-col :span="8">
@@ -205,13 +205,13 @@ export default {
 
 <style lang="scss" scoped>
 .AboutUs-bg {
-    overflow: auto;
-    position: fixed;
+    // overflow: auto;
+    overflow-x: hidden;
+    position: absolute;
     width: 100%;
     min-height: 100%;
     margin-bottom: 100px;
-    background: rgba(241, 241, 241, 0.99);
-    z-index: 99;
+    background: #f1f1f1;
 }
 
 ::v-deep html {
@@ -223,7 +223,7 @@ export default {
     margin: auto;
     padding: 80px;
     width: 50%;
-    height: 40vh;
+    height: 400px;
     border-radius: 30px;
     background: #eaeaea;
     box-shadow: 15px 15px 30px #bebebe,
