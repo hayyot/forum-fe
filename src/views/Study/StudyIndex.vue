@@ -181,6 +181,7 @@ export default {
 
 .index-content{
     margin-top: 20px;
+    margin-bottom: 20px;
     background-color: #fff;
     margin-left: 20%;
     width: 70%;
