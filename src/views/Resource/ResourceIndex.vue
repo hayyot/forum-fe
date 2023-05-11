@@ -6,8 +6,10 @@
 -->
 <template>
     <div class="ResourceIndex-bg">
+        
         <el-row>
             <el-button class="el-btn" :class="elActive[index] ? 'el-btn_focus' : ''" v-for="item,index in topic_list" :key="index" @click="changeTopic(index)">{{ item }}</el-button>
+            <div>页面数据来自于:南生论坛(<a href="http://bbs.nanshengbbs.top/">http://bbs.nanshengbbs.top/</a>)</div>
         </el-row>
         <div style="width: 100%;display: flex;justify-content: center;">
             <div class="ResourceIndex-content">
