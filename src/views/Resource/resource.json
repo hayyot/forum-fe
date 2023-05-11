@@ -3,7 +3,9 @@
   "desc": "成功",
   "data": {
     "total": 91,
-    "list": [{
+    "list": [
+
+      {
       "id": 94,
       "resourceName": "KaKa",
       "logo": "http://image.szj.icu/forumresourceNavigatePicture-20220717144753685_7m0auk.jpg",
@@ -30,7 +32,7 @@
     }, {
       "id": 92,
       "resourceName": "Colorsinspo",
-      "logo": "http://image.szj.icu/forumresourceNavigatePicture-20220717144622253_df0fme.jpg",
+      "logo": "http://image.szj.icu/forum2.jpg",
       "category": "色彩工具",
       "desc": "颜色搭配/工具/渐变等合集",
       "link": "https://colorsinspo.com/",

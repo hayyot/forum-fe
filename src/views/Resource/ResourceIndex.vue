@@ -6,7 +6,7 @@
 -->
 <template>
     <div class="ResourceIndex-bg">
-        
+
         <el-row>
             <el-button class="el-btn" :class="elActive[index] ? 'el-btn_focus' : ''" v-for="item,index in topic_list" :key="index" @click="changeTopic(index)">{{ item }}</el-button>
             <div>页面数据来自于:南生论坛(<a href="http://bbs.nanshengbbs.top/">http://bbs.nanshengbbs.top/</a>)</div>
@@ -64,12 +64,15 @@ export default {
             this.data_list = []
             if(index == 0){
                 this.data_list = data.data.list
+              // console.log(data.data.list+">>>>")
             }else{
                 data.data.list.forEach(item => {
                     if(item.category == this.topic_list[index]){
                         // console.log(item.category)
                         this.data_list.push(item)
+
                     }
+                    // console.log(this.data_list+"====")
                 });
             }
         }
@@ -136,7 +139,7 @@ export default {
     a:visited {
         color: #000000;
     }
-    
+
     .ResourceIndex-content_data-head{
         width: 100%;
         padding: 2%;

@@ -125,13 +125,13 @@
                     <div class="grid-content bg-purple">
                         <div class="grid-content bg-purple">
                             <div class="card">
-                                <div class="block"><el-avatar :size="100" src="http://47.99.34.48:9000/springboot/profile.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=admin%2F20230504%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230504T054705Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=c9dd6e3d78e05b4e41f9b033e96a7bfaae5b86daac53c39aa57e0d7c772d2571"></el-avatar></div>
+                                <div class="block"><el-avatar :size="100" src="http://47.99.34.48:9000/springboot/profile.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=admin%2F20230508%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230508T030604Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=5635e0275e10eefb29d320ccd74c9839daa6059a0053e155d3ff74abe5bc056f"></el-avatar></div>
                                 <h2>尚智江</h2>
                                 <p>本项目的负责人</p>
                                 <h3>个人介绍:</h3>
                                 <p>青岛工学院 软件工程 大三</p>
                                 <h3>主要编程语言:</h3>
-                                <p>java spring全家桶 sql</p>
+                                <p>SpringBoot，MySql，Redis</p>
                                 <h3>联系方式：</h3>
                                 <p>shangzhijiang@qit.edu.cn</p>
                                 <div style="width: 100%;margin-top: 30px;display: flex;flex-direction: row; justify-content:space-between ;">
@@ -145,7 +145,7 @@
                                             </svg>
                                         </el-tooltip></el-link>
                                     <el-link :underline="false" href="#" target="_blank">
-                                        <el-tooltip content="" placement="bottom" effect="light">
+                                        <el-tooltip content="2859308825" placement="bottom" effect="light">
                                             <svg t="1682611650508" class="icon" viewBox="0 0 1024 1024" version="1.1"
                                                 xmlns="http://www.w3.org/2000/svg" p-id="3588" width="40" height="40">
                                                 <path
@@ -154,7 +154,7 @@
                                             </svg>
                                         </el-tooltip></el-link>
                                     <el-link :underline="false" href="#" target="_blank">
-                                        <el-tooltip content="暂无" placement="bottom" effect="light">
+                                        <el-tooltip content="s2859308825" placement="bottom" effect="light">
                                             <svg t="1682611681329" class="icon" viewBox="0 0 1024 1024" version="1.1"
                                                 xmlns="http://www.w3.org/2000/svg" p-id="4618" width="40" height="40">
                                                 <path
@@ -162,7 +162,7 @@
                                                     fill="#5D5D5D" p-id="4619"></path>
                                             </svg>
                                         </el-tooltip></el-link>
-                                    <el-link :underline="false" href="#" target="_blank">
+                                    <el-link :underline="false" href="https://space.bilibili.com/399326494" target="_blank">
                                         <el-tooltip content="bilibili" placement="bottom" effect="light">
                                             <svg t="1682611787319" class="icon" viewBox="0 0 1024 1024" version="1.1"
                                                 xmlns="http://www.w3.org/2000/svg" p-id="5620" width="40" height="40">
